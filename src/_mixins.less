@@ -48,10 +48,10 @@
     text-overflow: ellipsis;
 }
 
-@mixin flex-center {
+.flex-center(@align: center, @justify: center) {
     display: flex;
-    align-items: center;
-    justify-content: center;
+    align-items: @align;
+    justify-content: @justify;
 }
 
 @mixin cover-background {
