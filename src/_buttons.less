@@ -1,0 +1,27 @@
+.default-button {
+    min-width: 125px;
+    max-width: 250px;
+    white-space: pre-wrap;
+    font-size: 14px;
+    font-weight: 600;
+    background-color: @default-background-color;
+    border-radius: 16px;
+    padding: 8px 10px;
+    
+    &.success {
+        .button-variant(@button-success);
+    }
+    
+    &.cancel {
+        .button-variant(@button-cancel);
+    }
+    
+    &.default {
+        .button-variant(@button-default);
+    }
+
+    &:hover {
+        opacity: .5;
+        transform: scale(1.05);
+    }
+}
