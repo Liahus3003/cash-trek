@@ -10,6 +10,7 @@ import { MonthlySummaryComponent } from './monthly-summary/monthly-summary.compo
 import { YearlySummaryComponent } from './yearly-summary/yearly-summary.component';
 import { CreditCommitmentComponent } from './credit-commitment/credit-commitment.component';
 import { HeaderComponent } from './header/header.component';
+import { NavigationTabComponent } from './navigation-tab/navigation-tab.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { HeaderComponent } from './header/header.component';
     MonthlySummaryComponent,
     YearlySummaryComponent,
     CreditCommitmentComponent,
-    HeaderComponent
+    HeaderComponent,
+    NavigationTabComponent
   ],
   imports: [
     BrowserModule,
