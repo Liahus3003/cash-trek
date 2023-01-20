@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { NAVIGATION } from '../shared/constants';
 
 @Component({
   selector: 'app-navigation-tab',
@@ -6,5 +7,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./navigation-tab.component.less']
 })
 export class NavigationTabComponent {
-
+  navigationLinks = NAVIGATION;
 }

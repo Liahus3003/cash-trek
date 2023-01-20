@@ -1,3 +1,7 @@
 <section class="navigation-wrapper">
-    <p>navigation-tab works!</p>
+    <ul class="mb-0">
+        <li *ngFor="let navigation of navigationLinks" [routerLink]="navigation.route">
+            <span>{{navigation.label}}</span>
+        </li>
+    </ul>
 </section>

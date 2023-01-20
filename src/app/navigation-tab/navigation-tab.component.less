@@ -1,11 +1,13 @@
 @import '../../_variables.less';
+@import '../../_mixins.less';
+
 // https://dribbble.com/tags/mobile_navigation
 // https://dribbble.com/shots/16923583--Tab-Bar-Animation-Dark-Version
 .navigation-wrapper {
     position: fixed;
     bottom: 0px;
     background-color: @default-font-color;
-    color: @default-font-color;
+    color: @default-background-color;
     z-index: 1;
     width: 96%;
     max-width: 600px;
@@ -14,4 +16,13 @@
     transform: translateX(-50%);
     left: 50%;
     border-radius: 8px;
+
+    ul {
+        .flex-center;
+        li {
+            cursor: pointer;
+            display: inline-block;
+            margin: 12px;
+        }
+    }
 }
