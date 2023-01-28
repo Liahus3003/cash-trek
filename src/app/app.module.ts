@@ -18,9 +18,7 @@ import { NavigationTabComponent } from './navigation-tab/navigation-tab.componen
     DashboardComponent,
     MonthlySummaryComponent,
     YearlySummaryComponent,
-    CreditCommitmentComponent,
-    HeaderComponent,
-    NavigationTabComponent
+    CreditCommitmentComponent
   ],
   imports: [
     BrowserModule,
@@ -30,7 +28,9 @@ import { NavigationTabComponent } from './navigation-tab/navigation-tab.componen
       // Register the ServiceWorker as soon as the application is stable
       // or after 30 seconds (whichever comes first).
       registrationStrategy: 'registerWhenStable:30000'
-    })
+    }),
+    HeaderComponent,
+    NavigationTabComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

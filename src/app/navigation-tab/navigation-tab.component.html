@@ -1,7 +1,8 @@
 <section class="navigation-wrapper">
     <ul class="mb-0">
         <li *ngFor="let navigation of navigationLinks" [routerLink]="navigation.route">
-            <span>{{navigation.label}}</span>
+            <img class="navigation-logo" src="https://raw.githubusercontent.com/Liahus3003/gallery/main/icons/{{navigation.imgSrc}}.svg" [alt]="navigation.label">
+            <span class="navigation-label mt-1 d-block">{{navigation.label}}</span>
         </li>
     </ul>
 </section>

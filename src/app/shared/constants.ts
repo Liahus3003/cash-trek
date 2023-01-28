@@ -2,21 +2,25 @@ export const NAVIGATION = [
     {
         id: 1,
         label: 'Dashboard',
-        route: 'dashboard'
+        route: 'dashboard',
+        imgSrc: 'home'
     },
     {
         id: 2,
-        label: 'Yearly summary',
-        route: 'yearly-summary'
+        label: 'Monthly',
+        route: 'monthly-summary',
+        imgSrc: 'calendar'
     },
     {
         id: 3,
-        label: 'Monthly summary',
-        route: 'monthly-summary'
+        label: 'Yearly',
+        route: 'yearly-summary',
+        imgSrc: 'calendar-number-outline'
     },
     {
         id: 4,
         label: 'Categories',
-        route: 'categories'
+        route: 'categories',
+        imgSrc: 'settings'
     }
 ];
