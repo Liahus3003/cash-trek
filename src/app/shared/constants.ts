@@ -9,13 +9,13 @@ export const NAVIGATION = [
         id: 2,
         label: 'Monthly',
         route: 'monthly-summary',
-        imgSrc: 'calendar'
+        imgSrc: 'calendar-number-outline'
     },
     {
         id: 3,
         label: 'Yearly',
         route: 'yearly-summary',
-        imgSrc: 'calendar-number-outline'
+        imgSrc: 'calendar'
     },
     {
         id: 4,
