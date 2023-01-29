@@ -11,12 +11,12 @@ import { YearlySummaryComponent } from './yearly-summary/yearly-summary.componen
 import { CreditCommitmentComponent } from './credit-commitment/credit-commitment.component';
 import { HeaderComponent } from './header/header.component';
 import { NavigationTabComponent } from './navigation-tab/navigation-tab.component';
-import { CheckboxComponent } from './shared/components/checkbox/checkbox.component';
-import { SelectComponent } from './shared/components/select/select.component';
-import { TextareaComponent } from './shared/components/textarea/textarea.component';
-import { RadioComponent } from './shared/components/radio/radio.component';
-import { InputComponent } from './shared/components/input/input.component';
-import { DefaultButtonComponent } from './shared/components/default-button/default-button.component';
+import { CheckboxComponent } from '@shared/components/checkbox/checkbox.component';
+import { SelectComponent } from '@shared/components/select/select.component';
+import { TextareaComponent } from '@shared/components/textarea/textarea.component';
+import { RadioComponent } from '@shared/components/radio/radio.component';
+import { InputComponent } from '@shared/components/input/input.component';
+import { DefaultButtonComponent } from '@shared/components/default-button/default-button.component';
 
 @NgModule({
   declarations: [
