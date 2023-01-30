@@ -1,5 +1,9 @@
-<div class="input-wrapper m-5 position-relative">
-    <textarea class="input-content" name="" id="" cols="30" rows="3"></textarea>
-    <!-- <input class="input-content" type="radio" name="" id="" required> -->
-    <label class="input-label" for="">Text-area</label>
+<div class="input-wrapper d-flex m-5 position-relative">
+    <span *ngIf="iconSrc" class="icon-wrapper">
+        <img class="input-icon" aria-hidden="true" src="https://raw.githubusercontent.com/Liahus3003/gallery/main/icons/{{iconSrc}}.svg" alt="">
+    </span>
+    <div class="input-container position-relative">
+        <ng-content></ng-content>
+        <label class="select-label" for="">{{label}}</label>
+    </div>
 </div>

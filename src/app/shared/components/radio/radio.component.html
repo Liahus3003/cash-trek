@@ -1,6 +1,11 @@
 <div class="input-wrapper m-5 position-relative">
-    <label class="check-group-label" for="radio">
-        <input class="input-radio" type="radio" name="radio" id="" required>
-        Radio
-    </label>
+    <div class="label-text mb-3 flex-center">
+        <span *ngIf="iconSrc" class="icon-wrapper">
+            <img class="input-icon" aria-hidden="true" src="https://raw.githubusercontent.com/Liahus3003/gallery/main/icons/{{iconSrc}}.svg" alt="">
+        </span>
+        <span class="group-label">{{label}}</span>
+    </div>
+    <div [class.ms-2]="iconSrc">
+        <ng-content></ng-content>
+    </div>
 </div>

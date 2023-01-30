@@ -1,6 +1,10 @@
 .input-wrapper {
     position: relative;
 
+    &.default {
+        .flex-center(center, flex-start);
+    }
+
     .input-label {
         position: absolute;
         font-size: 16px;
@@ -15,6 +19,32 @@
         -moz-transition: 0.2s ease all;
         -webkit-transition: 0.2s ease all;
         color: @label-text;
+    }
+
+    .icon-wrapper {
+        padding: 10px;
+        height: 100%;
+        background-color: @input-border-color;
+        border: 1px solid @input-border-color;
+        border-radius: 50%;
+        margin-right: 8px;
+        padding-top: 6px;
+        box-shadow: 0 2px 4px @input-border-color;
+    }
+
+    .input-icon {
+        width: 20px;
+        height: 20px;
+        filter: invert(1);
+    }
+
+    .label-text {
+        .flex-center(center, flex-start);
+
+        .group-label {
+            font-weight: 600;
+            color: @check-group-color;
+        }
     }
 
     .input-content {
@@ -99,6 +129,7 @@
         .flex-center(center, flex-start);
         flex-wrap: wrap;
         column-gap: 10px;
+        margin-bottom: 8px;
     }
 
     // Learn about this technique:
@@ -159,7 +190,7 @@
         height: 50px;
         padding: 16px 64px 8px 16px;
         background: url(https://upload.wikimedia.org/wikipedia/commons/9/9d/Caret_down_font_awesome_whitevariation.svg) no-repeat right 0.8em center / 1.4em,
-            linear-gradient(to left, @default-font-color 3em, transparent 3em);
+            linear-gradient(to left, @input-border-color 3em, transparent 3em);
         color: @default-font-color;
         border-radius: 16px;
         box-shadow: 0px 2px 4px 0px rgb(0 0 0 / 20%);
