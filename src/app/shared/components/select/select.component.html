@@ -1,9 +1,15 @@
 <div class="input-wrapper default m-5 position-relative">
-    <span *ngIf="iconSrc" class="icon-wrapper">
-        <img class="input-icon" aria-hidden="true" src="https://raw.githubusercontent.com/Liahus3003/gallery/main/icons/{{iconSrc}}.svg" alt="">
-    </span>
-    <div class="input-container position-relative">
-        <label class="select-label" for="">{{label}}</label>
-        <ng-content></ng-content>
-    </div>
+  <span *ngIf="iconSrc" class="icon-wrapper">
+    <img
+      class="input-icon"
+      aria-hidden="true"
+      src="https://raw.githubusercontent.com/Liahus3003/gallery/main/icons/{{
+        iconSrc
+      }}.svg"
+      alt="" />
+  </span>
+  <div class="input-container position-relative">
+    <label class="select-label" for="">{{ label }}</label>
+    <ng-content></ng-content>
+  </div>
 </div>
