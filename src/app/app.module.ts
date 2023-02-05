@@ -17,6 +17,7 @@ import { TextareaComponent } from '@shared/components/textarea/textarea.componen
 import { RadioComponent } from '@shared/components/radio/radio.component';
 import { InputComponent } from '@shared/components/input/input.component';
 import { DefaultButtonComponent } from '@shared/components/default-button/default-button.component';
+import { SlimScrollDirective } from '@shared/directives/slimscroll.directive';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { DefaultButtonComponent } from '@shared/components/default-button/defaul
     TextareaComponent,
     RadioComponent,
     InputComponent,
-    DefaultButtonComponent
+    DefaultButtonComponent,
+    SlimScrollDirective
   ],
   providers: [],
   bootstrap: [AppComponent]
