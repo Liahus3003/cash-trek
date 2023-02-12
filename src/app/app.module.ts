@@ -1,5 +1,6 @@
 import { NgModule, isDevMode } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
@@ -18,6 +19,7 @@ import { RadioComponent } from '@shared/components/radio/radio.component';
 import { InputComponent } from '@shared/components/input/input.component';
 import { DefaultButtonComponent } from '@shared/components/default-button/default-button.component';
 import { SlimScrollDirective } from '@shared/directives/slimscroll.directive';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 @NgModule({
   declarations: [
@@ -30,6 +32,8 @@ import { SlimScrollDirective } from '@shared/directives/slimscroll.directive';
   imports: [
     BrowserModule,
     RouterModule.forRoot(routes),
+    NgxChartsModule,
+    BrowserAnimationsModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: !isDevMode(),
       // Register the ServiceWorker as soon as the application is stable

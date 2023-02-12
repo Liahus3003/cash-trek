@@ -1,4 +1,62 @@
-<p>dashboard works!</p>
+<div class="m-3" #graphWrapper>
+    <h1>dashboard works!</h1>
+    <div>
+        <div>Current spend</div>
+        <div>2.5k</div>
+    </div>
+    <div class="row mx-0 row-cols-2 g-2">
+        <div class="col flex-center card-block snake" #graphWrapper>
+            <div class="inner">
+                <div>
+                    <h2>$2600</h2>
+                    <div>Ex-Spent</div>
+                </div>
+                <div>
+                    <h2>$1200</h2>
+                    <div>Upcoming</div>
+                </div>
+            </div>
+        </div>
+        <div class="chart-layout col card-block snake">
+            <div class="donut-chart-grid inner">
+                <ngx-charts-pie-chart [view]="view" [legendPosition]="legendPosition" [results]="series" [legend]="true"
+                    [labels]="true" [doughnut]="true" [legendTitle]="''"
+                    [labelFormatting]="pieChartLabel.bind(this, series)" [animations]="false">
+                </ngx-charts-pie-chart>
+            </div>
+        </div>
+        <div class="chart-layout col-12 col-md-6">
+            <div class="donut-chart-grid">
+                <ngx-charts-pie-chart [view]="view" [legendPosition]="legendPosition" [results]="series" [legend]="true"
+                    [labels]="true" [explodeSlices]="true" [legendTitle]="''"
+                    [labelFormatting]="pieChartLabel.bind(this, series)" [animations]="false">
+                </ngx-charts-pie-chart>
+            </div>
+        </div>
+        <div class="chart-layout col-12 col-md-6">
+            <div class="flex-center">
+                <ngx-charts-linear-gauge [view]="view" [scheme]="colorScheme" [value]="1500" [previousValue]="3200"
+                    [units]="'Expense'">
+                </ngx-charts-linear-gauge>
+            </div>
+        </div>
+        <div class="chart-layout col-12 col-md-6">
+            <div class="flex-center py-3">
+                <ngx-charts-bar-vertical-stacked [view]="view" [results]="multi" [gradient]="false" [xAxis]="true"
+                    [yAxis]="true" [legend]="true" [showXAxisLabel]="true" [showYAxisLabel]="true" [xAxisLabel]="'Day'"
+                    [yAxisLabel]="'Expense'" [animations]="true" [legendPosition]="legendPosition">
+                </ngx-charts-bar-vertical-stacked>
+            </div>
+        </div>
+        <div class="chart-layout col-12 col-md-6">
+            <div class="flex-center py-3">
+                <ngx-charts-tree-map [view]="view" [results]="treeInfo" [animations]="true"
+                    [labelFormatting]="treeLabelFormatting">
+                </ngx-charts-tree-map>
+            </div>
+        </div>
+    </div>
+</div>
 <app-input label="Input Field" iconSrc="wallet-solid">
     <input class="input-content" type="text" name="" id="" required>
 </app-input>
