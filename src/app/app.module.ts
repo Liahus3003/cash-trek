@@ -20,6 +20,7 @@ import { InputComponent } from '@shared/components/input/input.component';
 import { DefaultButtonComponent } from '@shared/components/default-button/default-button.component';
 import { SlimScrollDirective } from '@shared/directives/slimscroll.directive';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { CardWrapperComponent } from './shared/components/card-wrapper/card-wrapper.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     RadioComponent,
     InputComponent,
     DefaultButtonComponent,
+    CardWrapperComponent,
     SlimScrollDirective
   ],
   providers: [],
