@@ -1,96 +1,85 @@
 <div class="m-3" #graphWrapper>
-    <h1>dashboard works!</h1>
-    <div>
-        <div>Current spend</div>
-        <div>2.5k</div>
-    </div>
-    <div class="row mx-0 row-cols-2 g-2">
-        <div class="col flex-center card-block snake" #graphWrapper>
-            <div class="inner">
-                <div>
-                    <h2>$2600</h2>
-                    <div>Ex-Spent</div>
-                </div>
-                <div>
-                    <h2>$1200</h2>
-                    <div>Upcoming</div>
-                </div>
-            </div>
-        </div>
-        <div class="chart-layout col card-block snake">
-            <div class="donut-chart-grid inner">
-                <ngx-charts-pie-chart [view]="view" [legendPosition]="legendPosition" [results]="series" [legend]="true"
-                    [labels]="true" [doughnut]="true" [legendTitle]="''"
-                    [labelFormatting]="pieChartLabel.bind(this, series)" [animations]="false">
-                </ngx-charts-pie-chart>
-            </div>
-        </div>
-        <div class="chart-layout col-12 col-md-6">
-            <div class="donut-chart-grid">
-                <ngx-charts-pie-chart [view]="view" [legendPosition]="legendPosition" [results]="series" [legend]="true"
-                    [labels]="true" [explodeSlices]="true" [legendTitle]="''"
-                    [labelFormatting]="pieChartLabel.bind(this, series)" [animations]="false">
-                </ngx-charts-pie-chart>
-            </div>
-        </div>
-        <div class="chart-layout col-12 col-md-6">
-            <div class="flex-center">
-                <ngx-charts-linear-gauge [view]="view" [scheme]="colorScheme" [value]="1500" [previousValue]="3200"
-                    [units]="'Expense'">
-                </ngx-charts-linear-gauge>
-            </div>
-        </div>
-        <div class="chart-layout col-12 col-md-6">
-            <div class="flex-center py-3">
-                <ngx-charts-bar-vertical-stacked [view]="view" [results]="multi" [gradient]="false" [xAxis]="true"
-                    [yAxis]="true" [legend]="true" [showXAxisLabel]="true" [showYAxisLabel]="true" [xAxisLabel]="'Day'"
-                    [yAxisLabel]="'Expense'" [animations]="true" [legendPosition]="legendPosition">
-                </ngx-charts-bar-vertical-stacked>
-            </div>
-        </div>
-        <div class="chart-layout col-12 col-md-6">
-            <div class="flex-center py-3">
-                <ngx-charts-tree-map [view]="view" [results]="treeInfo" [animations]="true"
-                    [labelFormatting]="treeLabelFormatting">
-                </ngx-charts-tree-map>
-            </div>
-        </div>
-    </div>
+  <h1>dashboard works!</h1>
+  <div class="row mx-0 row-cols-1 row-cols-md-2 g-2" #graphWrapper>
+    <app-card-wrapper [isDefault]="true">
+      <ngx-charts-linear-gauge [view]="view" [scheme]="colorScheme" [value]="1500" [previousValue]="3200"
+        [units]="'Expense'">
+      </ngx-charts-linear-gauge>
+    </app-card-wrapper>
+    <app-card-wrapper [isDonutChart]="true">
+      <ngx-charts-pie-chart [view]="view" [legendPosition]="legendPosition" [results]="series" [legend]="true"
+        [labels]="true" [doughnut]="true" [legendTitle]="''" [labelFormatting]="pieChartLabel.bind(this, series)"
+        [animations]="false">
+      </ngx-charts-pie-chart>
+    </app-card-wrapper>
+    <app-card-wrapper [isDonutChart]="true">
+      <ngx-charts-pie-chart [view]="view" [legendPosition]="legendPosition" [results]="series" [legend]="true"
+        [labels]="true" [explodeSlices]="true" [legendTitle]="''" [labelFormatting]="pieChartLabel.bind(this, series)"
+        [animations]="false">
+      </ngx-charts-pie-chart>
+    </app-card-wrapper>
+    <!-- <div class="chart-layout col-12 col-md-6">
+      <div class="donut-chart-grid">
+        
+      </div>
+    </div> -->
+    <app-card-wrapper [isDefault]="true">
+      <ngx-charts-bar-vertical-stacked [view]="view" [results]="multi" [gradient]="false" [xAxis]="true" [yAxis]="true"
+        [legend]="true" [legendTitle]="''" [showXAxisLabel]="true" [showYAxisLabel]="true" [xAxisLabel]="'Day'" [yAxisLabel]="'Expense'"
+        [animations]="true" [legendPosition]="legendPosition">
+      </ngx-charts-bar-vertical-stacked>
+    </app-card-wrapper>
+    <!-- <div class="chart-layout col-12 col-md-6">
+      <div class="flex-center py-3">
+        
+      </div>
+    </div> -->
+    <app-card-wrapper [isDefault]="true">
+      <ngx-charts-tree-map [view]="view" [results]="treeInfo" [animations]="true"
+      [labelFormatting]="treeLabelFormatting">
+    </ngx-charts-tree-map>
+    </app-card-wrapper>
+    <!-- <div class="chart-layout col-12 col-md-6">
+      <div class="flex-center py-3">
+
+      </div>
+    </div> -->
+  </div>
 </div>
 <app-input label="Input Field" iconSrc="wallet-solid">
-    <input class="input-content" type="text" name="" id="" required>
+  <input class="input-content" type="text" name="" id="" required />
 </app-input>
 <app-checkbox label="Checkbox" iconSrc="gift">
-    <label class="check-group-label" for="checkbox">
-        <input class="input-checkbox" type="checkbox" name="checkbox" id="" required>
-        Checkbox 1
-    </label>
-    <label class="check-group-label" for="checkbox">
-        <input class="input-checkbox" type="checkbox" name="checkbox" id="" required>
-        Checkbox 2
-    </label>
+  <label class="check-group-label" for="checkbox">
+    <input class="input-checkbox" type="checkbox" name="checkbox" id="" required />
+    Checkbox 1
+  </label>
+  <label class="check-group-label" for="checkbox">
+    <input class="input-checkbox" type="checkbox" name="checkbox" id="" required />
+    Checkbox 2
+  </label>
 </app-checkbox>
 <app-radio label="Radio" iconSrc="headphones">
-    <label class="check-group-label" for="radio">
-        <input class="input-radio" type="radio" name="radio" id="" required>
-        Radio 1
-    </label>
-    <label class="check-group-label" for="radio">
-        <input class="input-radio" type="radio" name="radio" id="" required>
-        Radio 2
-    </label>
+  <label class="check-group-label" for="radio">
+    <input class="input-radio" type="radio" name="radio" id="" required />
+    Radio 1
+  </label>
+  <label class="check-group-label" for="radio">
+    <input class="input-radio" type="radio" name="radio" id="" required />
+    Radio 2
+  </label>
 </app-radio>
 <app-select label="Dropdown" iconSrc="utensils-solid">
-    <select class="select-content" name="" id="">
-        <option selected value="">One</option>
-        <option value="">Two</option>
-        <option value="">Three</option>
-        <option value="">Four</option>
-        <option value="">Five</option>
-        <option value="">Six</option>
-    </select>
+  <select class="select-content" name="" id="">
+    <option selected value="">One</option>
+    <option value="">Two</option>
+    <option value="">Three</option>
+    <option value="">Four</option>
+    <option value="">Five</option>
+    <option value="">Six</option>
+  </select>
 </app-select>
 <app-textarea label="Textarea" iconSrc="activity">
-    <textarea class="input-content" name="" id="" cols="30" rows="3"></textarea>
+  <textarea class="input-content" name="" id="" cols="30" rows="3"></textarea>
 </app-textarea>
 <app-default-button></app-default-button>
