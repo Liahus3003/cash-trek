@@ -2,4 +2,8 @@
     <div class="inner" [ngClass]="{'donut-chart-grid' : isDonutChart, 'flex-center': isDefault}">
         <ng-content></ng-content>
     </div>
+    <div *ngIf="hasDescription" class="m-auto mt-3">
+        <span>Your spendings exceeded by 300$</span>
+        <div>Days remaining in this month: 4 days</div>
+    </div>
 </div>

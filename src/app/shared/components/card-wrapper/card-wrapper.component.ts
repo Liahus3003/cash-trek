@@ -12,4 +12,5 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 export class CardWrapperComponent {
   @Input() isDefault = false;
   @Input() isDonutChart = false;
+  @Input() hasDescription = false;
 }

@@ -244,7 +244,8 @@ export class DashboardComponent implements AfterViewInit {
   onResize(event?: Event) {
     if (this.graphWrapper && this.graphWrapper.nativeElement) {
       const width = window.innerWidth < 767 ? (this.graphWrapper.nativeElement.offsetWidth - 40) : (Math.floor((this.graphWrapper.nativeElement.offsetWidth)/2) - 40);
-      this.view = [width, 450];
+      const height = window.innerWidth < 767 ? 300 : 450;
+      this.view = [width, height];
       console.log(this.view);
     }
   }

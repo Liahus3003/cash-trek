@@ -1,10 +1,85 @@
 <div class="m-3" #graphWrapper>
-  <h1>dashboard works!</h1>
+  <h1 class="flex-center">dashboard works!</h1>
   <div class="row mx-0 row-cols-1 row-cols-md-2 g-2" #graphWrapper>
-    <app-card-wrapper [isDefault]="true">
-      <ngx-charts-linear-gauge [view]="view" [scheme]="colorScheme" [value]="1500" [previousValue]="3200"
+    <app-card-wrapper [isDefault]="true" [hasDescription]="true">
+      <ngx-charts-linear-gauge [view]="[300, 250]" [scheme]="colorScheme" [value]="1500" [previousValue]="1200"
         [units]="'Expense'">
       </ngx-charts-linear-gauge>
+    </app-card-wrapper>
+    <app-card-wrapper [isDefault]="true">
+      <ngx-charts-tree-map [view]="[300, 300]" [results]="treeInfo" [animations]="true"
+      [labelFormatting]="treeLabelFormatting">
+    </ngx-charts-tree-map>
+    </app-card-wrapper>
+    <app-card-wrapper [isDefault]="true">
+      <div>
+        <h3 class="flex-center">Upcoming expenses</h3>
+        <div class="my-2">
+          <div class="flex-space-around py-2">
+            <span>Icon</span>
+            <span>Description</span>
+            <span>$300</span>
+          </div>
+          <div class="flex-space-around py-2">
+            <span>Icon</span>
+            <span>Description</span>
+            <span>$300</span>
+          </div>
+          <div class="flex-space-around py-2">
+            <span>Icon</span>
+            <span>Description</span>
+            <span>$300</span>
+          </div>
+          <div class="flex-space-around py-2">
+            <span>Icon</span>
+            <span>Description</span>
+            <span>$300</span>
+          </div>
+          <div class="flex-space-around py-2">
+            <span>Icon</span>
+            <span>Description</span>
+            <span>$300</span>
+          </div>
+        </div>
+      </div>
+    </app-card-wrapper>
+    <app-card-wrapper [isDefault]="true">
+      <div>
+        <h3 class="flex-center">Upcoming credits</h3>
+        <div class="my-2">
+          <div class="flex-space-around py-2">
+            <span>Icon</span>
+            <span>Description</span>
+            <span>$300</span>
+          </div>
+          <div class="flex-space-around py-2">
+            <span>Icon</span>
+            <span>Description</span>
+            <span>$300</span>
+          </div>
+          <div class="flex-space-around py-2">
+            <span>Icon</span>
+            <span>Description</span>
+            <span>$300</span>
+          </div>
+          <div class="flex-space-around py-2">
+            <span>Icon</span>
+            <span>Description</span>
+            <span>$300</span>
+          </div>
+          <div class="flex-space-around py-2">
+            <span>Icon</span>
+            <span>Description</span>
+            <span>$300</span>
+          </div>
+        </div>
+      </div>
+    </app-card-wrapper>
+    <app-card-wrapper [isDefault]="true">
+      <ngx-charts-bar-vertical-stacked [view]="view" [results]="multi" [gradient]="false" [xAxis]="true" [yAxis]="true"
+        [legend]="true" [legendTitle]="''" [showXAxisLabel]="true" [showYAxisLabel]="true" [xAxisLabel]="'Day'" [yAxisLabel]="'Expense'"
+        [animations]="true" [legendPosition]="legendPosition">
+      </ngx-charts-bar-vertical-stacked>
     </app-card-wrapper>
     <app-card-wrapper [isDonutChart]="true">
       <ngx-charts-pie-chart [view]="view" [legendPosition]="legendPosition" [results]="series" [legend]="true"
@@ -18,32 +93,6 @@
         [animations]="false">
       </ngx-charts-pie-chart>
     </app-card-wrapper>
-    <!-- <div class="chart-layout col-12 col-md-6">
-      <div class="donut-chart-grid">
-        
-      </div>
-    </div> -->
-    <app-card-wrapper [isDefault]="true">
-      <ngx-charts-bar-vertical-stacked [view]="view" [results]="multi" [gradient]="false" [xAxis]="true" [yAxis]="true"
-        [legend]="true" [legendTitle]="''" [showXAxisLabel]="true" [showYAxisLabel]="true" [xAxisLabel]="'Day'" [yAxisLabel]="'Expense'"
-        [animations]="true" [legendPosition]="legendPosition">
-      </ngx-charts-bar-vertical-stacked>
-    </app-card-wrapper>
-    <!-- <div class="chart-layout col-12 col-md-6">
-      <div class="flex-center py-3">
-        
-      </div>
-    </div> -->
-    <app-card-wrapper [isDefault]="true">
-      <ngx-charts-tree-map [view]="view" [results]="treeInfo" [animations]="true"
-      [labelFormatting]="treeLabelFormatting">
-    </ngx-charts-tree-map>
-    </app-card-wrapper>
-    <!-- <div class="chart-layout col-12 col-md-6">
-      <div class="flex-center py-3">
-
-      </div>
-    </div> -->
   </div>
 </div>
 <app-input label="Input Field" iconSrc="wallet-solid">
