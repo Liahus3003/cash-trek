@@ -7,11 +7,9 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { routes } from './router';
 import { RouterModule } from '@angular/router';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { MonthlySummaryComponent } from './monthly-summary/monthly-summary.component';
-import { YearlySummaryComponent } from './yearly-summary/yearly-summary.component';
-import { CreditCommitmentComponent } from './credit-commitment/credit-commitment.component';
-import { HeaderComponent } from './header/header.component';
-import { NavigationTabComponent } from './navigation-tab/navigation-tab.component';
+import { MonthlySummaryComponent } from './modules/monthly-summary/monthly-summary.component';
+import { HeaderComponent } from './shared/components/header/header.component';
+import { NavigationTabComponent } from './shared/components/navigation-tab/navigation-tab.component';
 import { CheckboxComponent } from '@shared/components/checkbox/checkbox.component';
 import { SelectComponent } from '@shared/components/select/select.component';
 import { TextareaComponent } from '@shared/components/textarea/textarea.component';
@@ -21,6 +19,10 @@ import { DefaultButtonComponent } from '@shared/components/default-button/defaul
 import { SlimScrollDirective } from '@shared/directives/slimscroll.directive';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { CardWrapperComponent } from './shared/components/card-wrapper/card-wrapper.component';
+import { CashBookComponent } from './modules/cash-book/cash-book.component';
+import { CreditCommitmentComponent } from './modules/credit-commitment/credit-commitment.component';
+import { YearlySummaryComponent } from './modules/yearly-summary/yearly-summary.component';
+import { CategoriesComponent } from './modules/categories/categories.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,9 @@ import { CardWrapperComponent } from './shared/components/card-wrapper/card-wrap
     DashboardComponent,
     MonthlySummaryComponent,
     YearlySummaryComponent,
-    CreditCommitmentComponent
+    CreditCommitmentComponent,
+    CashBookComponent,
+    CategoriesComponent
   ],
   imports: [
     BrowserModule,
