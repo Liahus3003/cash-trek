@@ -19,6 +19,12 @@ export const NAVIGATION = [
     },
     {
         id: 4,
+        label: 'Cash Book',
+        route: 'cash-book',
+        imgSrc: 'activity'
+    },
+    {
+        id: 5,
         label: 'Categories',
         route: 'categories',
         imgSrc: 'settings'
