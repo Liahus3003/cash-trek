@@ -1,4 +1,4 @@
-<div class="input-wrapper m-5 position-relative">
+<div class="input-wrapper m-2 m-sm-3 position-relative">
   <div class="label-text mb-3 flex-center">
     <span *ngIf="iconSrc" class="icon-wrapper">
       <img
@@ -11,7 +11,7 @@
     </span>
     <span class="group-label">{{ label }}</span>
   </div>
-  <div [class.ms-2]="iconSrc">
+  <div>
     <ng-content></ng-content>
   </div>
 </div>
