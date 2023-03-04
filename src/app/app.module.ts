@@ -31,7 +31,6 @@ import { CategoriesComponent } from './modules/categories/categories.component';
     MonthlySummaryComponent,
     YearlySummaryComponent,
     CreditCommitmentComponent,
-    CashBookComponent,
     CategoriesComponent
   ],
   imports: [
@@ -54,7 +53,8 @@ import { CategoriesComponent } from './modules/categories/categories.component';
     InputComponent,
     DefaultButtonComponent,
     CardWrapperComponent,
-    SlimScrollDirective
+    SlimScrollDirective,
+    CashBookComponent
   ],
   providers: [],
   bootstrap: [AppComponent]
