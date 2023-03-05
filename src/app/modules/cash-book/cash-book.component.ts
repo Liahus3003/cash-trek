@@ -32,6 +32,7 @@ export class CashBookComponent {
     date: ['', Validators.required],
     notes: [''],
     category: ['', Validators.required],
+    paymentMode: ['', Validators.required],
     isSubscription: ['', Validators.required],
     rebill: ['', Validators.required],
     site: ['', Validators.required],

@@ -1,70 +1,87 @@
-<form [formGroup]="expenseInfoForm">
-    <div class="row mx-0">
-        <div class="col-md-4">
-            <app-input label="Name" iconSrc="wallet-solid">
-                <input class="input-content" type="text" name="" id="" formControlName="name" />
-            </app-input>
+<div class="m-4">
+    <h1 class="content-header">
+        Add Expense
+    </h1>
+    <form [formGroup]="expenseInfoForm">
+        <div class="row mx-0">
+            <div class="col-md-4">
+                <app-input label="Name" iconSrc="wallet-solid">
+                    <input class="input-content" type="text" name="" id="" formControlName="name" />
+                </app-input>
+            </div>
+            <div class="col-md-4">
+                <app-input label="Price" iconSrc="wallet-solid">
+                    <input class="input-content" type="number" name="" id="" formControlName="price" />
+                </app-input>
+            </div>
+            <div class="col-md-4">
+                <app-input label="Date" iconSrc="wallet-solid">
+                    <input class="input-content" type="date" name="" id="" formControlName="date" />
+                </app-input>
+            </div>
+            <div class="col-md-4">
+                <app-select label="Category" iconSrc="utensils-solid">
+                    <select class="select-content" name="" id="" formControlName="category">
+                        <option selected value="">One</option>
+                        <option value="">Two</option>
+                        <option value="">Three</option>
+                        <option value="">Four</option>
+                        <option value="">Five</option>
+                        <option value="">Six</option>
+                    </select>
+                </app-select>
+            </div>
+            <div class="col-md-4">
+                <app-select label="Payment Mode" iconSrc="utensils-solid">
+                    <select class="select-content" name="" id="" formControlName="paymentMode">
+                        <option selected value="">One</option>
+                        <option value="">Two</option>
+                        <option value="">Three</option>
+                        <option value="">Four</option>
+                        <option value="">Five</option>
+                        <option value="">Six</option>
+                    </select>
+                </app-select>
+            </div>
+            <div class="col-md-4">
+                <app-checkbox label="Subscription" iconSrc="gift">
+                    <label class="check-group-label" for="checkbox">
+                        <input class="input-checkbox" type="checkbox" name="checkbox" id=""
+                            formControlName="isSubscription" />
+                        Auto Refill
+                    </label>
+                </app-checkbox>
+            </div>
+            <div class="col-md-4">
+                <app-textarea label="Notes" iconSrc="activity">
+                    <textarea class="input-content" name="" id="" cols="20" rows="3" formControlName="notes"></textarea>
+                </app-textarea>
+            </div>
+            <div class="col-md-4">
+                <app-select label="Rebill" iconSrc="utensils-solid">
+                    <select class="select-content" name="" id="" formControlName="rebill">
+                        <option selected value="">One</option>
+                        <option value="">Two</option>
+                        <option value="">Three</option>
+                        <option value="">Four</option>
+                        <option value="">Five</option>
+                        <option value="">Six</option>
+                    </select>
+                </app-select>
+            </div>
+            <div class="col-md-4">
+                <app-input label="Site" iconSrc="wallet-solid">
+                    <input class="input-content" type="text" name="" id="" formControlName="site" />
+                </app-input>
+            </div>
         </div>
-        <div class="col-md-4">
-            <app-input label="Price" iconSrc="wallet-solid">
-                <input class="input-content" type="number" name="" id="" formControlName="price" />
-            </app-input>
+        <div class="flex-center">
+            <app-default-button buttonType="success" label="Add"></app-default-button>
+            <app-default-button buttonType="cancel" label="Reset"></app-default-button>
         </div>
-        <div class="col-md-4">
-            <app-input label="Date" iconSrc="wallet-solid">
-                <input class="input-content" type="date" name="" id="" formControlName="date" />
-            </app-input>
-        </div>
-        <div class="col-md-4">
-            <app-select label="Category" iconSrc="utensils-solid">
-                <select class="select-content" name="" id="" formControlName="category">
-                    <option selected value="">One</option>
-                    <option value="">Two</option>
-                    <option value="">Three</option>
-                    <option value="">Four</option>
-                    <option value="">Five</option>
-                    <option value="">Six</option>
-                </select>
-            </app-select>
-        </div>
-        <div class="col-md-4">
-            <app-checkbox label="Subscription" iconSrc="gift">
-                <label class="check-group-label" for="checkbox">
-                    <input class="input-checkbox" type="checkbox" name="checkbox" id="" formControlName="isSubscription"/>
-                    Auto Refill
-                </label>
-                <!-- <label class="check-group-label" for="checkbox">
-                    <input class="input-checkbox" type="checkbox" name="checkbox" id="" required />
-                    Checkbox 2
-                </label> -->
-            </app-checkbox>
-        </div>
-        <div class="col-md-4">
-            <app-textarea label="Notes" iconSrc="activity">
-                <textarea class="input-content" name="" id="" cols="20" rows="3" formControlName="notes"></textarea>
-            </app-textarea>
-        </div>
-        <div class="col-md-4">
-            <app-input label="Site" iconSrc="wallet-solid">
-                <input class="input-content" type="text" name="" id="" formControlName="site" />
-            </app-input>
-        </div>
-        <div class="col-md-4">
-            <app-select label="Rebill" iconSrc="utensils-solid">
-                <select class="select-content" name="" id="" formControlName="rebill">
-                    <option selected value="">One</option>
-                    <option value="">Two</option>
-                    <option value="">Three</option>
-                    <option value="">Four</option>
-                    <option value="">Five</option>
-                    <option value="">Six</option>
-                </select>
-            </app-select>
-        </div>
-    </div>
-    <app-default-button></app-default-button>
-</form>
-    <!-- <app-radio label="Radio" iconSrc="headphones">
+    </form>
+</div>
+<!-- <app-radio label="Radio" iconSrc="headphones">
         <label class="check-group-label" for="radio">
             <input class="input-radio" type="radio" name="radio" id="" required />
             Radio 1
