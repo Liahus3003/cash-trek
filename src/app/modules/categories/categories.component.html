@@ -1,37 +1,66 @@
-<app-input label="Input Field" iconSrc="wallet-solid">
-    <input class="input-content" type="text" name="" id="" required />
-</app-input>
-<app-checkbox label="Checkbox" iconSrc="gift">
-    <label class="check-group-label" for="checkbox">
-        <input class="input-checkbox" type="checkbox" name="checkbox" id="" required />
-        Checkbox 1
-    </label>
-    <label class="check-group-label" for="checkbox">
-        <input class="input-checkbox" type="checkbox" name="checkbox" id="" required />
-        Checkbox 2
-    </label>
-</app-checkbox>
-<app-radio label="Radio" iconSrc="headphones">
-    <label class="check-group-label" for="radio">
-        <input class="input-radio" type="radio" name="radio" id="" required />
-        Radio 1
-    </label>
-    <label class="check-group-label" for="radio">
-        <input class="input-radio" type="radio" name="radio" id="" required />
-        Radio 2
-    </label>
-</app-radio>
-<app-select label="Dropdown" iconSrc="utensils-solid">
-    <select class="select-content" name="" id="">
-        <option selected value="">One</option>
-        <option value="">Two</option>
-        <option value="">Three</option>
-        <option value="">Four</option>
-        <option value="">Five</option>
-        <option value="">Six</option>
-    </select>
-</app-select>
-<app-textarea label="Textarea" iconSrc="activity">
-    <textarea class="input-content" name="" id="" cols="30" rows="3"></textarea>
-</app-textarea>
-<app-default-button></app-default-button>
+<div class="m-4">
+    <h1 class="content-header">
+        Categories
+    </h1>
+    <div *ngIf="VIEW_MODE">
+        <h2 class="sub-header">
+            {{VIEW_MODE}} Category
+        </h2>
+        <form [formGroup]="categoryInfoForm">
+            <div class="row mx-0">
+                <div class="col-md-4">
+                    <app-input label="Name" iconSrc="wallet-solid">
+                        <input class="input-content" type="text" name="" id="" formControlName="name" />
+                    </app-input>
+                </div>
+                <div class="col-md-4">
+                    <app-textarea label="Notes" iconSrc="activity">
+                        <textarea class="input-content" name="" id="" cols="20" rows="3" formControlName="description"></textarea>
+                    </app-textarea>
+                </div>
+                <div class="flex-start">
+                    <app-default-button buttonType="success" label="Add Category"></app-default-button>
+                    <app-default-button buttonType="cancel" label="Reset"></app-default-button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="row m-4">
+        <h2 class="sub-header mx-0 px-0">
+            Lookup
+        </h2>
+        <table class="table">
+            <thead class="table-head">
+                <tr class="table-head--row">
+                    <th class="row-content">No</th>
+                    <th class="row-content">Name</th>
+                    <th class="row-content">Description</th>
+                    <th class="row-content">Status</th>
+                    <th class="row-content">Actions</th>
+                </tr>
+            </thead>
+            <tbody class="table-body">
+                <tr class="table-body-row">
+                    <td class="row-content">1</td>
+                    <td class="row-content">Food</td>
+                    <td class="row-content">Items include food, beverages, snacks and cool drinks</td>
+                    <td class="row-content">Active</td>
+                    <td class="row-content">
+                        <span>Edit</span>
+                        <span>Delete</span>
+                    </td>
+                </tr>
+                <tr class="table-body-row">
+                    <td class="row-content">2</td>
+                    <td class="row-content">Movie</td>
+                    <td class="row-content">Items include Ticket cost, parking, pop-corn and cool drinks</td>
+                    <td class="row-content">Active</td>
+                    <td class="row-content">
+                        <span>Edit</span>
+                        <span>Delete</span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
