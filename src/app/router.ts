@@ -7,7 +7,7 @@ import { CategoriesComponent } from "./modules/categories/categories.component";
 
 export const routes: Routes = [
     {path: 'cash-book', component: CashBookComponent},
-    {path: 'categories', component: CategoriesComponent},
+    {path: 'configuration', component: CategoriesComponent},
     {path: 'dashboard', component: DashboardComponent},
     {path: 'monthly-summary', component: MonthlySummaryComponent},
     {path: 'yearly-summary', component: YearlySummaryComponent},
