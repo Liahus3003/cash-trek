@@ -39,4 +39,12 @@ export class CashBookComponent {
   });
 
   constructor(private fb: FormBuilder) {}
+
+  submitForm(): void {
+    console.log(this.expenseInfoForm.value);
+  }
+
+  resetForm(): void {
+    this.expenseInfoForm.reset();
+  }
 }

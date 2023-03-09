@@ -25,8 +25,8 @@ export const NAVIGATION = [
     },
     {
         id: 5,
-        label: 'Categories',
-        route: 'categories',
+        label: 'Configure',
+        route: 'configuration',
         imgSrc: 'settings'
     }
 ];

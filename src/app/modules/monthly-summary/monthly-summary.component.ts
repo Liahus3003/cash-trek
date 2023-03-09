@@ -19,6 +19,48 @@ export class MonthlySummaryComponent implements AfterViewInit {
     name: 'Customer Usage',
   };
   view: [number, number] = [700, 400];
+  lineChart = [
+    {
+      "name": "Jan",
+      "series": [
+        {
+          "name": "1",
+          "value": 100
+        },
+        {
+          "name": "2",
+          "value": 1000
+        },
+        {
+          "name": "3",
+          "value": 0
+        },
+        {
+          "name": "4",
+          "value": 2000
+        }
+      ]
+    },
+  
+    {
+      "name": "Feb",
+      "series": [
+        {
+          "name": "1",
+          "value": 0
+        },
+        {
+          "name": "2",
+          "value": -150
+        },
+        {
+          "name": "3",
+          "value": 500
+        }
+      ]
+    }
+  ];
+  
   multi = [
     {
       name: 'D-1',

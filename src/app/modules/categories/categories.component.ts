@@ -28,10 +28,19 @@ import { TextareaComponent } from '@shared/components/textarea/textarea.componen
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CategoriesComponent {
-  categoryInfoForm = this.fb.group({
+  lookupInfoForm = this.fb.group({
     name: ['', Validators.required],
+    category: ['', Validators.required],
     description: ['']
   });
   VIEW_MODE = 'Add';
   constructor(private fb: FormBuilder) {}
+
+  submitForm(): void {
+    console.log(this.lookupInfoForm.value);
+  }
+
+  resetForm(): void {
+    this.lookupInfoForm.reset();
+  }
 }

@@ -1,12 +1,12 @@
 <div class="m-4">
     <h1 class="content-header">
-        Categories
+        Configure Lookup
     </h1>
     <div *ngIf="VIEW_MODE">
         <h2 class="sub-header">
-            {{VIEW_MODE}} Category
+            {{VIEW_MODE}} Lookup
         </h2>
-        <form [formGroup]="categoryInfoForm">
+        <form [formGroup]="lookupInfoForm">
             <div class="row mx-0">
                 <div class="col-md-4">
                     <app-input label="Name" iconSrc="wallet-solid">
@@ -14,26 +14,35 @@
                     </app-input>
                 </div>
                 <div class="col-md-4">
+                    <app-select label="Type" iconSrc="utensils-solid">
+                        <select class="select-content" name="" id="" formControlName="type">
+                            <option selected value="">Category</option>
+                            <option value="">Currency</option>
+                        </select>
+                    </app-select>
+                </div>
+                <div class="col-md-4">
                     <app-textarea label="Notes" iconSrc="activity">
                         <textarea class="input-content" name="" id="" cols="20" rows="3" formControlName="description"></textarea>
                     </app-textarea>
                 </div>
                 <div class="flex-start">
-                    <app-default-button buttonType="success" label="Add Category"></app-default-button>
-                    <app-default-button buttonType="cancel" label="Reset"></app-default-button>
+                    <app-default-button buttonType="success" label="Add Info" (buttonClicked)="submitForm()"></app-default-button>
+                    <app-default-button buttonType="cancel" label="Reset" (buttonClicked)="resetForm()"></app-default-button>
                 </div>
             </div>
         </form>
     </div>
     <div class="row m-4">
         <h2 class="sub-header mx-0 px-0">
-            Lookup
+            Lookup Info
         </h2>
         <table class="table">
             <thead class="table-head">
                 <tr class="table-head--row">
                     <th class="row-content">No</th>
                     <th class="row-content">Name</th>
+                    <th class="row-content">Type</th>
                     <th class="row-content">Description</th>
                     <th class="row-content">Status</th>
                     <th class="row-content">Actions</th>
@@ -43,6 +52,7 @@
                 <tr class="table-body-row">
                     <td class="row-content">1</td>
                     <td class="row-content">Food</td>
+                    <td class="row-content">Category</td>
                     <td class="row-content">Items include food, beverages, snacks and cool drinks</td>
                     <td class="row-content">Active</td>
                     <td class="row-content">
@@ -53,7 +63,19 @@
                 <tr class="table-body-row">
                     <td class="row-content">2</td>
                     <td class="row-content">Movie</td>
+                    <td class="row-content">Category</td>
                     <td class="row-content">Items include Ticket cost, parking, pop-corn and cool drinks</td>
+                    <td class="row-content">Active</td>
+                    <td class="row-content">
+                        <span>Edit</span>
+                        <span>Delete</span>
+                    </td>
+                </tr>
+                <tr class="table-body-row">
+                    <td class="row-content">3</td>
+                    <td class="row-content">$</td>
+                    <td class="row-content">Currency</td>
+                    <td class="row-content">Currency of the U.S.A</td>
                     <td class="row-content">Active</td>
                     <td class="row-content">
                         <span>Edit</span>

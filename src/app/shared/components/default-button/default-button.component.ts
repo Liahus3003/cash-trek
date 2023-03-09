@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   standalone: true,
@@ -12,4 +12,9 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 export class DefaultButtonComponent {
   @Input() buttonType = 'success';
   @Input() label = '';
+  @Output() buttonClicked = new EventEmitter();
+
+  triggerClick(): void {
+    this.buttonClicked.emit();
+  }
 }
