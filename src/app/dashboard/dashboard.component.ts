@@ -5,6 +5,7 @@ import {
   NgZone,
   ViewChild,
 } from '@angular/core';
+import { AnimateCounterDirective } from '@shared/directives/animate-counter.directive';
 import { Color, LegendPosition, ScaleType } from '@swimlane/ngx-charts';
 import { debounceTime, distinctUntilChanged, fromEvent, Subject } from 'rxjs';
 
@@ -12,6 +13,8 @@ import { debounceTime, distinctUntilChanged, fromEvent, Subject } from 'rxjs';
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.less'],
+  standalone: true,
+  imports: [AnimateCounterDirective]
 })
 export class DashboardComponent implements AfterViewInit {
   legendPosition: LegendPosition = LegendPosition.Below;
@@ -175,40 +178,57 @@ export class DashboardComponent implements AfterViewInit {
 
   treeInfo = [
     {
-      "name": "Family",
-      "value": 33000
+      name: 'Family',
+      value: 33000,
     },
     {
-      "name": "Netflix",
-      "value": 699
+      name: 'Netflix',
+      value: 699,
     },
     {
-      "name": "Invest",
-      "value": 15000
+      name: 'Invest',
+      value: 15000,
     },
     {
-      "name": "Entertainment",
-      "value": 1240
+      name: 'Entertainment',
+      value: 1240,
     },
     {
-      "name": "Outing",
-      "value": 2000
-    },{
-      "name": "Travel",
-      "value": 500
-    }
+      name: 'Outing',
+      value: 2000,
+    },
+    {
+      name: 'Travel',
+      value: 500,
+    },
   ];
 
   @ViewChild('graphWrapper') graphWrapper!: ElementRef;
   changeSize = new Subject<Event>();
 
-  constructor(private zone: NgZone) {}
+  constructor(private zone: NgZone) {
+  }
 
   ngAfterViewInit(): void {
     this.fixGraphPosition();
     setTimeout(() => {
       this.onResize();
     }, 0);
+    // const valueDisplays = document.querySelectorAll('.num');
+    // const interval = 1000;
+
+    // valueDisplays.forEach(valueDisplay => {
+    //   let startValue = 0;
+    //   const endValue = parseInt(valueDisplay.getAttribute('data-val') || '');
+    //   const duration = Math.floor(interval / endValue);
+    //   const counter = setInterval(function () {
+    //     startValue += 1;
+    //     valueDisplay.textContent = String(startValue);
+    //     if (startValue == endValue) {
+    //       clearInterval(counter);
+    //     }
+    //   }, duration);
+    // });
   }
 
   fixGraphPosition() {
@@ -237,13 +257,16 @@ export class DashboardComponent implements AfterViewInit {
     return name;
   }
 
-  treeLabelFormatting(c: {name: string, label: string}) {
-    return `${(c.label)} Expense`;
+  treeLabelFormatting(c: { name: string; label: string }) {
+    return `${c.label} Expense`;
   }
 
   onResize(event?: Event) {
     if (this.graphWrapper && this.graphWrapper.nativeElement) {
-      const width = window.innerWidth < 767 ? (this.graphWrapper.nativeElement.offsetWidth - 40) : (Math.floor((this.graphWrapper.nativeElement.offsetWidth)/2) - 40);
+      const width =
+        window.innerWidth < 767
+          ? this.graphWrapper.nativeElement.offsetWidth - 40
+          : Math.floor(this.graphWrapper.nativeElement.offsetWidth / 2) - 40;
       const height = window.innerWidth < 767 ? 300 : 450;
       this.view = [width, height];
       console.log(this.view);

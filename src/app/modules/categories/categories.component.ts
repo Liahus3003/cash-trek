@@ -30,7 +30,7 @@ import { TextareaComponent } from '@shared/components/textarea/textarea.componen
 export class CategoriesComponent {
   lookupInfoForm = this.fb.group({
     name: ['', Validators.required],
-    category: ['', Validators.required],
+    type: ['', Validators.required],
     description: ['']
   });
   VIEW_MODE = 'Add';
