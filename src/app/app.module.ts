@@ -1,6 +1,5 @@
 import { NgModule, isDevMode } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
@@ -17,26 +16,20 @@ import { RadioComponent } from '@shared/components/radio/radio.component';
 import { InputComponent } from '@shared/components/input/input.component';
 import { DefaultButtonComponent } from '@shared/components/default-button/default-button.component';
 import { SlimScrollDirective } from '@shared/directives/slimscroll.directive';
-import { NgxChartsModule } from '@swimlane/ngx-charts';
-import { CardWrapperComponent } from './shared/components/card-wrapper/card-wrapper.component';
 import { CashBookComponent } from './modules/cash-book/cash-book.component';
 import { CreditCommitmentComponent } from './modules/credit-commitment/credit-commitment.component';
 import { YearlySummaryComponent } from './modules/yearly-summary/yearly-summary.component';
 import { CategoriesComponent } from './modules/categories/categories.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    DashboardComponent,
-    MonthlySummaryComponent,
-    YearlySummaryComponent,
-    CreditCommitmentComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
-    RouterModule.forRoot(routes),
-    NgxChartsModule,
     BrowserAnimationsModule,
+    RouterModule.forRoot(routes),
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: !isDevMode(),
       // Register the ServiceWorker as soon as the application is stable
@@ -51,10 +44,13 @@ import { CategoriesComponent } from './modules/categories/categories.component';
     RadioComponent,
     InputComponent,
     DefaultButtonComponent,
-    CardWrapperComponent,
     SlimScrollDirective,
     CashBookComponent,
-    CategoriesComponent
+    CategoriesComponent,
+    CreditCommitmentComponent,
+    DashboardComponent,
+    MonthlySummaryComponent,
+    YearlySummaryComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

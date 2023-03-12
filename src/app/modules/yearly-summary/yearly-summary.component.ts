@@ -1,16 +1,32 @@
-import { AfterViewInit, Component, ElementRef, NgZone, ViewChild } from '@angular/core';
-import { Color, LegendPosition, ScaleType } from '@swimlane/ngx-charts';
+import {
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  NgZone,
+  ViewChild,
+} from '@angular/core';
+import { CardWrapperComponent } from '@shared/components/card-wrapper/card-wrapper.component';
+import {
+  Color,
+  LegendPosition,
+  NgxChartsModule,
+  ScaleType,
+} from '@swimlane/ngx-charts';
 import { fromEvent, debounceTime, distinctUntilChanged, Subject } from 'rxjs';
 
 @Component({
   selector: 'app-yearly-summary',
   templateUrl: './yearly-summary.component.html',
-  styleUrls: ['./yearly-summary.component.less']
+  styleUrls: ['./yearly-summary.component.less'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [CardWrapperComponent, NgxChartsModule],
+  standalone: true,
 })
 export class YearlySummaryComponent implements AfterViewInit {
   @ViewChild('graphWrapper') graphWrapper!: ElementRef;
   changeSize = new Subject<Event>();
-  
+
   legendPosition: LegendPosition = LegendPosition.Below;
   colorScheme: Color = {
     domain: ['#99CCE5', '#FF7F7F'],
@@ -172,28 +188,29 @@ export class YearlySummaryComponent implements AfterViewInit {
 
   treeInfo = [
     {
-      "name": "Family",
-      "value": 33000
+      name: 'Family',
+      value: 33000,
     },
     {
-      "name": "Netflix",
-      "value": 699
+      name: 'Netflix',
+      value: 699,
     },
     {
-      "name": "Invest",
-      "value": 15000
+      name: 'Invest',
+      value: 15000,
     },
     {
-      "name": "Entertainment",
-      "value": 1240
+      name: 'Entertainment',
+      value: 1240,
     },
     {
-      "name": "Outing",
-      "value": 2000
-    },{
-      "name": "Travel",
-      "value": 500
-    }
+      name: 'Outing',
+      value: 2000,
+    },
+    {
+      name: 'Travel',
+      value: 500,
+    },
   ];
 
   constructor(private zone: NgZone) {
@@ -233,13 +250,16 @@ export class YearlySummaryComponent implements AfterViewInit {
     return name;
   }
 
-  treeLabelFormatting(c: {name: string, label: string}) {
-    return `${(c.label)} Expense`;
+  treeLabelFormatting(c: { name: string; label: string }) {
+    return `${c.label} Expense`;
   }
 
   onResize(event?: Event) {
     if (this.graphWrapper && this.graphWrapper.nativeElement) {
-      const width = window.innerWidth < 767 ? (this.graphWrapper.nativeElement.offsetWidth - 40) : (Math.floor((this.graphWrapper.nativeElement.offsetWidth)/2) - 40);
+      const width =
+        window.innerWidth < 767
+          ? this.graphWrapper.nativeElement.offsetWidth - 40
+          : Math.floor(this.graphWrapper.nativeElement.offsetWidth / 2) - 40;
       const height = window.innerWidth < 767 ? 300 : 450;
       this.view = [width, height];
       console.log(this.view);

@@ -1,16 +1,32 @@
-import { AfterViewInit, Component, ElementRef, NgZone, ViewChild } from '@angular/core';
-import { LegendPosition, ScaleType, Color } from '@swimlane/ngx-charts';
+import {
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  NgZone,
+  ViewChild,
+} from '@angular/core';
+import { CardWrapperComponent } from '@shared/components/card-wrapper/card-wrapper.component';
+import {
+  LegendPosition,
+  ScaleType,
+  Color,
+  NgxChartsModule,
+} from '@swimlane/ngx-charts';
 import { Subject, fromEvent, debounceTime, distinctUntilChanged } from 'rxjs';
 
 @Component({
   selector: 'app-monthly-summary',
   templateUrl: './monthly-summary.component.html',
-  styleUrls: ['./monthly-summary.component.less']
+  styleUrls: ['./monthly-summary.component.less'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [CardWrapperComponent, NgxChartsModule],
+  standalone: true,
 })
 export class MonthlySummaryComponent implements AfterViewInit {
   @ViewChild('graphWrapper') graphWrapper!: ElementRef;
   changeSize = new Subject<Event>();
-  
+
   legendPosition: LegendPosition = LegendPosition.Below;
   colorScheme: Color = {
     domain: ['#99CCE5', '#FF7F7F'],
@@ -21,46 +37,46 @@ export class MonthlySummaryComponent implements AfterViewInit {
   view: [number, number] = [700, 400];
   lineChart = [
     {
-      "name": "Jan",
-      "series": [
+      name: 'Jan',
+      series: [
         {
-          "name": "1",
-          "value": 100
+          name: '1',
+          value: 100,
         },
         {
-          "name": "2",
-          "value": 1000
+          name: '2',
+          value: 1000,
         },
         {
-          "name": "3",
-          "value": 0
+          name: '3',
+          value: 0,
         },
         {
-          "name": "4",
-          "value": 2000
-        }
-      ]
+          name: '4',
+          value: 2000,
+        },
+      ],
     },
-  
+
     {
-      "name": "Feb",
-      "series": [
+      name: 'Feb',
+      series: [
         {
-          "name": "1",
-          "value": 0
+          name: '1',
+          value: 0,
         },
         {
-          "name": "2",
-          "value": -150
+          name: '2',
+          value: -150,
         },
         {
-          "name": "3",
-          "value": 500
-        }
-      ]
-    }
+          name: '3',
+          value: 500,
+        },
+      ],
+    },
   ];
-  
+
   multi = [
     {
       name: 'D-1',
@@ -214,28 +230,29 @@ export class MonthlySummaryComponent implements AfterViewInit {
 
   treeInfo = [
     {
-      "name": "Family",
-      "value": 33000
+      name: 'Family',
+      value: 33000,
     },
     {
-      "name": "Netflix",
-      "value": 699
+      name: 'Netflix',
+      value: 699,
     },
     {
-      "name": "Invest",
-      "value": 15000
+      name: 'Invest',
+      value: 15000,
     },
     {
-      "name": "Entertainment",
-      "value": 1240
+      name: 'Entertainment',
+      value: 1240,
     },
     {
-      "name": "Outing",
-      "value": 2000
-    },{
-      "name": "Travel",
-      "value": 500
-    }
+      name: 'Outing',
+      value: 2000,
+    },
+    {
+      name: 'Travel',
+      value: 500,
+    },
   ];
 
   constructor(private zone: NgZone) {
@@ -275,13 +292,16 @@ export class MonthlySummaryComponent implements AfterViewInit {
     return name;
   }
 
-  treeLabelFormatting(c: {name: string, label: string}) {
-    return `${(c.label)} Expense`;
+  treeLabelFormatting(c: { name: string; label: string }) {
+    return `${c.label} Expense`;
   }
 
   onResize(event?: Event) {
     if (this.graphWrapper && this.graphWrapper.nativeElement) {
-      const width = window.innerWidth < 767 ? (this.graphWrapper.nativeElement.offsetWidth - 40) : (Math.floor((this.graphWrapper.nativeElement.offsetWidth)/2) - 40);
+      const width =
+        window.innerWidth < 767
+          ? this.graphWrapper.nativeElement.offsetWidth - 40
+          : Math.floor(this.graphWrapper.nativeElement.offsetWidth / 2) - 40;
       const height = window.innerWidth < 767 ? 300 : 450;
       this.view = [width, height];
       console.log(this.view);
