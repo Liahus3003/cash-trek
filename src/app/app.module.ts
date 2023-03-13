@@ -9,11 +9,6 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { MonthlySummaryComponent } from './modules/monthly-summary/monthly-summary.component';
 import { HeaderComponent } from './shared/components/header/header.component';
 import { NavigationTabComponent } from './shared/components/navigation-tab/navigation-tab.component';
-import { CheckboxComponent } from '@shared/components/checkbox/checkbox.component';
-import { SelectComponent } from '@shared/components/select/select.component';
-import { TextareaComponent } from '@shared/components/textarea/textarea.component';
-import { RadioComponent } from '@shared/components/radio/radio.component';
-import { InputComponent } from '@shared/components/input/input.component';
 import { DefaultButtonComponent } from '@shared/components/default-button/default-button.component';
 import { SlimScrollDirective } from '@shared/directives/slimscroll.directive';
 import { CashBookComponent } from './modules/cash-book/cash-book.component';
@@ -38,11 +33,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     }),
     HeaderComponent,
     NavigationTabComponent,
-    CheckboxComponent,
-    SelectComponent,
-    TextareaComponent,
-    RadioComponent,
-    InputComponent,
     DefaultButtonComponent,
     SlimScrollDirective,
     CashBookComponent,

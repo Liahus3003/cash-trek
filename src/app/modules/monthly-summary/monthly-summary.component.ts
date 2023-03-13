@@ -20,7 +20,10 @@ import { Subject, fromEvent, debounceTime, distinctUntilChanged } from 'rxjs';
   templateUrl: './monthly-summary.component.html',
   styleUrls: ['./monthly-summary.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [CardWrapperComponent, NgxChartsModule],
+  imports: [
+    CardWrapperComponent,
+    NgxChartsModule
+  ],
   standalone: true,
 })
 export class MonthlySummaryComponent implements AfterViewInit {

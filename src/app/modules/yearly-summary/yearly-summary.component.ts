@@ -20,7 +20,10 @@ import { fromEvent, debounceTime, distinctUntilChanged, Subject } from 'rxjs';
   templateUrl: './yearly-summary.component.html',
   styleUrls: ['./yearly-summary.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [CardWrapperComponent, NgxChartsModule],
+  imports: [
+    CardWrapperComponent,
+    NgxChartsModule
+  ],
   standalone: true,
 })
 export class YearlySummaryComponent implements AfterViewInit {
