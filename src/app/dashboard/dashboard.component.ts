@@ -5,8 +5,14 @@ import {
   NgZone,
   ViewChild,
 } from '@angular/core';
-import { AnimateCounterDirective } from '@shared/directives/animate-counter.directive';
-import { Color, LegendPosition, ScaleType } from '@swimlane/ngx-charts';
+import { CardWrapperComponent } from '@shared/components/card-wrapper/card-wrapper.component';
+import { CounterBoxComponent } from '@shared/components/counter-box/counter-box.component';
+import {
+  Color,
+  LegendPosition,
+  NgxChartsModule,
+  ScaleType,
+} from '@swimlane/ngx-charts';
 import { debounceTime, distinctUntilChanged, fromEvent, Subject } from 'rxjs';
 
 @Component({
@@ -14,7 +20,7 @@ import { debounceTime, distinctUntilChanged, fromEvent, Subject } from 'rxjs';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.less'],
   standalone: true,
-  imports: [AnimateCounterDirective]
+  imports: [CardWrapperComponent, NgxChartsModule, CounterBoxComponent],
 })
 export class DashboardComponent implements AfterViewInit {
   legendPosition: LegendPosition = LegendPosition.Below;
@@ -206,29 +212,13 @@ export class DashboardComponent implements AfterViewInit {
   @ViewChild('graphWrapper') graphWrapper!: ElementRef;
   changeSize = new Subject<Event>();
 
-  constructor(private zone: NgZone) {
-  }
+  constructor(private zone: NgZone) {}
 
   ngAfterViewInit(): void {
     this.fixGraphPosition();
     setTimeout(() => {
       this.onResize();
     }, 0);
-    // const valueDisplays = document.querySelectorAll('.num');
-    // const interval = 1000;
-
-    // valueDisplays.forEach(valueDisplay => {
-    //   let startValue = 0;
-    //   const endValue = parseInt(valueDisplay.getAttribute('data-val') || '');
-    //   const duration = Math.floor(interval / endValue);
-    //   const counter = setInterval(function () {
-    //     startValue += 1;
-    //     valueDisplay.textContent = String(startValue);
-    //     if (startValue == endValue) {
-    //       clearInterval(counter);
-    //     }
-    //   }, duration);
-    // });
   }
 
   fixGraphPosition() {

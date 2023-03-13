@@ -2,38 +2,26 @@
   <h1 class="content-header">
     Dashboard
   </h1>
-  <div class="wrapper">
-    <div class="container">
-      <i class="fas fa-utensils"></i>
-      <span class="num" appAnimateCounter [value]="400000">000</span>
-      <span class="text">Meals Delivered</span>
-    </div>
-    <div class="container">
-      <i class="fas fa-smile-beam"></i>
-      <span class="num" appAnimateCounter [value]="340">000</span>
-      <span class="text">Happy Customers</span>
-    </div>
-    <div class="container">
-      <i class="fas fa-list"></i>
-      <span class="num" appAnimateCounter [value]="225">000</span>
-      <span class="text">Menu Items</span>
-    </div>
-    <div class="container">
-      <i class="fas fa-star"></i>
-      <span class="num" appAnimateCounter [value]="280">000</span>
-      <span class="text">Five Stars</span>
-    </div>
-  </div>
-  <!-- <div class="row mx-0 row-cols-1 row-cols-md-2 g-2" #graphWrapper>
+  <div class="row mx-0 row-cols-1 row-cols-md-2 g-2" #graphWrapper>
+    <app-card-wrapper [isDefault]="true">
+      <app-counter-box [iconSrc]="'color-icons/coin.svg'" [value]="68000" [text]="'Income'"></app-counter-box>
+      <app-counter-box [iconSrc]="'color-icons/visiting-card.svg'" [value]="30000" [text]="'Expense'"></app-counter-box>
+    </app-card-wrapper>
     <app-card-wrapper [isDefault]="true" [hasDescription]="true">
-      <ngx-charts-linear-gauge [view]="[300, 250]" [scheme]="colorScheme" [value]="1500" [previousValue]="1200"
+      <ngx-charts-linear-gauge [view]="[view[0], 150]" [scheme]="colorScheme" [value]="1500" [previousValue]="1200"
         [units]="'Expense'">
       </ngx-charts-linear-gauge>
     </app-card-wrapper>
     <app-card-wrapper [isDefault]="true">
-      <ngx-charts-tree-map [view]="[300, 300]" [results]="treeInfo" [animations]="true"
+      <ngx-charts-tree-map [view]="view" [results]="treeInfo" [animations]="true"
         [labelFormatting]="treeLabelFormatting">
       </ngx-charts-tree-map>
+    </app-card-wrapper>
+    <app-card-wrapper [isDefault]="true">
+      <ngx-charts-bar-vertical-stacked [view]="view" [results]="multi" [gradient]="false" [xAxis]="true" [yAxis]="true"
+        [legend]="true" [legendTitle]="''" [showXAxisLabel]="true" [showYAxisLabel]="true" [xAxisLabel]="'Day'"
+        [yAxisLabel]="'Expense'" [animations]="true" [legendPosition]="legendPosition">
+      </ngx-charts-bar-vertical-stacked>
     </app-card-wrapper>
     <app-card-wrapper [isDefault]="true">
       <div>
@@ -113,12 +101,6 @@
         </div>
       </div>
     </app-card-wrapper>
-    <app-card-wrapper [isDefault]="true">
-      <ngx-charts-bar-vertical-stacked [view]="view" [results]="multi" [gradient]="false" [xAxis]="true" [yAxis]="true"
-        [legend]="true" [legendTitle]="''" [showXAxisLabel]="true" [showYAxisLabel]="true" [xAxisLabel]="'Day'"
-        [yAxisLabel]="'Expense'" [animations]="true" [legendPosition]="legendPosition">
-      </ngx-charts-bar-vertical-stacked>
-    </app-card-wrapper>
     <app-card-wrapper [isDonutChart]="true">
       <ngx-charts-pie-chart [view]="view" [legendPosition]="legendPosition" [results]="series" [legend]="true"
         [labels]="true" [doughnut]="true" [legendTitle]="''" [labelFormatting]="pieChartLabel.bind(this, series)"
@@ -131,5 +113,5 @@
         [animations]="false">
       </ngx-charts-pie-chart>
     </app-card-wrapper>
-  </div> -->
+  </div>
 </div>
