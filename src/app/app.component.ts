@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router, NavigationEnd } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -8,10 +9,13 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'cash-trek';
 
-  constructor() {
-    setTimeout(() => {
-      this.setCardAnimations();
-    }, 1000);
+  constructor(private router: Router) {
+   this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        window.scrollTo(0, 0);
+        this.setCardAnimations();
+      }
+    });
   }
 
   setCardAnimations(): void {
