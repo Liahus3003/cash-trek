@@ -80,8 +80,8 @@
                 </div>
             </div>
             <div class="flex-center">
-                <app-default-button buttonType="success" label="Add" (buttonClicked)="submitForm()"></app-default-button>
-                <app-default-button buttonType="cancel" label="Reset" (buttonClicked)="resetForm()"></app-default-button>
+                <app-default-button buttonType="success" label="Add" (buttonClicked)="submitExpenseForm()"></app-default-button>
+                <app-default-button buttonType="cancel" label="Reset" (buttonClicked)="resetExpenseForm()"></app-default-button>
             </div>
         </form>
     </div>
@@ -129,6 +129,95 @@
                     <td class="row-content">Currency</td>
                     <td class="row-content">Currency of the U.S.A</td>
                     <td class="row-content">Active</td>
+                    <td class="row-content">
+                        <span>Edit</span>
+                        <span>Delete</span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div>
+        <h2 class="sub-header">
+            Add Wishlist
+        </h2>
+        <form [formGroup]="wishlistForm">
+            <div class="row mx-0">
+                <div class="col-md-4">
+                    <app-input label="Name" iconSrc="dog-tag">
+                        <input class="input-content" type="text" name="" id="" formControlName="name" />
+                    </app-input>
+                </div>
+                <div class="col-md-4">
+                    <app-input label="Budget" iconSrc="rupees-coin">
+                        <input class="input-content" type="number" name="" id="" formControlName="budget" />
+                    </app-input>
+                </div>
+                <div class="col-md-4">
+                    <app-checkbox label="Priority" iconSrc="repeat">
+                        <label class="check-group-label" for="checkbox">
+                            <input class="input-checkbox" type="checkbox" name="checkbox" id=""
+                                formControlName="priority" />
+                            Urgent
+                        </label>
+                    </app-checkbox>
+                </div>
+                <div class="col-md-4">
+                    <app-textarea label="Notes" iconSrc="notes">
+                        <textarea class="input-content" name="" id="" cols="20" rows="3" formControlName="notes"></textarea>
+                    </app-textarea>
+                </div>
+            </div>
+            <div class="flex-center">
+                <app-default-button buttonType="success" label="Add" (buttonClicked)="submitWishlistForm()"></app-default-button>
+                <app-default-button buttonType="cancel" label="Reset" (buttonClicked)="resetWishlistForm()"></app-default-button>
+            </div>
+        </form>
+    </div>
+    <div class="row m-4">
+        <h2 class="sub-header mx-0 px-0">
+            Wishlist
+        </h2>
+        <table class="table">
+            <thead class="table-head">
+                <tr class="table-head--row">
+                    <th class="row-content">No</th>
+                    <th class="row-content">Name</th>
+                    <th class="row-content">Budget</th>
+                    <th class="row-content">Description</th>
+                    <th class="row-content">Priority</th>
+                    <th class="row-content">Actions</th>
+                </tr>
+            </thead>
+            <tbody class="table-body">
+                <tr class="table-body-row">
+                    <td class="row-content">1</td>
+                    <td class="row-content">Food</td>
+                    <td class="row-content">$300</td>
+                    <td class="row-content">Items include food, beverages, snacks and cool drinks</td>
+                    <td class="row-content">Yes</td>
+                    <td class="row-content">
+                        <span>Edit</span>
+                        <span>Delete</span>
+                    </td>
+                </tr>
+                <tr class="table-body-row">
+                    <td class="row-content">2</td>
+                    <td class="row-content">Movie</td>
+                    <td class="row-content">$300</td>
+                    <td class="row-content">Items include Ticket cost, parking, pop-corn and cool drinks</td>
+                    <td class="row-content">No</td>
+                    <td class="row-content">
+                        <span>Edit</span>
+                        <span>Delete</span>
+                    </td>
+                </tr>
+                <tr class="table-body-row">
+                    <td class="row-content">3</td>
+                    <td class="row-content">Washing Machine</td>
+                    <td class="row-content">$300</td>
+                    <td class="row-content">Dummy Description</td>
+                    <td class="row-content">No</td>
                     <td class="row-content">
                         <span>Edit</span>
                         <span>Delete</span>

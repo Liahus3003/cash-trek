@@ -38,13 +38,28 @@ export class CashBookComponent {
     site: ['', Validators.required],
   });
 
+  wishlistForm = this.fb.group({
+    name: ['', Validators.required],
+    budget: ['', Validators.required],
+    notes: [''],
+    priority: ['', Validators.required]
+  });
+
   constructor(private fb: FormBuilder) {}
 
-  submitForm(): void {
+  submitExpenseForm(): void {
     console.log(this.expenseInfoForm.value);
   }
 
-  resetForm(): void {
+  resetExpenseForm(): void {
     this.expenseInfoForm.reset();
+  }
+
+  submitWishlistForm(): void {
+    console.log(this.wishlistForm.value);
+  }
+
+  resetWishlistForm(): void {
+    this.wishlistForm.reset();
   }
 }
