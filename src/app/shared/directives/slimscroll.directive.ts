@@ -102,7 +102,7 @@ const defaults: SlimScrollOptions = {
   wrapperClass: "slimScrollDiv",
   allowPageScroll: false,
   wheelStep: 20,
-  touchScrollStep: 200,
+  touchScrollStep: 35,
   borderRadius: "7px",
   railBorderRadius: "7px",
   scrollTo: 0,
