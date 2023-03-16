@@ -30,7 +30,7 @@ export class DashboardComponent implements AfterViewInit {
     selectable: true,
     name: 'Customer Usage',
   };
-  view: [number, number] = [700, 400];
+  view: [number, number] = [700, 375];
   multi = [
     {
       name: 'D-1',
@@ -257,7 +257,7 @@ export class DashboardComponent implements AfterViewInit {
         window.innerWidth < 767
           ? this.graphWrapper.nativeElement.offsetWidth - 40
           : Math.floor(this.graphWrapper.nativeElement.offsetWidth / 2) - 40;
-      const height = window.innerWidth < 767 ? 300 : 450;
+      const height = window.innerWidth < 767 ? 300 : 375;
       this.view = [width, height];
       console.log(this.view);
     }

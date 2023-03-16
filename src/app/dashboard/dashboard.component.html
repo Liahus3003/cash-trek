@@ -11,6 +11,16 @@
       <ngx-charts-linear-gauge [view]="[view[0], 150]" [scheme]="colorScheme" [value]="1500" [previousValue]="1200"
         [units]="'Expense'">
       </ngx-charts-linear-gauge>
+      <div class="row gap-2">
+        <div class="flex-space-between">
+            <span>Your spendings exceeded by 300$</span>
+            <span>$1800 i</span>
+        </div>
+        <div class="flex-space-between">
+            <span>Upcoming bills</span>
+            <span>$990 i</span>
+        </div>
+    </div>
     </app-card-wrapper>
     <app-card-wrapper [isDefault]="true">
       <ngx-charts-tree-map [view]="view" [results]="treeInfo" [animations]="true"
@@ -23,7 +33,7 @@
         [yAxisLabel]="'Expense'" [animations]="true" [legendPosition]="legendPosition">
       </ngx-charts-bar-vertical-stacked>
     </app-card-wrapper>
-    <app-card-wrapper [isDefault]="true">
+    <app-card-wrapper>
       <div>
         <h2 class="sub-header flex-center">
           Upcoming expenses
@@ -62,7 +72,7 @@
         </div>
       </div>
     </app-card-wrapper>
-    <app-card-wrapper [isDefault]="true">
+    <app-card-wrapper>
       <div>
         <h2 class="sub-header flex-center">
           Upcoming credits
