@@ -1,13 +1,75 @@
 <div class="m-4" #graphWrapper>
     <h1 class="content-header">Yearly Summary</h1>
+    <div class="row m-4">
+        <h2 class="sub-header mx-0 px-0">
+            Summary
+        </h2>
+        <table class="table">
+            <thead class="table-head">
+                <tr class="table-head--row">
+                    <th class="row-content">No</th>
+                    <th class="row-content">Name</th>
+                    <th class="row-content">Budget</th>
+                    <th class="row-content">Description</th>
+                    <th class="row-content">Priority</th>
+                </tr>
+            </thead>
+            <tbody class="table-body">
+                <tr class="table-body-row">
+                    <td class="row-content">1</td>
+                    <td class="row-content">Food</td>
+                    <td class="row-content">$300</td>
+                    <td class="row-content">Items include food, beverages, snacks and cool drinks</td>
+                    <td class="row-content">Yes</td>
+                </tr>
+                <tr class="table-body-row">
+                    <td class="row-content">2</td>
+                    <td class="row-content">Movie</td>
+                    <td class="row-content">$300</td>
+                    <td class="row-content">Items include Ticket cost, parking, pop-corn and cool drinks</td>
+                    <td class="row-content">No</td>
+                </tr>
+                <tr class="table-body-row">
+                    <td class="row-content">3</td>
+                    <td class="row-content">Washing Machine</td>
+                    <td class="row-content">$300</td>
+                    <td class="row-content">Dummy Description</td>
+                    <td class="row-content">No</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
     <div class="row mx-0 row-cols-1 row-cols-md-2 g-2" #graphWrapper>
         <app-card-wrapper [isDefault]="true" [hasDescription]="true">
-            <ngx-charts-linear-gauge [view]="[300, 250]" [scheme]="colorScheme" [value]="1500" [previousValue]="1200"
+            <ngx-charts-linear-gauge [view]="[300, 300]" [scheme]="colorScheme" [value]="150000" [previousValue]="200000"
                 [units]="'Expense'">
             </ngx-charts-linear-gauge>
+            <div class="row gap-2">
+                <div class="card-caption flex-space-between">
+                    <span class="label">Your spendings exceeded by 300$</span>
+                    <span class="value">$1800 i</span>
+                </div>
+                <div class="card-caption flex-space-between">
+                    <span class="label">Upcoming bills</span>
+                    <span class="value">$990 i</span>
+                </div>
+                <div class="note-section">*Months remaining in this year: 8</div>
+            </div>
+        </app-card-wrapper>
+        <app-card-wrapper [isDefault]="true" [hasDescription]="true">
+            <div class="row mx-0 mb-4">
+                <div class="flex-space-between">
+                    <span class="mx-4">Year comparison</span>
+                    <span>2023 vs 2022</span>
+                </div>
+            </div>
+            <ngx-charts-line-chart [view]="[view[0], view[1] - 50]" [scheme]="colorScheme" [legend]="true" [roundDomains]="true"
+                [showXAxisLabel]="true" [showYAxisLabel]="true" [xAxis]="true" [yAxis]="true"
+                [xAxisLabel]="'Months'" [yAxisLabel]="'Expense'" [results]="lineChart" [legendPosition]="legendPosition">
+            </ngx-charts-line-chart>
         </app-card-wrapper>
         <app-card-wrapper [isDefault]="true">
-            <ngx-charts-tree-map [view]="[300, 300]" [results]="treeInfo" [animations]="true"
+            <ngx-charts-tree-map [view]="view" [results]="treeInfo" [animations]="true"
                 [labelFormatting]="treeLabelFormatting">
             </ngx-charts-tree-map>
         </app-card-wrapper>

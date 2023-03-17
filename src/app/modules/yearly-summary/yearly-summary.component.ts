@@ -37,7 +37,7 @@ export class YearlySummaryComponent implements AfterViewInit {
     selectable: true,
     name: 'Customer Usage',
   };
-  view: [number, number] = [700, 400];
+  view: [number, number] = [700, 375];
   multi = [
     {
       name: 'D-1',
@@ -170,6 +170,47 @@ export class YearlySummaryComponent implements AfterViewInit {
       ],
     },
   ];
+  lineChart = [
+    {
+      name: '2023',
+      series: [
+        {
+          name: '1',
+          value: 100,
+        },
+        {
+          name: '2',
+          value: 1000,
+        },
+        {
+          name: '3',
+          value: 0,
+        },
+        {
+          name: '4',
+          value: 2000,
+        },
+      ],
+    },
+
+    {
+      name: '2022',
+      series: [
+        {
+          name: '1',
+          value: 0,
+        },
+        {
+          name: '2',
+          value: -150,
+        },
+        {
+          name: '3',
+          value: 500,
+        },
+      ],
+    },
+  ];
 
   series = [
     {
@@ -263,7 +304,7 @@ export class YearlySummaryComponent implements AfterViewInit {
         window.innerWidth < 767
           ? this.graphWrapper.nativeElement.offsetWidth - 40
           : Math.floor(this.graphWrapper.nativeElement.offsetWidth / 2) - 40;
-      const height = window.innerWidth < 767 ? 300 : 450;
+      const height = window.innerWidth < 767 ? 300 : 375;
       this.view = [width, height];
       console.log(this.view);
     }
