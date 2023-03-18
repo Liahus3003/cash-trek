@@ -8,22 +8,22 @@
         </h2>
         <form [formGroup]="expenseInfoForm">
             <div class="row mx-0">
-                <div class="col-md-4">
+                <div class="col-12 col-sm-6 col-lg-4">
                     <app-input label="Name" iconSrc="dog-tag">
                         <input class="input-content" type="text" name="" id="" formControlName="name" />
                     </app-input>
                 </div>
-                <div class="col-md-4">
+                <div class="col-12 col-sm-6 col-lg-4">
                     <app-input label="Price" iconSrc="rupees-coin">
                         <input class="input-content" type="number" name="" id="" formControlName="price" />
                     </app-input>
                 </div>
-                <div class="col-md-4">
+                <div class="col-12 col-sm-6 col-lg-4">
                     <app-input label="Date" iconSrc="calendar">
                         <input class="input-content" type="date" name="" id="" formControlName="date" />
                     </app-input>
                 </div>
-                <div class="col-md-4">
+                <div class="col-12 col-sm-6 col-lg-4">
                     <app-select label="Category" iconSrc="branch-up-arrow">
                         <select class="select-content" name="" id="" formControlName="category">
                             <option selected value="">One</option>
@@ -35,7 +35,7 @@
                         </select>
                     </app-select>
                 </div>
-                <div class="col-md-4">
+                <div class="col-12 col-sm-6 col-lg-4">
                     <app-select label="Payment Mode" iconSrc="pay-by-card">
                         <select class="select-content" name="" id="" formControlName="paymentMode">
                             <option selected value="">One</option>
@@ -47,7 +47,7 @@
                         </select>
                     </app-select>
                 </div>
-                <div class="col-md-4">
+                <div class="col-12 col-sm-6 col-lg-4">
                     <app-checkbox label="Subscription" iconSrc="repeat">
                         <label class="check-group-label" for="checkbox">
                             <input class="input-checkbox" type="checkbox" name="checkbox" id=""
@@ -56,12 +56,12 @@
                         </label>
                     </app-checkbox>
                 </div>
-                <div class="col-md-4">
+                <div class="col-12 col-sm-6 col-lg-4">
                     <app-textarea label="Notes" iconSrc="notes">
                         <textarea class="input-content" name="" id="" cols="20" rows="3" formControlName="notes"></textarea>
                     </app-textarea>
                 </div>
-                <div class="col-md-4">
+                <div class="col-12 col-sm-6 col-lg-4">
                     <app-select label="Rebill" iconSrc="timelapse">
                         <select class="select-content" name="" id="" formControlName="rebill">
                             <option selected value="">One</option>
@@ -73,13 +73,13 @@
                         </select>
                     </app-select>
                 </div>
-                <div class="col-md-4">
+                <div class="col-12 col-sm-6 col-lg-4">
                     <app-input label="Site" iconSrc="website">
                         <input class="input-content" type="text" name="" id="" formControlName="site" />
                     </app-input>
                 </div>
             </div>
-            <div class="flex-center">
+            <div class="buttons-group">
                 <app-default-button buttonType="success" label="Add" (buttonClicked)="submitExpenseForm()"></app-default-button>
                 <app-default-button buttonType="cancel" label="Reset" (buttonClicked)="resetExpenseForm()"></app-default-button>
             </div>
@@ -143,17 +143,17 @@
         </h2>
         <form [formGroup]="wishlistForm">
             <div class="row mx-0">
-                <div class="col-md-4">
+                <div class="col-12 col-sm-6 col-lg-4">
                     <app-input label="Name" iconSrc="dog-tag">
                         <input class="input-content" type="text" name="" id="" formControlName="name" />
                     </app-input>
                 </div>
-                <div class="col-md-4">
+                <div class="col-12 col-sm-6 col-lg-4">
                     <app-input label="Budget" iconSrc="rupees-coin">
                         <input class="input-content" type="number" name="" id="" formControlName="budget" />
                     </app-input>
                 </div>
-                <div class="col-md-4">
+                <div class="col-12 col-sm-6 col-lg-4">
                     <app-checkbox label="Priority" iconSrc="repeat">
                         <label class="check-group-label" for="checkbox">
                             <input class="input-checkbox" type="checkbox" name="checkbox" id=""
@@ -162,13 +162,13 @@
                         </label>
                     </app-checkbox>
                 </div>
-                <div class="col-md-4">
+                <div class="col-12 col-sm-6 col-lg-4">
                     <app-textarea label="Notes" iconSrc="notes">
                         <textarea class="input-content" name="" id="" cols="20" rows="3" formControlName="notes"></textarea>
                     </app-textarea>
                 </div>
             </div>
-            <div class="flex-center">
+            <div class="buttons-group">
                 <app-default-button buttonType="success" label="Add" (buttonClicked)="submitWishlistForm()"></app-default-button>
                 <app-default-button buttonType="cancel" label="Reset" (buttonClicked)="resetWishlistForm()"></app-default-button>
             </div>

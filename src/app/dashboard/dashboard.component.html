@@ -4,8 +4,14 @@
   </h1>
   <div class="row mx-0 row-cols-1 row-cols-md-2 g-2" #graphWrapper>
     <app-card-wrapper [isDefault]="true">
-      <app-counter-box [iconSrc]="'color-icons/coin.svg'" [value]="68000" [text]="'Income'"></app-counter-box>
-      <app-counter-box [iconSrc]="'color-icons/visiting-card.svg'" [value]="30000" [text]="'Expense'"></app-counter-box>
+      <div class="row mx-0">
+        <div class="col-12 col-sm-6">
+          <app-counter-box [iconSrc]="'color-icons/coin.svg'" [value]="68000" [text]="'Income'"></app-counter-box>
+        </div>
+        <div class="col-12 col-sm-6">
+          <app-counter-box [iconSrc]="'color-icons/visiting-card.svg'" [value]="30000" [text]="'Expense'"></app-counter-box>
+        </div>
+      </div>
     </app-card-wrapper>
     <app-card-wrapper [isDefault]="true" [hasDescription]="true">
       <ngx-charts-linear-gauge [view]="[view[0], 150]" [scheme]="colorScheme" [value]="1500" [previousValue]="1200"

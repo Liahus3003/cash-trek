@@ -138,9 +138,13 @@ body {
   color: @description;
   .label {
     font-weight: 400;
+    max-width: 80%;
   }
   .value {
     font-weight: 600;
+  }
+  @media screen and (max-width: 576px) {
+    padding: 4px 16px 0 !important;
   }
 }
 
@@ -150,4 +154,14 @@ body {
   font-style: italic;
   font-weight: 600;
   padding: 8px 40px !important;
+  @media screen and (max-width: 576px) {
+    padding: 8px 16px !important;
+  }
+}
+
+.buttons-group {
+  .flex-start;
+  @media screen and (max-width: 767px) {
+    .flex-center;
+  }
 }

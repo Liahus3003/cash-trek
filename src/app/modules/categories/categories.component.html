@@ -8,12 +8,12 @@
         </h2>
         <form [formGroup]="lookupInfoForm">
             <div class="row mx-0">
-                <div class="col-md-4">
+                <div class="col-12 col-sm-6 col-lg-4">
                     <app-input label="Name" iconSrc="dog-tag">
                         <input class="input-content" type="text" name="" id="" formControlName="name" />
                     </app-input>
                 </div>
-                <div class="col-md-4">
+                <div class="col-12 col-sm-6 col-lg-4">
                     <app-select label="Type" iconSrc="branch-up-arrow">
                         <select class="select-content" name="" id="" formControlName="type">
                             <option selected value="">Category</option>
@@ -21,12 +21,12 @@
                         </select>
                     </app-select>
                 </div>
-                <div class="col-md-4">
+                <div class="col-12 col-sm-6 col-lg-4">
                     <app-textarea label="Notes" iconSrc="notes">
                         <textarea class="input-content" name="" id="" cols="20" rows="3" formControlName="description"></textarea>
                     </app-textarea>
                 </div>
-                <div class="flex-start">
+                <div class="buttons-group">
                     <app-default-button buttonType="success" label="Add Info" (buttonClicked)="submitForm()"></app-default-button>
                     <app-default-button buttonType="cancel" label="Reset" (buttonClicked)="resetForm()"></app-default-button>
                 </div>

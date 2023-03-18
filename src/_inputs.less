@@ -49,7 +49,7 @@
 
   .input-content {
     width: auto;
-    min-width: 200px;
+    width: 200px;
     padding: 18px 10px 4px;
     border: 1px solid @input-default-border;
     border-radius: 8px;
@@ -72,6 +72,9 @@
     &:hover {
       background-color: @input-hover;
       box-shadow: @input-shadow;
+    }
+    @media screen and (max-width: 576px) {
+      width: 275px;
     }
   }
 
@@ -189,8 +192,7 @@
     outline: 0;
     font: inherit;
     /* Personalize */
-    min-width: 200px;
-    max-width: 300px;
+    width: 200px;
     height: 50px;
     padding: 16px 64px 8px 16px;
     background: url(https://upload.wikimedia.org/wikipedia/commons/9/9d/Caret_down_font_awesome_whitevariation.svg)
@@ -216,6 +218,10 @@
     &::-ms-expand {
       display: none;
     }
+
+    @media screen and (max-width: 576px) {
+      width: 275px;
+    }
   }
 
   .select-label {
@@ -226,5 +232,8 @@
     transform: translateY(-20%);
     padding: 6px;
     color: @label-text;
+  }
+  @media screen and (max-width: 576px) {
+    padding-bottom: 16px;
   }
 }
