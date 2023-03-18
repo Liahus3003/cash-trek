@@ -1,3 +1,5 @@
+@import '../../../../_variables.less';
+
 .box-wrapper {
     margin: 0 16px;
     min-width: 200px;
@@ -25,29 +27,30 @@
         }
 
         span.text {
-            color: #e0e0e0;
+            color: @description;
             font-size: 1em;
             text-align: center;
-            pad: 0.7em 0;
             font-weight: 400;
         }
     }
 }
 
-@media screen and (max-width: 1024px) {
-    .box-container {
-        font-size: 12px;
-    }
-}
-
-@media screen and (max-width: 768px) {
-    .box-container {
-        font-size: 14px;
-    }
-}
-
-@media screen and (max-width: 480px) {
-    .box-container {
-        font-size: 8px;
+@media screen and (max-width: 576px) {
+    .box-wrapper {
+        .box-container {
+            font-size: 14px;
+            padding: 8px 0;
+            span.num {
+                display: grid;
+                place-items: center;
+                font-weight: 400;
+                font-size: 44px;
+                line-height: 1.3;
+            }
+            .icon {
+                width: 50px ;
+                height: 50px;
+            }
+        }
     }
 }
