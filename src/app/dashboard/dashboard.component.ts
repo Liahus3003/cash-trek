@@ -7,6 +7,7 @@ import {
 } from '@angular/core';
 import { CardWrapperComponent } from '@shared/components/card-wrapper/card-wrapper.component';
 import { CounterBoxComponent } from '@shared/components/counter-box/counter-box.component';
+import { CustomTableComponent } from '@shared/components/custom-table/custom-table.component';
 import {
   Color,
   LegendPosition,
@@ -20,7 +21,7 @@ import { debounceTime, distinctUntilChanged, fromEvent, Subject } from 'rxjs';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.less'],
   standalone: true,
-  imports: [CardWrapperComponent, NgxChartsModule, CounterBoxComponent],
+  imports: [CardWrapperComponent, CustomTableComponent, NgxChartsModule, CounterBoxComponent],
 })
 export class DashboardComponent implements AfterViewInit {
   legendPosition: LegendPosition = LegendPosition.Below;
@@ -207,6 +208,18 @@ export class DashboardComponent implements AfterViewInit {
       name: 'Travel',
       value: 500,
     },
+  ];
+
+  creditsData = [
+    {name: 'Travel', date: 'Today', amount: '$369', description: 'Sample description'},
+    {name: 'Travel', date: '23/1/24', amount: '$369', description: 'Sample description'},
+    {name: 'Travel', date: '23/1/24', amount: '$369', description: 'Sample description'}
+  ];
+
+  expenseData = [
+    {name: 'Travel', date: '23/1/24', amount: '$369', description: 'Sample description'},
+    {name: 'Travel', date: '23/1/24', amount: '$369', description: 'Sample description'},
+    {name: 'Travel', date: '23/1/24', amount: '$369', description: 'Sample description'}
   ];
 
   @ViewChild('graphWrapper') graphWrapper!: ElementRef;

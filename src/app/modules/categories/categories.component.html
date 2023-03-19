@@ -37,52 +37,6 @@
         <h2 class="sub-header mx-0 px-0">
             Lookup Info
         </h2>
-        <table class="table">
-            <thead class="table-head">
-                <tr class="table-head--row">
-                    <th class="row-content">No</th>
-                    <th class="row-content">Name</th>
-                    <th class="row-content">Type</th>
-                    <th class="row-content">Description</th>
-                    <th class="row-content">Status</th>
-                    <th class="row-content">Actions</th>
-                </tr>
-            </thead>
-            <tbody class="table-body">
-                <tr class="table-body-row">
-                    <td class="row-content">1</td>
-                    <td class="row-content">Food</td>
-                    <td class="row-content">Category</td>
-                    <td class="row-content">Items include food, beverages, snacks and cool drinks</td>
-                    <td class="row-content">Active</td>
-                    <td class="row-content">
-                        <span>Edit</span>
-                        <span>Delete</span>
-                    </td>
-                </tr>
-                <tr class="table-body-row">
-                    <td class="row-content">2</td>
-                    <td class="row-content">Movie</td>
-                    <td class="row-content">Category</td>
-                    <td class="row-content">Items include Ticket cost, parking, pop-corn and cool drinks</td>
-                    <td class="row-content">Active</td>
-                    <td class="row-content">
-                        <span>Edit</span>
-                        <span>Delete</span>
-                    </td>
-                </tr>
-                <tr class="table-body-row">
-                    <td class="row-content">3</td>
-                    <td class="row-content">$</td>
-                    <td class="row-content">Currency</td>
-                    <td class="row-content">Currency of the U.S.A</td>
-                    <td class="row-content">Active</td>
-                    <td class="row-content">
-                        <span>Edit</span>
-                        <span>Delete</span>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+        <app-custom-table [tableData]="categoriesData"></app-custom-table>
     </div>
 </div>

@@ -7,6 +7,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { CardWrapperComponent } from '@shared/components/card-wrapper/card-wrapper.component';
+import { CustomTableComponent } from '@shared/components/custom-table/custom-table.component';
 import {
   Color,
   LegendPosition,
@@ -22,6 +23,7 @@ import { fromEvent, debounceTime, distinctUntilChanged, Subject } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     CardWrapperComponent,
+    CustomTableComponent,
     NgxChartsModule
   ],
   standalone: true,
@@ -257,6 +259,12 @@ export class YearlySummaryComponent implements AfterViewInit {
     },
   ];
 
+  yearlyData = [
+    { no: 1, name: 'Food', budget: 'Category', description: 'Items include food, beverages, snacks and cool drinks', priority: 'Yes'},
+    { no: 2, name: 'Food', budget: 'Category', description: 'Items include food, beverages, snacks and cool drinks', priority: 'No'},
+    { no: 3, name: 'Food', budget: 'Category', description: 'Items include food, beverages, snacks and cool drinks', priority: 'Yes'}
+  ];
+
   constructor(private zone: NgZone) {
     console.log('');
   }
@@ -308,5 +316,9 @@ export class YearlySummaryComponent implements AfterViewInit {
       this.view = [width, height];
       console.log(this.view);
     }
+  }
+
+  mapAction(id: number, type: string): void {
+    console.log(id, type);
   }
 }

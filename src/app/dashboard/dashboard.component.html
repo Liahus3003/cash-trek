@@ -45,36 +45,7 @@
           Upcoming expenses
         </h2>
         <div class="my-3">
-          <table class="table">
-            <thead class="table-head">
-              <tr class="table-head--row">
-                <th class="row-content">Name</th>
-                <th class="row-content">Date</th>
-                <th class="row-content">Description</th>
-                <th class="row-content">Amount</th>
-              </tr>
-            </thead>
-            <tbody class="table-body">
-              <tr class="table-body-row">
-                <td class="row-content">Currency</td>
-                <td class="row-content">Today</td>
-                <td class="row-content">Currency of the U.S.A</td>
-                <td class="row-content">$300</td>
-              </tr>
-              <tr class="table-body-row">
-                <td class="row-content">Currency</td>
-                <td class="row-content">23/1/24</td>
-                <td class="row-content">Currency of the U.S.A</td>
-                <td class="row-content">$300</td>
-              </tr>
-              <tr class="table-body-row">
-                <td class="row-content">Currency</td>
-                <td class="row-content">23/1/24</td>
-                <td class="row-content">Currency of the U.S.A</td>
-                <td class="row-content">$300</td>
-              </tr>
-            </tbody>
-          </table>
+          <app-custom-table [tableData]="expenseData"></app-custom-table>
         </div>
       </div>
     </app-card-wrapper>
@@ -84,36 +55,7 @@
           Upcoming credits
         </h2>
         <div class="my-3">
-          <table class="table">
-            <thead class="table-head">
-              <tr class="table-head--row">
-                <th class="row-content">Name</th>
-                <th class="row-content">Date</th>
-                <th class="row-content">Description</th>
-                <th class="row-content">Amount</th>
-              </tr>
-            </thead>
-            <tbody class="table-body">
-              <tr class="table-body-row">
-                <td class="row-content">Currency</td>
-                <td class="row-content">Today</td>
-                <td class="row-content">Currency of the U.S.A</td>
-                <td class="row-content">$300</td>
-              </tr>
-              <tr class="table-body-row">
-                <td class="row-content">Currency</td>
-                <td class="row-content">23/1/24</td>
-                <td class="row-content">Currency of the U.S.A</td>
-                <td class="row-content">$300</td>
-              </tr>
-              <tr class="table-body-row">
-                <td class="row-content">Currency</td>
-                <td class="row-content">23/1/24</td>
-                <td class="row-content">Currency of the U.S.A</td>
-                <td class="row-content">$300</td>
-              </tr>
-            </tbody>
-          </table>
+          <app-custom-table [tableData]="creditsData"></app-custom-table>
         </div>
       </div>
     </app-card-wrapper>

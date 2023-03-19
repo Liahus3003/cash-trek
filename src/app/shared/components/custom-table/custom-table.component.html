@@ -8,7 +8,7 @@
         <tr *ngFor="let row of tableData" class="table-body-row">
             <td [attr.data-label]="header" *ngFor="let header of getTableHeaders" class="row-content">
                 <ng-container *ngIf="header === 'actions'; else default">
-                    <span *ngFor="let action of row[header]">
+                    <span *ngFor="let action of row[header]" (click)="triggerAction(row['no'], action)">
                         {{action}}
                     </span>
                 </ng-container>
