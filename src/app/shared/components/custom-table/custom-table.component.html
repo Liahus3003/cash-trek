@@ -1,0 +1,21 @@
+<table class="table">
+    <thead class="table-head">
+        <tr class="table-head--row">
+            <th *ngFor="let header of getTableHeaders" class="row-content">{{ header }}</th>
+        </tr>
+    </thead>
+    <tbody class="table-body">
+        <tr *ngFor="let row of tableData" class="table-body-row">
+            <td [attr.data-label]="header" *ngFor="let header of getTableHeaders" class="row-content">
+                <ng-container *ngIf="header === 'actions'; else default">
+                    <span *ngFor="let action of row[header]">
+                        {{action}}
+                    </span>
+                </ng-container>
+                <ng-template #default>
+                    {{ row[header] }}
+                </ng-template>
+            </td>
+        </tr>
+    </tbody>
+</table>
