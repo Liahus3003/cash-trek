@@ -1,6 +1,11 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+const actions: {[key: string]: string} = {
+  delete: 'trash',
+  edit: 'edit'
+};
+
 @Component({
   selector: 'app-custom-table',
   standalone: true,
@@ -16,6 +21,10 @@ export class CustomTableComponent {
 
   get getTableHeaders() {
     return Object.keys(this.tableData[0]);
+  }
+
+  iconName(name: string): string {
+    return actions[name];
   }
 
   triggerAction(id: number, type: string): void {

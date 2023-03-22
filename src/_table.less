@@ -27,6 +27,13 @@
       .row-content {
         padding: 16px 12px;
       }
+      .actions {
+        width: 25px;
+        height: 25px;
+        cursor: pointer;
+        display: inline-block;
+        margin: 0 4px;
+      }
     }
   }
 }
@@ -51,6 +58,7 @@
   tbody {
     tr {
       border-bottom-width: 1px !important;
+      padding: 4px 0;
     }
   }
 
@@ -69,7 +77,9 @@
     padding-right: 29px;
     white-space: nowrap;
     content: attr(data-label);
+    color: @description;
     font-weight: bold;
+    text-transform: capitalize;
   }
 
   .table {
@@ -79,6 +89,9 @@
           display: inline-block !important;
           padding: 32px 12px 8px 0 !important;
           min-width: 100px;
+          &.description {
+            width: 100%;
+          }
         }
       }
     }

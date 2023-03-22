@@ -1,3 +1,4 @@
+import { NgIf } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CardWrapperComponent } from '@shared/components/card-wrapper/card-wrapper.component';
@@ -23,7 +24,8 @@ import { TextareaComponent } from '@shared/components/textarea/textarea.componen
     InputComponent,
     DefaultButtonComponent,
     CardWrapperComponent,
-    CustomTableComponent
+    CustomTableComponent,
+    NgIf
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -74,5 +76,9 @@ export class CashBookComponent {
 
   resetWishlistForm(): void {
     this.wishlistForm.reset();
+  }
+
+  get isRebill() {
+    return this.expenseInfoForm.value.isSubscription;
   }
 }

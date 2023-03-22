@@ -1,15 +1,17 @@
 <table class="table">
     <thead class="table-head">
         <tr class="table-head--row">
-            <th *ngFor="let header of getTableHeaders" class="row-content">{{ header }}</th>
+            <th *ngFor="let header of getTableHeaders" class="row-content">{{ header | titlecase }}</th>
         </tr>
     </thead>
     <tbody class="table-body">
         <tr *ngFor="let row of tableData" class="table-body-row">
-            <td [attr.data-label]="header" *ngFor="let header of getTableHeaders" class="row-content">
+            <td [attr.data-label]="header" *ngFor="let header of getTableHeaders" class="row-content {{header}}">
                 <ng-container *ngIf="header === 'actions'; else default">
-                    <span *ngFor="let action of row[header]" (click)="triggerAction(row['no'], action)">
-                        {{action}}
+                    <span class="actions" *ngFor="let action of row[header]"
+                        (click)="triggerAction(row['no'], action)">
+                        <img class="input-icon" aria-hidden="true" src="https://raw.githubusercontent.com/Liahus3003/gallery/main/icons/{{
+                            iconName(action)}}.svg" alt="{{action}}" />
                     </span>
                 </ng-container>
                 <ng-template #default>
