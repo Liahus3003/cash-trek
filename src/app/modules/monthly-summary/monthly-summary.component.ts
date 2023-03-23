@@ -7,6 +7,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { CardWrapperComponent } from '@shared/components/card-wrapper/card-wrapper.component';
+import { CustomPopoverComponent } from '@shared/components/custom-popover/custom-popover.component';
 import { CustomTableComponent } from '@shared/components/custom-table/custom-table.component';
 import {
   LegendPosition,
@@ -22,6 +23,7 @@ import { Subject, fromEvent, debounceTime, distinctUntilChanged } from 'rxjs';
   styleUrls: ['./monthly-summary.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
+    CustomPopoverComponent,
     CardWrapperComponent,
     CustomTableComponent,
     NgxChartsModule

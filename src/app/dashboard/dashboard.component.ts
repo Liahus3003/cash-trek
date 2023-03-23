@@ -7,6 +7,7 @@ import {
 } from '@angular/core';
 import { CardWrapperComponent } from '@shared/components/card-wrapper/card-wrapper.component';
 import { CounterBoxComponent } from '@shared/components/counter-box/counter-box.component';
+import { CustomPopoverComponent } from '@shared/components/custom-popover/custom-popover.component';
 import { CustomTableComponent } from '@shared/components/custom-table/custom-table.component';
 import {
   Color,
@@ -21,7 +22,7 @@ import { debounceTime, distinctUntilChanged, fromEvent, Subject } from 'rxjs';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.less'],
   standalone: true,
-  imports: [CardWrapperComponent, CustomTableComponent, NgxChartsModule, CounterBoxComponent],
+  imports: [CardWrapperComponent, CustomPopoverComponent, CustomTableComponent, NgxChartsModule, CounterBoxComponent],
 })
 export class DashboardComponent implements AfterViewInit {
   legendPosition: LegendPosition = LegendPosition.Below;

@@ -40,7 +40,7 @@ body {
   // box-shadow: inset 0 0 0 var(--border) grey;
   padding: var(--padding);
   border-radius: calc(var(--radius) + var(--padding));
-  overflow: hidden;
+  // overflow: hidden;
   display: grid;
   margin-bottom: var(--gap);
 }
@@ -49,6 +49,9 @@ body {
   z-index: 2;
   padding: 20px;
   border-radius: var(--radius);
+  &:has(.popover-content) {
+    z-index: 5;
+  }
 }
 
 .tail {

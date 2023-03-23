@@ -1,0 +1,31 @@
+<div class="popover-container">
+    <img class="tooltip-info--icon"
+        src="https://raw.githubusercontent.com/Liahus3003/gallery/main/icons/information.svg" alt="information"
+        role="button" (click)="$event.stopPropagation();togglePopover()" (keyup.enter)="togglePopover()" />
+    <ng-container *ngIf="showPopover">
+        <div appClickOutside (clickOutside)="onOutsideClick()" class="popover-content">
+            <h6 *ngIf="title" class="popover-title">Title</h6>
+            <div *ngIf="description" class="popover-description my-2">Description</div>
+            <ul *ngIf="contentList?.length" class="popover-list p-0">
+                <li>
+                    <span class="flex-space-between">
+                        <span>Travel</span>
+                        <span>80$</span>
+                    </span>
+                </li>
+                <li>
+                    <span class="flex-space-between">
+                        <span>Food</span>
+                        <span>70$</span>
+                    </span>
+                </li>
+                <li>
+                    <span class="flex-space-between">
+                        <span>Tickets</span>
+                        <span>80$</span>
+                    </span>
+                </li>
+            </ul>
+        </div>
+    </ng-container>
+</div>
