@@ -42,12 +42,14 @@ body {
   border-radius: calc(var(--radius) + var(--padding));
   // overflow: hidden;
   display: grid;
+  height: 100%;
   margin-bottom: var(--gap);
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 50px;
 }
 
 .inner {
   z-index: 2;
-  padding: 20px;
+  padding: 20px 4px;
   border-radius: var(--radius);
   &:has(.popover-content) {
     z-index: 5;
