@@ -21,3 +21,4 @@
         </tr>
     </tbody>
 </table>
+<app-custom-paginator [pageSize]="itemsPerPage" [pageIndex]="currentPage" [totalItems]="totalItems" (pageChange)="onPageChange($event)"></app-custom-paginator>
