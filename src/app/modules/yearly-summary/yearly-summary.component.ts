@@ -9,6 +9,7 @@ import {
 import { CardWrapperComponent } from '@shared/components/card-wrapper/card-wrapper.component';
 import { CustomPopoverComponent } from '@shared/components/custom-popover/custom-popover.component';
 import { CustomTableComponent } from '@shared/components/custom-table/custom-table.component';
+import { InputComponent } from '@shared/components/input/input.component';
 import {
   Color,
   LegendPosition,
@@ -26,6 +27,7 @@ import { fromEvent, debounceTime, distinctUntilChanged, Subject } from 'rxjs';
     CustomPopoverComponent,
     CardWrapperComponent,
     CustomTableComponent,
+    InputComponent,
     NgxChartsModule
   ],
   standalone: true,
@@ -322,5 +324,9 @@ export class YearlySummaryComponent implements AfterViewInit {
 
   mapAction(id: number, type: string): void {
     console.log(id, type);
+  }
+
+  get currentYear(): number {
+    return new Date().getFullYear();
   }
 }

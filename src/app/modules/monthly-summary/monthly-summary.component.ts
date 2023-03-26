@@ -9,6 +9,7 @@ import {
 import { CardWrapperComponent } from '@shared/components/card-wrapper/card-wrapper.component';
 import { CustomPopoverComponent } from '@shared/components/custom-popover/custom-popover.component';
 import { CustomTableComponent } from '@shared/components/custom-table/custom-table.component';
+import { InputComponent } from '@shared/components/input/input.component';
 import {
   LegendPosition,
   ScaleType,
@@ -26,7 +27,8 @@ import { Subject, fromEvent, debounceTime, distinctUntilChanged } from 'rxjs';
     CustomPopoverComponent,
     CardWrapperComponent,
     CustomTableComponent,
-    NgxChartsModule
+    NgxChartsModule,
+    InputComponent
   ],
   standalone: true,
 })
@@ -323,5 +325,10 @@ export class MonthlySummaryComponent implements AfterViewInit {
 
   mapAction(id: number, type: string): void {
     console.log(id, type);
+  }
+
+  get currentMonth(): Date {
+    const now = new Date();
+    return new Date(now.getFullYear(), now.getMonth(), 1);
   }
 }

@@ -12,4 +12,5 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 export class InputComponent {
   @Input() label!: string;
   @Input() iconSrc!: string;
+  @Input() removeXMargin = false;
 }

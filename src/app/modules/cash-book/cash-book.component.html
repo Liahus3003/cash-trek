@@ -1,138 +1,154 @@
 <div class="m-2 m-sm-4">
-    <h1 class="content-header">
-        Cash Book
-    </h1>
-    <div>
-        <h2 class="sub-header">
-            Add Transaction
-        </h2>
-        <form [formGroup]="expenseInfoForm">
-            <div class="row mx-0">
-                <div class="col-12 col-sm-6 col-lg-4">
-                    <app-input label="Name" iconSrc="tag">
-                        <input class="input-content" type="text" name="" id="" formControlName="name" />
-                    </app-input>
-                </div>
-                <div class="col-12 col-sm-6 col-lg-4">
-                    <app-input label="Price" iconSrc="dollar">
-                        <input class="input-content" type="number" name="" id="" formControlName="price" />
-                    </app-input>
-                </div>
-                <div class="col-12 col-sm-6 col-lg-4">
-                    <app-input label="Date" iconSrc="calendar">
-                        <input class="input-content" type="date" name="" id="" formControlName="date" />
-                    </app-input>
-                </div>
-                <div class="col-12 col-sm-6 col-lg-4">
-                    <app-select label="Category" iconSrc="branch-up-arrow">
-                        <select class="select-content" name="" id="" formControlName="category">
-                            <option selected value="">One</option>
-                            <option value="">Two</option>
-                            <option value="">Three</option>
-                            <option value="">Four</option>
-                            <option value="">Five</option>
-                            <option value="">Six</option>
-                        </select>
-                    </app-select>
-                </div>
-                <div class="col-12 col-sm-6 col-lg-4">
-                    <app-select label="Payment Mode" iconSrc="pay-by-card">
-                        <select class="select-content" name="" id="" formControlName="paymentMode">
-                            <option selected value="">One</option>
-                            <option value="">Two</option>
-                            <option value="">Three</option>
-                            <option value="">Four</option>
-                            <option value="">Five</option>
-                            <option value="">Six</option>
-                        </select>
-                    </app-select>
-                </div>
-                <div class="col-12 col-sm-6 col-lg-4">
-                    <app-checkbox label="Subscription" iconSrc="refresh">
-                        <label class="check-group-label" for="checkbox">
-                            <input class="input-checkbox" value="yes" type="checkbox" name="checkbox" id=""
-                                formControlName="isSubscription" />
-                            Auto Refill
-                        </label>
-                    </app-checkbox>
-                </div>
-                <div class="col-12 col-sm-6 col-lg-4">
-                    <app-textarea label="Notes" iconSrc="notes">
-                        <textarea class="input-content" name="" id="" cols="20" rows="3" formControlName="notes"></textarea>
-                    </app-textarea>
-                </div>
-                <div class="col-12 col-sm-6 col-lg-4" *ngIf="isRebill">
-                    <app-select label="Rebill" iconSrc="timelapse">
-                        <select class="select-content" name="" id="" formControlName="rebill">
-                            <option selected value="">One</option>
-                            <option value="">Two</option>
-                            <option value="">Three</option>
-                            <option value="">Four</option>
-                            <option value="">Five</option>
-                            <option value="">Six</option>
-                        </select>
-                    </app-select>
-                </div>
-                <div class="col-12 col-sm-6 col-lg-4" *ngIf="isRebill">
-                    <app-input label="Site" iconSrc="website">
-                        <input class="input-content" type="text" name="" id="" formControlName="site" />
-                    </app-input>
-                </div>
+    <div class="row row-cols-1 g-4">
+        <app-card-wrapper>
+            <h1 class="content-header">
+                Cash Book
+            </h1>
+            <div>
+                <h2 class="sub-header">
+                    Add Transaction
+                </h2>
+                <form [formGroup]="expenseInfoForm">
+                    <div class="row mx-0">
+                        <div class="col-12 col-sm-6 col-lg-4">
+                            <app-input label="Name" iconSrc="tag">
+                                <input class="input-content" type="text" name="" id="" formControlName="name" />
+                            </app-input>
+                        </div>
+                        <div class="col-12 col-sm-6 col-lg-4">
+                            <app-input label="Price" iconSrc="dollar">
+                                <input class="input-content" type="number" name="" id="" formControlName="price" />
+                            </app-input>
+                        </div>
+                        <div class="col-12 col-sm-6 col-lg-4">
+                            <app-input label="Date" iconSrc="calendar">
+                                <input class="input-content" type="date" name="" id="" formControlName="date" />
+                            </app-input>
+                        </div>
+                        <div class="col-12 col-sm-6 col-lg-4">
+                            <app-select label="Category" iconSrc="branch-up-arrow">
+                                <select class="select-content" name="" id="" formControlName="category">
+                                    <option selected value="">One</option>
+                                    <option value="">Two</option>
+                                    <option value="">Three</option>
+                                    <option value="">Four</option>
+                                    <option value="">Five</option>
+                                    <option value="">Six</option>
+                                </select>
+                            </app-select>
+                        </div>
+                        <div class="col-12 col-sm-6 col-lg-4">
+                            <app-select label="Payment Mode" iconSrc="pay-by-card">
+                                <select class="select-content" name="" id="" formControlName="paymentMode">
+                                    <option selected value="">One</option>
+                                    <option value="">Two</option>
+                                    <option value="">Three</option>
+                                    <option value="">Four</option>
+                                    <option value="">Five</option>
+                                    <option value="">Six</option>
+                                </select>
+                            </app-select>
+                        </div>
+                        <div class="col-12 col-sm-6 col-lg-4">
+                            <app-checkbox label="Subscription" iconSrc="refresh">
+                                <label class="check-group-label" for="checkbox">
+                                    <input class="input-checkbox" value="yes" type="checkbox" name="checkbox" id=""
+                                        formControlName="isSubscription" />
+                                    Auto Refill
+                                </label>
+                            </app-checkbox>
+                        </div>
+                        <div class="col-12 col-sm-6 col-lg-4">
+                            <app-textarea label="Notes" iconSrc="notes">
+                                <textarea class="input-content" name="" id="" cols="20" rows="3"
+                                    formControlName="notes"></textarea>
+                            </app-textarea>
+                        </div>
+                        <div class="col-12 col-sm-6 col-lg-4" *ngIf="isRebill">
+                            <app-select label="Rebill" iconSrc="timelapse">
+                                <select class="select-content" name="" id="" formControlName="rebill">
+                                    <option selected value="">One</option>
+                                    <option value="">Two</option>
+                                    <option value="">Three</option>
+                                    <option value="">Four</option>
+                                    <option value="">Five</option>
+                                    <option value="">Six</option>
+                                </select>
+                            </app-select>
+                        </div>
+                        <div class="col-12 col-sm-6 col-lg-4" *ngIf="isRebill">
+                            <app-input label="Site" iconSrc="website">
+                                <input class="input-content" type="text" name="" id="" formControlName="site" />
+                            </app-input>
+                        </div>
+                    </div>
+                    <div class="buttons-group">
+                        <app-default-button buttonType="success" label="Add"
+                            (buttonClicked)="submitExpenseForm()"></app-default-button>
+                        <app-default-button buttonType="cancel" label="Reset"
+                            (buttonClicked)="resetExpenseForm()"></app-default-button>
+                    </div>
+                </form>
             </div>
-            <div class="buttons-group">
-                <app-default-button buttonType="success" label="Add" (buttonClicked)="submitExpenseForm()"></app-default-button>
-                <app-default-button buttonType="cancel" label="Reset" (buttonClicked)="resetExpenseForm()"></app-default-button>
+        </app-card-wrapper>
+        <app-card-wrapper>
+            <div class="row m-2 m-sm-4">
+                <h2 class="sub-header mx-0 px-0">
+                    Transaction Summary
+                </h2>
+                <app-custom-table [tableData]="transactionData"></app-custom-table>
             </div>
-        </form>
-    </div>
-    <div class="row m-2 m-sm-4">
-        <h2 class="sub-header mx-0 px-0">
-            Transaction Summary
-        </h2>
-        <app-custom-table [tableData]="transactionData"></app-custom-table>
-    </div>
-    <div>
-        <h2 class="sub-header">
-            Add Wishlist
-        </h2>
-        <form [formGroup]="wishlistForm">
-            <div class="row mx-0">
-                <div class="col-12 col-sm-6 col-lg-4">
-                    <app-input label="Name" iconSrc="tag">
-                        <input class="input-content" type="text" name="" id="" formControlName="name" />
-                    </app-input>
-                </div>
-                <div class="col-12 col-sm-6 col-lg-4">
-                    <app-input label="Budget" iconSrc="dollar">
-                        <input class="input-content" type="number" name="" id="" formControlName="budget" />
-                    </app-input>
-                </div>
-                <div class="col-12 col-sm-6 col-lg-4">
-                    <app-checkbox label="Priority" iconSrc="star">
-                        <label class="check-group-label" for="checkbox">
-                            <input class="input-checkbox" type="checkbox" name="checkbox" id=""
-                                formControlName="priority" />
-                            Urgent
-                        </label>
-                    </app-checkbox>
-                </div>
-                <div class="col-12 col-sm-6 col-lg-4">
-                    <app-textarea label="Notes" iconSrc="notes">
-                        <textarea class="input-content" name="" id="" cols="20" rows="3" formControlName="notes"></textarea>
-                    </app-textarea>
-                </div>
+        </app-card-wrapper>
+        <app-card-wrapper>
+            <div>
+                <h2 class="sub-header">
+                    Add Wishlist
+                </h2>
+                <form [formGroup]="wishlistForm">
+                    <div class="row mx-0">
+                        <div class="col-12 col-sm-6 col-lg-4">
+                            <app-input label="Name" iconSrc="tag">
+                                <input class="input-content" type="text" name="" id="" formControlName="name" />
+                            </app-input>
+                        </div>
+                        <div class="col-12 col-sm-6 col-lg-4">
+                            <app-input label="Budget" iconSrc="dollar">
+                                <input class="input-content" type="number" name="" id="" formControlName="budget" />
+                            </app-input>
+                        </div>
+                        <div class="col-12 col-sm-6 col-lg-4">
+                            <app-checkbox label="Priority" iconSrc="star">
+                                <label class="check-group-label" for="checkbox">
+                                    <input class="input-checkbox" type="checkbox" name="checkbox" id=""
+                                        formControlName="priority" />
+                                    Urgent
+                                </label>
+                            </app-checkbox>
+                        </div>
+                        <div class="col-12 col-sm-6 col-lg-4">
+                            <app-textarea label="Notes" iconSrc="notes">
+                                <textarea class="input-content" name="" id="" cols="20" rows="3"
+                                    formControlName="notes"></textarea>
+                            </app-textarea>
+                        </div>
+                    </div>
+                    <div class="buttons-group">
+                        <app-default-button buttonType="success" label="Add"
+                            (buttonClicked)="submitWishlistForm()"></app-default-button>
+                        <app-default-button buttonType="cancel" label="Reset"
+                            (buttonClicked)="resetWishlistForm()"></app-default-button>
+                    </div>
+                </form>
             </div>
-            <div class="buttons-group">
-                <app-default-button buttonType="success" label="Add" (buttonClicked)="submitWishlistForm()"></app-default-button>
-                <app-default-button buttonType="cancel" label="Reset" (buttonClicked)="resetWishlistForm()"></app-default-button>
+        </app-card-wrapper>
+        <app-card-wrapper>
+            <div class="row m-2 m-sm-4">
+                <h2 class="sub-header mx-0 px-0">
+                    Wishlist
+                </h2>
+                <app-custom-table [tableData]="wsihlishData"></app-custom-table>
             </div>
-        </form>
-    </div>
-    <div class="row m-2 m-sm-4">
-        <h2 class="sub-header mx-0 px-0">
-            Wishlist
-        </h2>
-        <app-custom-table [tableData]="wsihlishData"></app-custom-table>
+        </app-card-wrapper>
     </div>
 </div>
 <!-- <app-radio label="Radio" iconSrc="headphones">

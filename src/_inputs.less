@@ -57,7 +57,7 @@
 
     &:focus,
     &:valid {
-      + .input-label {
+      +.input-label {
         font-size: 12px;
         transform: translateY(0%);
         color: @default-font-color;
@@ -73,6 +73,7 @@
       background-color: @input-hover;
       box-shadow: @input-shadow;
     }
+
     @media screen and (max-width: 576px) {
       width: 275px;
     }
@@ -195,8 +196,7 @@
     width: 200px;
     height: 50px;
     padding: 16px 64px 8px 16px;
-    background: url(https://upload.wikimedia.org/wikipedia/commons/9/9d/Caret_down_font_awesome_whitevariation.svg)
-        no-repeat right 0.8em center / 1.4em,
+    background: url(https://upload.wikimedia.org/wikipedia/commons/9/9d/Caret_down_font_awesome_whitevariation.svg) no-repeat right 0.8em center / 1.4em,
       linear-gradient(to left, @input-border-color 3em, transparent 3em);
     color: @default-font-color;
     border-radius: 16px;
@@ -233,7 +233,27 @@
     padding: 6px;
     color: @label-text;
   }
+
   @media screen and (max-width: 576px) {
     padding-bottom: 16px;
+  }
+
+  /* For the calendar picker icon */
+  input[type="month"]::before {
+    content: '';
+    position: absolute;
+    top: 8px;
+    right: 6px;
+    width: 20px;
+    height: 20px;
+    background-size: contain;
+    pointer-events: none;
+  }
+
+  /* For the inner spin button */
+  input[type="month"]::-webkit-inner-spin-button,
+  input[type="month"]::-moz-inner-spin-button,
+  input[type="month"]::-ms-inner-spin-button {
+    display: none;
   }
 }
