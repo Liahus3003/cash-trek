@@ -54,7 +54,7 @@ export class CashBookComponent {
     { no: 2, name: 'Food', type: 'Category', description: 'Items include food, beverages, snacks and cool drinks', status: 'Active', actions: ['edit', 'delete'] },
     { no: 3, name: 'Food', type: 'Category', description: 'Items include food, beverages, snacks and cool drinks', status: 'Active', actions: ['edit', 'delete'] },
   ];
-  wsihlishData = [
+  wishlishData = [
     {no: 1, name: 'Food', budget: '$300', description: 'Items include food, beverages, snacks and cool drinks', priority: 'Yes', actions: ['edit', 'delete']},
     {no: 2, name: 'Food', budget: '$300', description: 'Items include food, beverages, snacks and cool drinks', priority: 'No', actions: ['edit', 'delete']},
     {no: 3, name: 'Food', budget: '$300', description: 'Items include food, beverages, snacks and cool drinks', priority: 'Yes', actions: ['edit', 'delete']}

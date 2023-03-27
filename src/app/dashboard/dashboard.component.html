@@ -38,7 +38,7 @@
           Upcoming expenses
         </h2>
         <div class="my-3">
-          <app-custom-table [tableData]="expenseData"></app-custom-table>
+          <app-custom-table [tableData]="expenseData" [sortConfig]="['name', 'date', 'amount']"></app-custom-table>
         </div>
       </div>
     </app-card-wrapper>
@@ -48,7 +48,7 @@
           Upcoming credits
         </h2>
         <div class="my-3">
-          <app-custom-table [tableData]="creditsData"></app-custom-table>
+          <app-custom-table [tableData]="creditsData" [sortConfig]="['name', 'date', 'amount']"></app-custom-table>
         </div>
       </div>
     </app-card-wrapper>

@@ -24,6 +24,7 @@ const actions: { [key: string]: string } = {
 export class CustomTableComponent {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   @Input() tableData: any[] = [];
+  @Input() sortConfig: string[] = ['name', 'priority'];
   @Output() actionEmitter = new EventEmitter();
 
   currentPage = 1;
@@ -35,7 +36,7 @@ export class CustomTableComponent {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   displayedData: any[] = [];
 
-  sortedColumn = 'id';
+  sortedColumn = 'name';
   sortDirection = 'asc';
 
   get getTableHeaders() {
@@ -61,7 +62,9 @@ export class CustomTableComponent {
   }
 
   sort(column: string) {
-    this.sortDirection = (this.sortDirection === 'asc' ? 'desc' : this.sortDirection === 'desc' ? 'reset-sort' : 'asc');
+    this.sortDirection = (this.sortDirection === 'asc' ? 'desc' : 'asc');
+    this.sortedColumn = column;
+
     if (this.isSortable(column)) {
       this.tableData.sort((a, b) => {
         let sortValue = 0;
@@ -77,14 +80,12 @@ export class CustomTableComponent {
         }
   
         return sortValue;
-      });
-  
-      this.sortedColumn = column;
+      });  
     }
   }
   
   isSortable(column: string): boolean {
-    return ['name', 'priority'].includes(column);
+    return this.sortConfig.includes(column);
   }  
 
   sortIcon(column: string): string {

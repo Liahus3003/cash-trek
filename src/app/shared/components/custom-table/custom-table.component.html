@@ -1,7 +1,7 @@
 <table class="table">
     <thead class="table-head">
         <tr class="table-head--row">
-            <th *ngFor="let header of getTableHeaders" class="row-content" [class.cursor-pointer]="isSortable(header)">{{ header | titlecase }} 
+            <th *ngFor="let header of getTableHeaders" class="row-content" (click)="sort(header)" [class.cursor-pointer]="isSortable(header)">{{ header | titlecase }} 
                 <span *ngIf="isSortable(header)">
                     <img class="sort-icon" src="https://raw.githubusercontent.com/Liahus3003/gallery/main/icons/{{sortIcon(header)}}.svg" alt="">
                 </span>
