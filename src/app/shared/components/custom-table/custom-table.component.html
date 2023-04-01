@@ -1,3 +1,13 @@
+<div class="flex-end mb-3 mb-sm-0" *ngIf="(deviceInfo$ | async) === 'mobile' && sortConfig.length">
+    <app-select label="Sort Column">
+        <select class="select-content" name="" id="" formControlName="paymentMode">
+            <option value="{{column}}" *ngFor="let column of sortConfig">{{column | titlecase}}</option>
+        </select>
+    </app-select>
+    <span class="mobile-sort--icon cursor-pointer">
+        <img (click)="sort('name')" class="sort-icon" src="https://raw.githubusercontent.com/Liahus3003/gallery/main/icons/{{sortIcon('name')}}.svg" alt="">
+    </span>
+</div>
 <table class="table">
     <thead class="table-head">
         <tr class="table-head--row">

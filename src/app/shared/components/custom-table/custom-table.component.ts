@@ -3,10 +3,14 @@ import {
   Component,
   EventEmitter,
   Input,
+  OnInit,
   Output,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CustomPaginatorComponent } from '../custom-paginator/custom-paginator.component';
+import { ScreenSizeService } from '@shared/services/screen-size.service';
+import { Observable } from 'rxjs';
+import { SelectComponent } from '../select/select.component';
 
 const actions: { [key: string]: string } = {
   delete: 'trash',
@@ -16,12 +20,13 @@ const actions: { [key: string]: string } = {
 @Component({
   selector: 'app-custom-table',
   standalone: true,
-  imports: [CommonModule, CustomPaginatorComponent],
+  imports: [CommonModule, CustomPaginatorComponent, SelectComponent
+  ],
   templateUrl: './custom-table.component.html',
   styleUrls: ['./custom-table.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CustomTableComponent {
+export class CustomTableComponent implements OnInit {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   @Input() tableData: any[] = [];
   @Input() sortConfig: string[] = ['name', 'priority'];
@@ -35,12 +40,20 @@ export class CustomTableComponent {
   endIndex = this.itemsPerPage;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   displayedData: any[] = [];
+  deviceInfo$!: Observable<string>;
 
   sortedColumn = 'name';
   sortDirection = 'asc';
 
   get getTableHeaders() {
     return Object.keys(this.tableData[0]);
+  }
+
+  constructor(private screenSizeService: ScreenSizeService) {
+  }
+
+  ngOnInit(): void {
+    this.deviceInfo$ = this.screenSizeService.getScreenSize();
   }
 
   iconName(name: string): string {
