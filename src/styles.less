@@ -15,6 +15,10 @@ body {
   .flex-center;
 }
 
+.flex-end {
+  .flex-center(center, flex-end);
+}
+
 .flex-start {
   .flex-center(center, flex-start);
 }
@@ -45,7 +49,7 @@ body {
   display: grid;
   height: 100%;
   margin-bottom: var(--gap);
-  box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 50px;
+  box-shadow: rgba(0, 0, 0, 0.1) -1px -7px 20px 4px;
 }
 
 .inner {
@@ -129,13 +133,16 @@ body {
   line-height: 1.4;
   margin: 16px 28px;
   .flex-center;
+  .gradient-text;
 }
 
 .sub-header {
+  color: @description;
   font-weight: 700;
   font-size: 18px;
   line-height: 1.2;
   margin: 16px 28px;
+  text-align: center;
 }
 
 .card-caption {
@@ -166,7 +173,7 @@ body {
 }
 
 .buttons-group {
-  .flex-start;
+  .flex-end;
   @media screen and (max-width: 767px) {
     .flex-center;
   }

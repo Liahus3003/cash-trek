@@ -59,6 +59,30 @@
   color: @color;
 }
 
+.gradient-text(@color1: #4d2ddd, @color2: #6355a4, @color3: #91cfcf, @color4: #e84378) {
+  background: linear-gradient(-45deg, @color1, @color2, @color3, @color4);
+  background-size: 300%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: animated_text 5s ease-in-out infinite;
+  -moz-animation: animated_text 5s ease-in-out infinite;
+  -webkit-animation: animated_text 5s ease-in-out infinite;
+}
+
+@keyframes animated_text {
+  0% {
+    background-position: 0px 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0px 50%;
+  }
+}
+
 @mixin cover-background {
   background-repeat: no-repeat;
   background-size: cover;
