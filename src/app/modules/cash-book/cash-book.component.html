@@ -1,15 +1,15 @@
 <div class="m-2 m-sm-4">
+    <h1 class="content-header">
+        Cash Book
+    </h1>
     <div class="row row-cols-1 g-4">
         <app-card-wrapper>
-            <h1 class="content-header">
-                Cash Book
-            </h1>
             <div>
                 <h2 class="sub-header">
                     Add Transaction
                 </h2>
                 <form [formGroup]="expenseInfoForm">
-                    <div class="row mx-0">
+                    <div class="row mx-0 g-3">
                         <div class="col-12 col-sm-6 col-lg-4">
                             <app-input label="Name" iconSrc="tag">
                                 <input class="input-content" type="text" name="" id="" formControlName="name" />
