@@ -1,76 +1,128 @@
 <div class="m-2 m-sm-4" #graphWrapper>
-    <h1 class="content-header">Yearly Summary</h1>
-    <div class="m-3">
-        <div class="month-selector">
-            <app-input label="Year" iconSrc="calendar" [removeXMargin]="true">
-                <input class="input-content" type="number" name="" id="" [min]="currentYear - 3" [max]="currentYear" />
-            </app-input>
+  <h1 class="content-header">Yearly Summary</h1>
+  <div class="m-3">
+    <div class="time-selector flex-end mb-4 mb-sm-2">
+      <app-input label="Year" iconSrc="calendar" [removeXMargin]="true">
+        <input
+          class="input-content"
+          type="number"
+          name=""
+          id=""
+          [min]="currentYear - 3"
+          [max]="currentYear" />
+      </app-input>
+    </div>
+    <app-card-wrapper>
+      <div class="row m-2 m-sm-4">
+        <h2 class="sub-header mx-0 px-0">Summary</h2>
+        <app-custom-table
+          [tableData]="yearlyData"
+          [sortConfig]="['name', 'priority']"></app-custom-table>
+      </div>
+    </app-card-wrapper>
+  </div>
+  <div class="row mx-0 row-cols-1 row-cols-md-2 g-4" #graphWrapper>
+    <app-card-wrapper [isDefault]="true" [hasDescription]="true">
+      <h2 class="sub-header">Expense vs Threshold</h2>
+      <ngx-charts-linear-gauge
+        [view]="[300, 300]"
+        [scheme]="colorScheme"
+        [value]="150000"
+        [previousValue]="200000"
+        [units]="'Expense'">
+      </ngx-charts-linear-gauge>
+      <div class="row gap-2">
+        <div class="card-caption flex-space-between">
+          <span class="label">Your spendings exceeded by 300$</span>
+          <span class="value"
+            >$1800
+            <app-custom-popover></app-custom-popover>
+          </span>
         </div>
-        <app-card-wrapper>
-            <div class="row m-2 m-sm-4">
-                <h2 class="sub-header mx-0 px-0">
-                    Summary
-                </h2>
-                <app-custom-table [tableData]="yearlyData" [sortConfig]="['name', 'priority']"></app-custom-table>
-            </div>
-        </app-card-wrapper>
-    </div>
-    <div class="row mx-0 row-cols-1 row-cols-md-2 g-4" #graphWrapper>
-        <app-card-wrapper [isDefault]="true" [hasDescription]="true">
-            <ngx-charts-linear-gauge [view]="[300, 300]" [scheme]="colorScheme" [value]="150000"
-                [previousValue]="200000" [units]="'Expense'">
-            </ngx-charts-linear-gauge>
-            <div class="row gap-2">
-                <div class="card-caption flex-space-between">
-                    <span class="label">Your spendings exceeded by 300$</span>
-                    <span class="value">$1800
-                        <app-custom-popover></app-custom-popover>
-                    </span>
-                </div>
-                <div class="card-caption flex-space-between">
-                    <span class="label">Upcoming bills</span>
-                    <span class="value">$990
-                        <app-custom-popover></app-custom-popover>
-                    </span>
-                </div>
-                <div class="note-section">*Months remaining in this year: 8</div>
-            </div>
-        </app-card-wrapper>
-        <app-card-wrapper [isDefault]="true" [hasDescription]="true">
-            <div class="row mx-0 mb-4">
-                <div class="flex-space-between">
-                    <span class="mx-4">Year comparison</span>
-                    <span>2023 vs 2022</span>
-                </div>
-            </div>
-            <ngx-charts-line-chart [view]="[view[0], view[1] - 50]" [scheme]="colorScheme" [legend]="true"
-                [roundDomains]="true" [showXAxisLabel]="true" [showYAxisLabel]="true" [xAxis]="true" [yAxis]="true"
-                [xAxisLabel]="'Months'" [yAxisLabel]="'Expense'" [results]="lineChart"
-                [legendPosition]="legendPosition">
-            </ngx-charts-line-chart>
-        </app-card-wrapper>
-        <app-card-wrapper [isDefault]="true">
-            <ngx-charts-tree-map [view]="view" [results]="treeInfo" [animations]="true"
-                [labelFormatting]="treeLabelFormatting">
-            </ngx-charts-tree-map>
-        </app-card-wrapper>
-        <app-card-wrapper [isDefault]="true">
-            <ngx-charts-bar-vertical-stacked [view]="view" [results]="multi" [gradient]="false" [xAxis]="true"
-                [yAxis]="true" [legend]="true" [legendTitle]="''" [showXAxisLabel]="true" [showYAxisLabel]="true"
-                [xAxisLabel]="'Day'" [yAxisLabel]="'Expense'" [animations]="true" [legendPosition]="legendPosition">
-            </ngx-charts-bar-vertical-stacked>
-        </app-card-wrapper>
-        <app-card-wrapper [isDonutChart]="true">
-            <ngx-charts-pie-chart [view]="view" [legendPosition]="legendPosition" [results]="series" [legend]="true"
-                [labels]="true" [doughnut]="true" [legendTitle]="''"
-                [labelFormatting]="pieChartLabel.bind(this, series)" [animations]="false">
-            </ngx-charts-pie-chart>
-        </app-card-wrapper>
-        <app-card-wrapper [isDonutChart]="true">
-            <ngx-charts-pie-chart [view]="view" [legendPosition]="legendPosition" [results]="series" [legend]="true"
-                [labels]="true" [explodeSlices]="true" [legendTitle]="''"
-                [labelFormatting]="pieChartLabel.bind(this, series)" [animations]="false">
-            </ngx-charts-pie-chart>
-        </app-card-wrapper>
-    </div>
+        <div class="card-caption flex-space-between">
+          <span class="label">Upcoming bills</span>
+          <span class="value"
+            >$990
+            <app-custom-popover></app-custom-popover>
+          </span>
+        </div>
+        <div class="note-section">*Months remaining in this year: 8</div>
+      </div>
+    </app-card-wrapper>
+    <app-card-wrapper [isDefault]="true" [hasDescription]="true">
+      <h2 class="sub-header flex-space-between">
+        <span class="mx-4">Year comparison</span>
+        <span>2023 vs 2022</span>
+      </h2>
+      <ngx-charts-line-chart
+        [view]="[view[0], view[1] - 50]"
+        [scheme]="colorScheme"
+        [legend]="true"
+        [roundDomains]="true"
+        [showXAxisLabel]="true"
+        [showYAxisLabel]="true"
+        [xAxis]="true"
+        [yAxis]="true"
+        [xAxisLabel]="'Months'"
+        [yAxisLabel]="'Expense'"
+        [results]="lineChart"
+        [legendPosition]="legendPosition">
+      </ngx-charts-line-chart>
+    </app-card-wrapper>
+    <app-card-wrapper [isDefault]="true" [hasDescription]="true">
+      <h2 class="sub-header">Expenses Tree Map</h2>
+      <ngx-charts-tree-map
+        [view]="view"
+        [results]="treeInfo"
+        [animations]="true"
+        [labelFormatting]="treeLabelFormatting">
+      </ngx-charts-tree-map>
+    </app-card-wrapper>
+    <app-card-wrapper [isDefault]="true" [hasDescription]="true">
+      <h2 class="sub-header">Per Month Expenses vs Median</h2>
+      <ngx-charts-bar-vertical-stacked
+        [view]="view"
+        [results]="multi"
+        [gradient]="false"
+        [xAxis]="true"
+        [yAxis]="true"
+        [legend]="true"
+        [legendTitle]="''"
+        [showXAxisLabel]="true"
+        [showYAxisLabel]="true"
+        [xAxisLabel]="'Day'"
+        [yAxisLabel]="'Expense'"
+        [animations]="true"
+        [legendPosition]="legendPosition">
+      </ngx-charts-bar-vertical-stacked>
+    </app-card-wrapper>
+    <app-card-wrapper [isDonutChart]="true">
+      <h2 class="sub-header">Expenses Donut</h2>
+      <ngx-charts-pie-chart
+        [view]="view"
+        [legendPosition]="legendPosition"
+        [results]="series"
+        [legend]="true"
+        [labels]="true"
+        [doughnut]="true"
+        [legendTitle]="''"
+        [labelFormatting]="pieChartLabel.bind(this, series)"
+        [animations]="false">
+      </ngx-charts-pie-chart>
+    </app-card-wrapper>
+    <app-card-wrapper [isDonutChart]="true">
+      <h2 class="sub-header">Expenses Pie</h2>
+      <ngx-charts-pie-chart
+        [view]="view"
+        [legendPosition]="legendPosition"
+        [results]="series"
+        [legend]="true"
+        [labels]="true"
+        [explodeSlices]="true"
+        [legendTitle]="''"
+        [labelFormatting]="pieChartLabel.bind(this, series)"
+        [animations]="false">
+      </ngx-charts-pie-chart>
+    </app-card-wrapper>
+  </div>
 </div>

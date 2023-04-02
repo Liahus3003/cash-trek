@@ -35,7 +35,7 @@ export class DashboardComponent implements AfterViewInit {
   view: [number, number] = [700, 375];
   multi = [
     {
-      name: 'D-1',
+      name: 'Oct 22',
       series: [
         {
           name: 'Median',
@@ -48,7 +48,7 @@ export class DashboardComponent implements AfterViewInit {
       ],
     },
     {
-      name: 'D-2',
+      name: 'Nov 22',
       series: [
         {
           name: 'Median',
@@ -61,7 +61,7 @@ export class DashboardComponent implements AfterViewInit {
       ],
     },
     {
-      name: 'D-3',
+      name: 'Dec 22',
       series: [
         {
           name: 'Median',
@@ -74,7 +74,7 @@ export class DashboardComponent implements AfterViewInit {
       ],
     },
     {
-      name: 'D-4',
+      name: 'Jan 23',
       series: [
         {
           name: 'Median',
@@ -87,7 +87,7 @@ export class DashboardComponent implements AfterViewInit {
       ],
     },
     {
-      name: 'D-5',
+      name: 'Feb 23',
       series: [
         {
           name: 'Median',
@@ -100,7 +100,7 @@ export class DashboardComponent implements AfterViewInit {
       ],
     },
     {
-      name: 'D-6',
+      name: 'Mar 23',
       series: [
         {
           name: 'Median',
@@ -113,7 +113,7 @@ export class DashboardComponent implements AfterViewInit {
       ],
     },
     {
-      name: 'D-7',
+      name: 'Apr 23',
       series: [
         {
           name: 'Median',
@@ -124,61 +124,22 @@ export class DashboardComponent implements AfterViewInit {
           value: 0,
         },
       ],
-    },
-    {
-      name: 'D-8',
-      series: [
-        {
-          name: 'Median',
-          value: 0,
-        },
-        {
-          name: 'Spent',
-          value: 0,
-        },
-      ],
-    },
-    {
-      name: 'D-9',
-      series: [
-        {
-          name: 'Median',
-          value: 0,
-        },
-        {
-          name: 'Spent',
-          value: 0,
-        },
-      ],
-    },
-    {
-      name: 'D-10',
-      series: [
-        {
-          name: 'Median',
-          value: 0,
-        },
-        {
-          name: 'Spent',
-          value: 0,
-        },
-      ],
-    },
+    }
   ];
 
   series = [
     {
-      name: 'Retired',
+      name: 'Family',
       value: 20,
       label: '20%',
     },
     {
-      name: 'Employed',
+      name: 'Invest',
       value: 70,
       label: '70%',
     },
     {
-      name: 'Unemployed',
+      name: 'Outing',
       value: 10,
       label: '10%',
     },

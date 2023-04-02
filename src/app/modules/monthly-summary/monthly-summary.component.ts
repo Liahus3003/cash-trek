@@ -221,7 +221,7 @@ export class MonthlySummaryComponent implements AfterViewInit {
 
   series = [
     {
-      name: 'Retired',
+      name: 'Family',
       value: 20,
       label: '20%',
     },
@@ -231,7 +231,7 @@ export class MonthlySummaryComponent implements AfterViewInit {
       label: '70%',
     },
     {
-      name: 'Unemployed',
+      name: 'Outing',
       value: 10,
       label: '10%',
     },
