@@ -39,7 +39,6 @@
 }
 
 @media only screen and (max-width: 767px) {
-
   table,
   thead,
   tbody,
@@ -59,6 +58,7 @@
     tr {
       border-bottom-width: 1px !important;
       padding: 4px 0;
+      margin: 0 8px;
     }
   }
 
@@ -96,4 +96,19 @@
       }
     }
   }
+}
+
+.sort-icon {
+  width: 15px;
+  height: auto;
+  @media screen and (max-width: 767px) {
+      width: 24px;
+      filter: invert();
+  }
+}
+
+.mobile-sort--icon {
+  padding: 8px;
+  background-color: @input-border-color;
+  border-radius: 50%;
 }
