@@ -32,7 +32,8 @@ import { TextareaComponent } from '@shared/components/textarea/textarea.componen
 export class CashBookComponent {
   expenseInfoForm = this.fb.group({
     name: ['', Validators.required],
-    price: ['', Validators.required],
+    amount: ['', Validators.required],
+    transactionType: ['', Validators.required],
     date: ['', Validators.required],
     notes: [''],
     category: ['', Validators.required],

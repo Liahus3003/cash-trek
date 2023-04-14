@@ -16,8 +16,8 @@
                             </app-input>
                         </div>
                         <div class="col-12 col-sm-6 col-lg-4">
-                            <app-input label="Price" iconSrc="dollar">
-                                <input class="input-content" type="number" name="" id="" formControlName="price" />
+                            <app-input label="amount" iconSrc="dollar">
+                                <input class="input-content" type="number" name="" id="" formControlName="amount" />
                             </app-input>
                         </div>
                         <div class="col-12 col-sm-6 col-lg-4">
@@ -34,6 +34,14 @@
                                     <option value="">Four</option>
                                     <option value="">Five</option>
                                     <option value="">Six</option>
+                                </select>
+                            </app-select>
+                        </div>
+                        <div class="col-12 col-sm-6 col-lg-4">
+                            <app-select label="Transaction Type" iconSrc="branch-up-arrow">
+                                <select class="select-content" name="" id="" formControlName="transactionType">
+                                    <option selected value="">Expense</option>
+                                    <option value="">Credit</option>
                                 </select>
                             </app-select>
                         </div>
