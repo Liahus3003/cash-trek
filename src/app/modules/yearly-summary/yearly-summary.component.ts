@@ -6,6 +6,7 @@ import {
   NgZone,
   ViewChild,
 } from '@angular/core';
+import { UntilDestroy } from '@ngneat/until-destroy';
 import { CardWrapperComponent } from '@shared/components/card-wrapper/card-wrapper.component';
 import { CustomPopoverComponent } from '@shared/components/custom-popover/custom-popover.component';
 import { CustomTableComponent } from '@shared/components/custom-table/custom-table.component';
@@ -18,6 +19,7 @@ import {
 } from '@swimlane/ngx-charts';
 import { fromEvent, debounceTime, distinctUntilChanged, Subject } from 'rxjs';
 
+@UntilDestroy({ checkProperties: true })
 @Component({
   selector: 'app-yearly-summary',
   templateUrl: './yearly-summary.component.html',

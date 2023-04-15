@@ -5,6 +5,7 @@ import {
   NgZone,
   ViewChild,
 } from '@angular/core';
+import { UntilDestroy } from '@ngneat/until-destroy';
 import { CardWrapperComponent } from '@shared/components/card-wrapper/card-wrapper.component';
 import { CounterBoxComponent } from '@shared/components/counter-box/counter-box.component';
 import { CustomPopoverComponent } from '@shared/components/custom-popover/custom-popover.component';
@@ -17,6 +18,7 @@ import {
 } from '@swimlane/ngx-charts';
 import { debounceTime, distinctUntilChanged, fromEvent, Subject } from 'rxjs';
 
+@UntilDestroy({ checkProperties: true })
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',

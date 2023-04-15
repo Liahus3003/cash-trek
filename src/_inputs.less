@@ -234,10 +234,6 @@
     color: @label-text;
   }
 
-  // @media screen and (max-width: 576px) {
-  //   padding-bottom: 16px;
-  // }
-
   /* For the calendar picker icon */
   input[type="month"]::before {
     content: '';
@@ -255,5 +251,12 @@
   input[type="month"]::-moz-inner-spin-button,
   input[type="month"]::-ms-inner-spin-button {
     display: none;
+  }
+
+  .ng-invalid {
+    &.ng-touched {
+      border-color: red;
+      border-width: 2px;
+    }
   }
 }

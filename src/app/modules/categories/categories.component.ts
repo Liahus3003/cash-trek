@@ -45,6 +45,9 @@ export class CategoriesComponent {
   constructor(private fb: FormBuilder) {}
 
   submitForm(): void {
+    if (!this.lookupInfoForm.valid) {
+      return;
+    }
     console.log(this.lookupInfoForm.value);
   }
 

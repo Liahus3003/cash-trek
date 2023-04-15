@@ -8,16 +8,16 @@
                 <h2 class="sub-header">
                     {{VIEW_MODE}} Lookup
                 </h2>
-                <form [formGroup]="lookupInfoForm">
+                <form (ngSubmit)="submitForm()" [formGroup]="lookupInfoForm">
                     <div class="row mx-0 g-3">
                         <div class="col-12 col-sm-6 col-lg-4">
                             <app-input label="Name" iconSrc="tag">
-                                <input class="input-content" type="text" name="" id="" formControlName="name" />
+                                <input class="input-content" type="text" placeholder="" name="name" id="" formControlName="name" />
                             </app-input>
                         </div>
                         <div class="col-12 col-sm-6 col-lg-4">
                             <app-select label="Type" iconSrc="branch-up-arrow">
-                                <select class="select-content" name="" id="" formControlName="type">
+                                <select class="select-content" name="type" id="" formControlName="type">
                                     <option selected value="">Category</option>
                                     <option value="">Currency</option>
                                 </select>
@@ -25,12 +25,12 @@
                         </div>
                         <div class="col-12 col-sm-6 col-lg-4">
                             <app-textarea label="Notes" iconSrc="notes">
-                                <textarea class="input-content" name="" id="" cols="20" rows="3" formControlName="description"></textarea>
+                                <textarea class="input-content" name="description" id="" cols="20" rows="3" formControlName="description"></textarea>
                             </app-textarea>
                         </div>
                         <div class="buttons-group">
-                            <app-default-button buttonType="success" label="Add Info" (buttonClicked)="submitForm()"></app-default-button>
-                            <app-default-button buttonType="cancel" label="Reset" (buttonClicked)="resetForm()"></app-default-button>
+                            <app-default-button type="submit" buttonType="success" label="Add Info"></app-default-button>
+                            <app-default-button type="reset" buttonType="cancel" label="Reset" (buttonClicked)="resetForm()"></app-default-button>
                         </div>
                     </div>
                 </form>

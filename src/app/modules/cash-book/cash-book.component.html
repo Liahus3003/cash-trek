@@ -8,26 +8,26 @@
                 <h2 class="sub-header">
                     Add Transaction
                 </h2>
-                <form [formGroup]="expenseInfoForm">
+                <form (ngSubmit)="submitExpenseForm()" [formGroup]="expenseInfoForm">
                     <div class="row mx-0 g-3">
                         <div class="col-12 col-sm-6 col-lg-4">
                             <app-input label="Name" iconSrc="tag">
-                                <input class="input-content" type="text" name="" id="" formControlName="name" />
+                                <input class="input-content" type="text" placeholder="" name="name" id="" formControlName="name" />
                             </app-input>
                         </div>
                         <div class="col-12 col-sm-6 col-lg-4">
-                            <app-input label="amount" iconSrc="dollar">
-                                <input class="input-content" type="number" name="" id="" formControlName="amount" />
+                            <app-input label="Amount" iconSrc="dollar">
+                                <input class="input-content" type="number" name="amount" id="" formControlName="amount" />
                             </app-input>
                         </div>
                         <div class="col-12 col-sm-6 col-lg-4">
                             <app-input label="Date" iconSrc="calendar">
-                                <input class="input-content" type="date" name="" id="" formControlName="date" />
+                                <input class="input-content" type="date" name="date" id="" formControlName="date" />
                             </app-input>
                         </div>
                         <div class="col-12 col-sm-6 col-lg-4">
                             <app-select label="Category" iconSrc="branch-up-arrow">
-                                <select class="select-content" name="" id="" formControlName="category">
+                                <select class="select-content" name="category" id="" formControlName="category">
                                     <option selected value="">One</option>
                                     <option value="">Two</option>
                                     <option value="">Three</option>
@@ -39,7 +39,7 @@
                         </div>
                         <div class="col-12 col-sm-6 col-lg-4">
                             <app-select label="Transaction Type" iconSrc="branch-up-arrow">
-                                <select class="select-content" name="" id="" formControlName="transactionType">
+                                <select class="select-content" name="transactionType" id="" formControlName="transactionType">
                                     <option selected value="">Expense</option>
                                     <option value="">Credit</option>
                                 </select>
@@ -47,7 +47,7 @@
                         </div>
                         <div class="col-12 col-sm-6 col-lg-4">
                             <app-select label="Payment Mode" iconSrc="pay-by-card">
-                                <select class="select-content" name="" id="" formControlName="paymentMode">
+                                <select class="select-content" name="paymentMode" id="" formControlName="paymentMode">
                                     <option selected value="">One</option>
                                     <option value="">Two</option>
                                     <option value="">Three</option>
@@ -60,7 +60,7 @@
                         <div class="col-12 col-sm-6 col-lg-4">
                             <app-checkbox label="Subscription" iconSrc="refresh">
                                 <label class="check-group-label" for="checkbox">
-                                    <input class="input-checkbox" value="yes" type="checkbox" name="checkbox" id=""
+                                    <input class="input-checkbox" value="yes" type="checkbox" name="isSubscription" id=""
                                         formControlName="isSubscription" />
                                     Auto Refill
                                 </label>
@@ -68,13 +68,13 @@
                         </div>
                         <div class="col-12 col-sm-6 col-lg-4">
                             <app-textarea label="Notes" iconSrc="notes">
-                                <textarea class="input-content" name="" id="" cols="20" rows="3"
+                                <textarea class="input-content" name="notes" id="" cols="20" rows="3"
                                     formControlName="notes"></textarea>
                             </app-textarea>
                         </div>
                         <div class="col-12 col-sm-6 col-lg-4" *ngIf="isRebill">
                             <app-select label="Rebill" iconSrc="timelapse">
-                                <select class="select-content" name="" id="" formControlName="rebill">
+                                <select class="select-content" name="rebill" id="" formControlName="rebill">
                                     <option selected value="">One</option>
                                     <option value="">Two</option>
                                     <option value="">Three</option>
@@ -86,14 +86,13 @@
                         </div>
                         <div class="col-12 col-sm-6 col-lg-4" *ngIf="isRebill">
                             <app-input label="Site" iconSrc="website">
-                                <input class="input-content" type="text" name="" id="" formControlName="site" />
+                                <input class="input-content" type="text" placeholder="" name="site" id="" formControlName="site" />
                             </app-input>
                         </div>
                     </div>
                     <div class="buttons-group">
-                        <app-default-button buttonType="success" label="Add"
-                            (buttonClicked)="submitExpenseForm()"></app-default-button>
-                        <app-default-button buttonType="cancel" label="Reset"
+                        <app-default-button type="submit" buttonType="success" label="Add"></app-default-button>
+                        <app-default-button type="reset" buttonType="cancel" label="Reset"
                             (buttonClicked)="resetExpenseForm()"></app-default-button>
                     </div>
                 </form>
@@ -112,22 +111,22 @@
                 <h2 class="sub-header">
                     Add Wishlist
                 </h2>
-                <form [formGroup]="wishlistForm">
+                <form (ngSubmit)="submitWishlistForm()" [formGroup]="wishlistForm">
                     <div class="row mx-0">
                         <div class="col-12 col-sm-6 col-lg-4">
                             <app-input label="Name" iconSrc="tag">
-                                <input class="input-content" type="text" name="" id="" formControlName="name" />
+                                <input class="input-content" type="text" placeholder="" name="name" id="" formControlName="name" />
                             </app-input>
                         </div>
                         <div class="col-12 col-sm-6 col-lg-4">
                             <app-input label="Budget" iconSrc="dollar">
-                                <input class="input-content" type="number" name="" id="" formControlName="budget" />
+                                <input class="input-content" type="number" name="budget" id="" formControlName="budget" />
                             </app-input>
                         </div>
                         <div class="col-12 col-sm-6 col-lg-4">
                             <app-checkbox label="Priority" iconSrc="star">
                                 <label class="check-group-label" for="checkbox">
-                                    <input class="input-checkbox" type="checkbox" name="checkbox" id=""
+                                    <input class="input-checkbox" type="checkbox" name="priority" id="priority"
                                         formControlName="priority" />
                                     Urgent
                                 </label>
@@ -135,15 +134,14 @@
                         </div>
                         <div class="col-12 col-sm-6 col-lg-4">
                             <app-textarea label="Notes" iconSrc="notes">
-                                <textarea class="input-content" name="" id="" cols="20" rows="3"
+                                <textarea class="input-content" name="notes" id="notes" cols="20" rows="3"
                                     formControlName="notes"></textarea>
                             </app-textarea>
                         </div>
                     </div>
                     <div class="buttons-group">
-                        <app-default-button buttonType="success" label="Add"
-                            (buttonClicked)="submitWishlistForm()"></app-default-button>
-                        <app-default-button buttonType="cancel" label="Reset"
+                        <app-default-button type="submit" buttonType="success" label="Add"></app-default-button>
+                        <app-default-button type="reset" buttonType="cancel" label="Reset"
                             (buttonClicked)="resetWishlistForm()"></app-default-button>
                     </div>
                 </form>

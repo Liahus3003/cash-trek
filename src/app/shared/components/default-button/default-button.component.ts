@@ -13,6 +13,7 @@ export class DefaultButtonComponent {
   @Input() buttonType = 'success';
   @Input() label = '';
   @Output() buttonClicked = new EventEmitter();
+  @Input() type = 'button';
 
   triggerClick(): void {
     this.buttonClicked.emit();
