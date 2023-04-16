@@ -5,7 +5,9 @@
       <router-outlet></router-outlet>
     <!-- </div> -->
   </div>
-  <app-navigation-tab></app-navigation-tab>
+  <ng-container *ngIf="isLoggedIn | async">
+    <app-navigation-tab></app-navigation-tab>
+  </ng-container>
 </div>
 <!-- Last 6 months average spend -->
 <!-- Compare month and years -->

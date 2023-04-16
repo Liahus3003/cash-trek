@@ -1,0 +1,52 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <app-slap-toggle></app-slap-toggle>             
+    </div>
+    <div class="col-md-6">
+      <h2>Login</h2>
+      <form [formGroup]="loginForm" (ngSubmit)="login()">
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" class="form-control" id="email" formControlName="email" required>
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" class="form-control" id="password" formControlName="password" required>
+        </div>
+        <button type="submit" [disabled]="!loginForm.valid">Login</button>
+      </form>
+    </div>
+    <div class="col-md-6">
+      <h2>Sign Up</h2>
+      <form [formGroup]="signupForm" (ngSubmit)="signup()">
+        <div class="form-group">
+          <label for="signup-email">Email</label>
+          <input type="email" class="form-control" id="signup-email" formControlName="signupEmail" required>
+        </div>
+        <div class="form-group">
+          <label for="password">Password:</label>
+          <input type="password" formControlName="password" (input)="onPasswordInput()" />
+          <div class="password-strength-indicator">
+            <div class="indicator-item" [class.satisfied]="passwordCriteria.minLength">
+              <span class="indicator-icon">✔</span> Minimum length (8 characters)
+            </div>
+            <div class="indicator-item" [class.satisfied]="passwordCriteria.uppercase">
+              <span class="indicator-icon">✔</span> Uppercase character
+            </div>
+            <div class="indicator-item" [class.satisfied]="passwordCriteria.lowercase">
+              <span class="indicator-icon">✔</span> Lowercase character
+            </div>
+            <div class="indicator-item" [class.satisfied]="passwordCriteria.number">
+              <span class="indicator-icon">✔</span> Numeric character
+            </div>
+            <div class="indicator-item" [class.satisfied]="passwordCriteria.specialChar">
+              <span class="indicator-icon">✔</span> Special character
+            </div>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Sign Up</button>
+      </form>
+    </div>
+  </div>
+</div>

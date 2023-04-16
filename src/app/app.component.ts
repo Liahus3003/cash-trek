@@ -1,6 +1,10 @@
 import { Component } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
+import { UntilDestroy } from '@ngneat/until-destroy';
+import { AuthService } from '@shared/services/auth.service';
+import { Observable, Subscription } from 'rxjs';
 
+@UntilDestroy({ checkProperties: true })
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -8,8 +12,10 @@ import { Router, NavigationEnd } from '@angular/router';
 })
 export class AppComponent {
   title = 'cash-trek';
+  isLoggedIn!: Observable<boolean>;
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private authService: AuthService) {
+   this.isLoggedIn = this.authService.isLoggedIn$();
    this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         window.scrollTo(0, 0);
