@@ -1,4 +1,4 @@
-<input id="toggle-on" class="toggle toggle-left" name="toggle" value="false" type="radio" checked>
+<input id="toggle-on" class="toggle toggle-left" name="toggle" (click)="toggle('login')" value="false" type="radio" [checked]="option === 'login'">
 <label for="toggle-on" class="btn">Login</label>
-<input id="toggle-off" class="toggle toggle-right" name="toggle" value="true" type="radio">
+<input id="toggle-off" class="toggle toggle-right" name="toggle" (click)="toggle('signup')" value="true" type="radio" [checked]="option === 'signup'">
 <label for="toggle-off" class="btn">Signup</label>

@@ -1,16 +1,34 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
+import { DefaultButtonComponent } from '@shared/components/default-button/default-button.component';
+import { InputComponent } from '@shared/components/input/input.component';
 import { SlapToggleComponent } from '@shared/components/slap-toggle/slap-toggle.component';
+import { BehaviorSubject, Subject } from 'rxjs';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, SlapToggleComponent]
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    SlapToggleComponent,
+    InputComponent,
+    DefaultButtonComponent
+  ],
 })
 export class LoginComponent implements OnInit {
+  private toggleOption = new BehaviorSubject<string>('login');
+
+  toggleOptionObs$ = this.toggleOption.asObservable();
+
   loginForm!: FormGroup;
   signupForm!: FormGroup;
   passwordCriteria = {
@@ -18,7 +36,7 @@ export class LoginComponent implements OnInit {
     uppercase: false,
     lowercase: false,
     number: false,
-    specialChar: false
+    specialChar: false,
   };
 
   isSignup = false;
@@ -27,17 +45,17 @@ export class LoginComponent implements OnInit {
     this.isSignup = !this.isSignup;
   }
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required]
+      password: ['', Validators.required],
     });
 
     this.signupForm = this.fb.group({
       signupEmail: ['', [Validators.required, Validators.email]],
-      signupPassword: ['', Validators.required]
+      signupPassword: ['', Validators.required],
     });
   }
 
@@ -64,5 +82,9 @@ export class LoginComponent implements OnInit {
     const signupPassword = this.signupForm.value.signupPassword;
     // Perform signup action with signupEmail and signupPassword
     console.log('Signup:', signupEmail, signupPassword);
+  }
+
+  updateToggleOption(option: string): void {
+    this.toggleOption.next(option);
   }
 }

@@ -16,6 +16,7 @@ import { CreditCommitmentComponent } from './modules/credit-commitment/credit-co
 import { YearlySummaryComponent } from './modules/yearly-summary/yearly-summary.component';
 import { CategoriesComponent } from './modules/categories/categories.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     CreditCommitmentComponent,
     DashboardComponent,
     MonthlySummaryComponent,
-    YearlySummaryComponent
+    YearlySummaryComponent,
+    LoginComponent
   ],
   providers: [],
   bootstrap: [AppComponent]
