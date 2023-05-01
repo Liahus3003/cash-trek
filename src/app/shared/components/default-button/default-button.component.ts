@@ -14,6 +14,7 @@ export class DefaultButtonComponent {
   @Input() label = '';
   @Output() buttonClicked = new EventEmitter();
   @Input() type = 'button';
+  @Input() isDisabled = false;
 
   triggerClick(): void {
     this.buttonClicked.emit();
