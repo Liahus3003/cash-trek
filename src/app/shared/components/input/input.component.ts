@@ -13,4 +13,5 @@ export class InputComponent {
   @Input() label!: string;
   @Input() iconSrc!: string;
   @Input() removeXMargin = false;
+  @Input() iconPath = 'icons/'
 }

@@ -1,5 +1,7 @@
+@import '../../../../_variables.less';
+
 .btn{
-    border: 2px solid #1a1a1a;
+    border: 2px solid @important;
     border-radius: 0;
     display: inline-block;
     padding: 5px;
@@ -15,10 +17,10 @@ input[type="radio"].toggle {
         min-width: 100px;
         &:hover{
             background: none;
-            color: #1a1a1a;
+            color: @important;
         }
         &:after{
-            background: #1a1a1a;
+            background: @important;
             content: "";
             height: 100%;
             position: absolute;
