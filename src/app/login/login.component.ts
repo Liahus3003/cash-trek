@@ -9,7 +9,15 @@ import {
 import { DefaultButtonComponent } from '@shared/components/default-button/default-button.component';
 import { InputComponent } from '@shared/components/input/input.component';
 import { SlapToggleComponent } from '@shared/components/slap-toggle/slap-toggle.component';
-import { BehaviorSubject, Subject } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
+
+interface PasswordCriteria {
+  minLength: boolean;
+  uppercase: boolean;
+  lowercase: boolean;
+  number: boolean;
+  specialChar: boolean;
+}
 
 @Component({
   selector: 'app-login',
@@ -27,18 +35,19 @@ import { BehaviorSubject, Subject } from 'rxjs';
 })
 export class LoginComponent implements OnInit {
   private toggleOption = new BehaviorSubject<string>('login');
-
-  toggleOptionObs$ = this.toggleOption.asObservable();
-
-  loginForm!: FormGroup;
-  signupForm!: FormGroup;
-  passwordCriteria = {
+  private passwordCriteria = new BehaviorSubject<PasswordCriteria>({
     minLength: false,
     uppercase: false,
     lowercase: false,
     number: false,
     specialChar: false,
-  };
+  });
+
+  passwordCriteriaObs$ = this.passwordCriteria.asObservable();
+  toggleOptionObs$ = this.toggleOption.asObservable();
+
+  loginForm!: FormGroup;
+  signupForm!: FormGroup;
 
   isSignup = false;
 
@@ -69,12 +78,20 @@ export class LoginComponent implements OnInit {
   }
 
   onPasswordInput(): void {
-    const password = this.signupForm.get('password')?.value;
-    this.passwordCriteria.minLength = password.length >= 8;
-    this.passwordCriteria.uppercase = /[A-Z]/.test(password);
-    this.passwordCriteria.lowercase = /[a-z]/.test(password);
-    this.passwordCriteria.number = /[0-9]/.test(password);
-    this.passwordCriteria.specialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+    const password = this.signupForm.get('signupPassword')?.value;
+    const passwordCriteria = {
+      minLength: false,
+      uppercase: false,
+      lowercase: false,
+      number: false,
+      specialChar: false
+    };
+    passwordCriteria.minLength = password.length >= 8;
+    passwordCriteria.uppercase = /[A-Z]/.test(password);
+    passwordCriteria.lowercase = /[a-z]/.test(password);
+    passwordCriteria.number = /[0-9]/.test(password);
+    passwordCriteria.specialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+    this.passwordCriteria.next(passwordCriteria);
   }
 
   signup(): void {
