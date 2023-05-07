@@ -22,8 +22,8 @@ export class DashboardService {
   }
 
   // Get expenses by category for last 6 months
-  getLastSixMonthsExepnseSum(categoryType: string): Observable<ExpenseSum> {
-    return this.http.get<ExpenseSum>(`${this.dashboardUrl}/last-six-months-expense-sum?categoryType=${categoryType}`);
+  getLastSixMonthsExepnseSum(categoryType: string): Observable<ExpenseSum[]> {
+    return this.http.get<ExpenseSum[]>(`${this.dashboardUrl}/last-six-months-expense-sum?categoryType=${categoryType}`);
   }
 
   // Get transactions based on criteria

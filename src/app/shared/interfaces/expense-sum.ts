@@ -1,4 +1,4 @@
 export interface ExpenseSum {
-    _id: string;
+    categoryType: string;
     total: number;
 }
