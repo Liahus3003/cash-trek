@@ -12,7 +12,6 @@ import { NavigationTabComponent } from './shared/components/navigation-tab/navig
 import { DefaultButtonComponent } from '@shared/components/default-button/default-button.component';
 import { SlimScrollDirective } from '@shared/directives/slimscroll.directive';
 import { CashBookComponent } from './modules/cash-book/cash-book.component';
-import { CreditCommitmentComponent } from './modules/credit-commitment/credit-commitment.component';
 import { YearlySummaryComponent } from './modules/yearly-summary/yearly-summary.component';
 import { CategoriesComponent } from './modules/categories/categories.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -42,7 +41,6 @@ import { HotToastModule } from '@ngneat/hot-toast';
     SlimScrollDirective,
     CashBookComponent,
     CategoriesComponent,
-    CreditCommitmentComponent,
     DashboardComponent,
     MonthlySummaryComponent,
     YearlySummaryComponent,
