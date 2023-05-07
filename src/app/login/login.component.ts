@@ -6,9 +6,12 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { Router } from '@angular/router';
+import { HotToastService } from '@ngneat/hot-toast';
 import { DefaultButtonComponent } from '@shared/components/default-button/default-button.component';
 import { InputComponent } from '@shared/components/input/input.component';
 import { SlapToggleComponent } from '@shared/components/slap-toggle/slap-toggle.component';
+import { AuthService } from '@shared/services/auth.service';
 import { BehaviorSubject } from 'rxjs';
 
 interface PasswordCriteria {
@@ -30,7 +33,7 @@ interface PasswordCriteria {
     ReactiveFormsModule,
     SlapToggleComponent,
     InputComponent,
-    DefaultButtonComponent
+    DefaultButtonComponent,
   ],
 })
 export class LoginComponent implements OnInit {
@@ -55,7 +58,12 @@ export class LoginComponent implements OnInit {
     this.isSignup = !this.isSignup;
   }
 
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private authService: AuthService,
+    private fb: FormBuilder,
+    private router: Router,
+    private toastService: HotToastService
+  ) {}
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
@@ -64,6 +72,7 @@ export class LoginComponent implements OnInit {
     });
 
     this.signupForm = this.fb.group({
+      name: ['', Validators.required],
       signupEmail: ['', [Validators.required, Validators.email]],
       signupPassword: ['', Validators.required],
     });
@@ -75,6 +84,10 @@ export class LoginComponent implements OnInit {
     const password = this.loginForm.value.password;
     // Perform login action with email and password
     console.log('Login:', email, password);
+    this.authService.login(email, password).subscribe(res => {
+      // this.toastService.success('Login Successful!')
+      this.router.navigate(['dashboard']);
+    });
   }
 
   onPasswordInput(): void {
@@ -84,7 +97,7 @@ export class LoginComponent implements OnInit {
       uppercase: false,
       lowercase: false,
       number: false,
-      specialChar: false
+      specialChar: false,
     };
     passwordCriteria.minLength = password.length >= 8;
     passwordCriteria.uppercase = /[A-Z]/.test(password);
@@ -96,10 +109,15 @@ export class LoginComponent implements OnInit {
 
   signup(): void {
     // Handle signup logic here
+    const name = this.signupForm.value.name;
     const signupEmail = this.signupForm.value.signupEmail;
     const signupPassword = this.signupForm.value.signupPassword;
     // Perform signup action with signupEmail and signupPassword
     console.log('Signup:', signupEmail, signupPassword);
+    this.authService.register(name, signupEmail, signupPassword).subscribe(res => {
+      // this.toastService.success('Signup Successful!')
+      this.router.navigate(['dashboard']);
+    });
   }
 
   updateToggleOption(option: string): void {
