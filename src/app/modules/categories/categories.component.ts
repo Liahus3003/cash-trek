@@ -9,6 +9,7 @@ import { InputComponent } from '@shared/components/input/input.component';
 import { RadioComponent } from '@shared/components/radio/radio.component';
 import { SelectComponent } from '@shared/components/select/select.component';
 import { TextareaComponent } from '@shared/components/textarea/textarea.component';
+import { CategoryService } from './categories.service';
 
 @Component({
   selector: 'app-categories',
@@ -42,7 +43,7 @@ export class CategoriesComponent {
     { no: 3, name: '$', type: 'Currency', description: 'Currency of the U.S.A', status: 'Active', actions: ['edit', 'delete'] },
   ];
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private categoryService: CategoryService) {}
 
   submitForm(): void {
     if (!this.lookupInfoForm.valid) {

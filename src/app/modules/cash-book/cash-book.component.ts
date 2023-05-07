@@ -9,6 +9,7 @@ import { InputComponent } from '@shared/components/input/input.component';
 import { RadioComponent } from '@shared/components/radio/radio.component';
 import { SelectComponent } from '@shared/components/select/select.component';
 import { TextareaComponent } from '@shared/components/textarea/textarea.component';
+import { CashBookService } from './cash-book.service';
 
 @Component({
   selector: 'app-cash-book',
@@ -61,7 +62,7 @@ export class CashBookComponent {
     {no: 3, name: 'Food', budget: '$300', description: 'Items include food, beverages, snacks and cool drinks', priority: 'Yes', actions: ['edit', 'delete']}
   ];
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private cashBookService: CashBookService) {}
 
   submitExpenseForm(): void {
     console.log(this.expenseInfoForm.value);
