@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { User } from '@shared/interfaces/user';
 
 @Component({
   standalone: true,
@@ -10,5 +11,11 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HeaderComponent {
-
+  userInfo!: User;
+  constructor() {
+    const user = localStorage.getItem('user-info');
+    if (user) {
+      this.userInfo = JSON.parse(user);
+    }
+  }
 }
