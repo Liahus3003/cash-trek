@@ -1,4 +1,4 @@
-import { NgIf } from '@angular/common';
+import { AsyncPipe, NgIf } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CardWrapperComponent } from '@shared/components/card-wrapper/card-wrapper.component';
@@ -10,6 +10,9 @@ import { RadioComponent } from '@shared/components/radio/radio.component';
 import { SelectComponent } from '@shared/components/select/select.component';
 import { TextareaComponent } from '@shared/components/textarea/textarea.component';
 import { CategoryService } from './categories.service';
+import { HotToastService } from '@ngneat/hot-toast';
+import { Subject } from 'rxjs';
+import { Category } from '@shared/interfaces/category';
 
 @Component({
   selector: 'app-categories',
@@ -19,6 +22,7 @@ import { CategoryService } from './categories.service';
   imports: [
     ReactiveFormsModule,
     NgIf,
+    AsyncPipe,
     CheckboxComponent,
     SelectComponent,
     TextareaComponent,
@@ -26,34 +30,57 @@ import { CategoryService } from './categories.service';
     InputComponent,
     DefaultButtonComponent,
     CardWrapperComponent,
-    CustomTableComponent
+    CustomTableComponent,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CategoriesComponent {
+  private _lookupStream = new Subject<Category[]>();
+  lookupObs = this._lookupStream.asObservable();
+
   lookupInfoForm = this.fb.group({
     name: ['', Validators.required],
     type: ['', Validators.required],
-    description: ['']
+    description: [''],
   });
   VIEW_MODE = 'Add';
-  categoriesData = [
-    { no: 1, name: 'Food', type: 'Category', description: 'Items include food, beverages, snacks and cool drinks', status: 'Active', actions: ['edit', 'delete'] },
-    { no: 2, name: 'Movie', type: 'Category', description: 'Items include food, beverages, snacks and cool drinks', status: 'Active', actions: ['edit', 'delete'] },
-    { no: 3, name: '$', type: 'Currency', description: 'Currency of the U.S.A', status: 'Active', actions: ['edit', 'delete'] },
-  ];
 
-  constructor(private fb: FormBuilder, private categoryService: CategoryService) {}
+  constructor(
+    private fb: FormBuilder,
+    private categoryService: CategoryService,
+    private toastService: HotToastService
+  ) {
+    this.getLookupInfo();
+  }
 
   submitForm(): void {
     if (!this.lookupInfoForm.valid) {
       return;
     }
-    console.log(this.lookupInfoForm.value);
+    const requestData = {
+      name: this.lookupInfoForm.value.name ?? '',
+      type: this.lookupInfoForm.value.type ?? '',
+      description: this.lookupInfoForm.value.description ?? '',
+    };
+
+    this.categoryService.addCategory(requestData).subscribe({
+      next: res => {
+        this.toastService.success('Lookup added Successfully!');
+        this.getLookupInfo();
+        this.resetForm();
+      },
+      error: e => this.toastService.error('Unable to add Lookup!'),
+    });
   }
 
   resetForm(): void {
     this.lookupInfoForm.reset();
+  }
+
+  getLookupInfo(): void {
+    this.categoryService
+      .getAllcategories()
+      .subscribe(data => this._lookupStream.next(data));
   }
 
   mapAction(id: number, type: string): void {

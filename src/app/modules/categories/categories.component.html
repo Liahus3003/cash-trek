@@ -16,10 +16,10 @@
                             </app-input>
                         </div>
                         <div class="col-12 col-sm-6 col-lg-4">
-                            <app-select label="Type" iconSrc="branch-up-arrow">
-                                <select class="select-content" name="type" id="" formControlName="type">
-                                    <option selected value="">Category</option>
-                                    <option value="">Currency</option>
+                            <app-select label="type" iconSrc="branch-up-arrow">
+                                <select class="select-content" name="type" id="type" formControlName="type">
+                                    <option selected value="Category">Category</option>
+                                    <option value="Currency">Currency</option>
                                 </select>
                             </app-select>
                         </div>
@@ -41,7 +41,9 @@
                 <h2 class="sub-header mx-0 px-0">
                     Lookup Info
                 </h2>
-                <app-custom-table [tableData]="categoriesData" [sortConfig]="['name', 'type', 'status']"></app-custom-table>
+                <ng-container *ngIf="(lookupObs | async) as categoriesData">
+                    <app-custom-table [tableData]="categoriesData" [isClientSide]="true" [itemsPerPage]="5" [sortConfig]="['name', 'type', 'status']"></app-custom-table>
+                </ng-container>
             </div>
         </app-card-wrapper>
     </div>

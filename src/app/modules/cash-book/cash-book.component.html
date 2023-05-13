@@ -48,12 +48,10 @@
                         <div class="col-12 col-sm-6 col-lg-4">
                             <app-select label="Payment Mode" iconSrc="pay-by-card">
                                 <select class="select-content" name="paymentMode" id="" formControlName="paymentMode">
-                                    <option selected value="">One</option>
-                                    <option value="">Two</option>
-                                    <option value="">Three</option>
-                                    <option value="">Four</option>
-                                    <option value="">Five</option>
-                                    <option value="">Six</option>
+                                    <option selected value="debit-card">Debit Card</option>
+                                    <option value="credit-card">Credit Card</option>
+                                    <option value="cash">Cash</option>
+                                    <option value="paytm">Paytm</option>
                                 </select>
                             </app-select>
                         </div>
@@ -103,7 +101,9 @@
                 <h2 class="sub-header mx-0 px-0">
                     Transaction Summary
                 </h2>
-                <app-custom-table [tableData]="transactionData" [sortConfig]="['name', 'category', 'status']"></app-custom-table>
+                <ng-container *ngIf="(expenseObs | async) as transactionData">
+                    <app-custom-table [tableData]="transactionData" [sortConfig]="['name', 'category', 'status']"></app-custom-table>
+                </ng-container>
             </div>
         </app-card-wrapper>
         <app-card-wrapper>
@@ -152,7 +152,9 @@
                 <h2 class="sub-header mx-0 px-0">
                     Wishlist
                 </h2>
-                <app-custom-table [tableData]="wishlishData" [sortConfig]="['name', 'budget', 'priority']"></app-custom-table>
+                <ng-container *ngIf="(wishlistObs | async) as wishlishData">
+                    <app-custom-table [tableData]="wishlishData" [sortConfig]="['name', 'budget', 'priority']"></app-custom-table>
+                </ng-container>
             </div>
         </app-card-wrapper>
     </div>

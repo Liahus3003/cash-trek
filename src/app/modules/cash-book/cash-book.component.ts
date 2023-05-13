@@ -1,4 +1,4 @@
-import { NgIf } from '@angular/common';
+import { AsyncPipe, NgIf } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CardWrapperComponent } from '@shared/components/card-wrapper/card-wrapper.component';
@@ -10,6 +10,10 @@ import { RadioComponent } from '@shared/components/radio/radio.component';
 import { SelectComponent } from '@shared/components/select/select.component';
 import { TextareaComponent } from '@shared/components/textarea/textarea.component';
 import { CashBookService } from './cash-book.service';
+import { HotToastService } from '@ngneat/hot-toast';
+import { Expense } from '@shared/interfaces/expense';
+import { Subject } from 'rxjs';
+import { Wishlist } from '@shared/interfaces/wishlist';
 
 @Component({
   selector: 'app-cash-book',
@@ -26,46 +30,73 @@ import { CashBookService } from './cash-book.service';
     DefaultButtonComponent,
     CardWrapperComponent,
     CustomTableComponent,
-    NgIf
+    NgIf,
+    AsyncPipe
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CashBookComponent {
+  private _expenseStream = new Subject<Expense[]>();
+  private _wishlistStream = new Subject<Wishlist[]>();
+
+  expenseObs = this._expenseStream.asObservable();
+  wishlistObs = this._wishlistStream.asObservable();
   expenseInfoForm = this.fb.group({
     name: ['', Validators.required],
-    amount: ['', Validators.required],
+    amount: [0, Validators.required],
     transactionType: ['', Validators.required],
-    date: ['', Validators.required],
+    date: [new Date(), Validators.required],
     notes: [''],
     category: ['', Validators.required],
     paymentMode: ['', Validators.required],
-    isSubscription: ['', Validators.required],
-    rebill: ['', Validators.required],
+    isSubscription: [false, Validators.required],
+    rebill: [false, Validators.required],
     site: ['', Validators.required],
   });
 
   wishlistForm = this.fb.group({
     name: ['', Validators.required],
-    budget: ['', Validators.required],
+    budget: [0, Validators.required],
     notes: [''],
-    priority: ['', Validators.required]
+    priority: [false, Validators.required],
   });
 
-  transactionData = [
-    { no: 1, name: 'Food', type: 'Category', description: 'Items include food, beverages, snacks and cool drinks', status: 'Active', actions: ['edit', 'delete'] },
-    { no: 2, name: 'Food', type: 'Category', description: 'Items include food, beverages, snacks and cool drinks', status: 'Active', actions: ['edit', 'delete'] },
-    { no: 3, name: 'Food', type: 'Category', description: 'Items include food, beverages, snacks and cool drinks', status: 'Active', actions: ['edit', 'delete'] },
-  ];
-  wishlishData = [
-    {no: 1, name: 'Food', budget: '$300', description: 'Items include food, beverages, snacks and cool drinks', priority: 'Yes', actions: ['edit', 'delete']},
-    {no: 2, name: 'Food', budget: '$300', description: 'Items include food, beverages, snacks and cool drinks', priority: 'No', actions: ['edit', 'delete']},
-    {no: 3, name: 'Food', budget: '$300', description: 'Items include food, beverages, snacks and cool drinks', priority: 'Yes', actions: ['edit', 'delete']}
-  ];
-
-  constructor(private fb: FormBuilder, private cashBookService: CashBookService) {}
+  constructor(
+    private fb: FormBuilder,
+    private cashBookService: CashBookService,
+    private toastService: HotToastService
+  ) {
+    this.getExpenseInfo();
+    this.getWishlistInfo();
+  }
 
   submitExpenseForm(): void {
-    console.log(this.expenseInfoForm.value);
+    const requestData = {
+      name: this.expenseInfoForm.value.name ?? '',
+      amount: this.expenseInfoForm.value.amount ?? 0,
+      category: this.expenseInfoForm.value.category ?? '',
+      transactionType: this.expenseInfoForm.value.transactionType ?? '',
+      date: this.expenseInfoForm.value.date ?? new Date(),
+      notes: this.expenseInfoForm.value.notes ?? '',
+      site: this.expenseInfoForm.value.site ?? '',
+      isRebill: this.expenseInfoForm.value.rebill ?? false,
+      isSubscription: this.expenseInfoForm.value.isSubscription ?? false,
+      paymentMode: this.expenseInfoForm.value.paymentMode ?? ''
+    };
+    this.cashBookService.addExpense(requestData).subscribe({
+      next: res => {
+        this.toastService.success('Expense added Successfully!');
+        this.getExpenseInfo();
+        this.resetExpenseForm();
+      },
+      error: e => this.toastService.error('Unable to add Expense!'),
+    });
+  }
+
+  getExpenseInfo(): void {
+    this.cashBookService
+      .getAllExpenses()
+      .subscribe(data => this._expenseStream.next(data));
   }
 
   resetExpenseForm(): void {
@@ -73,11 +104,30 @@ export class CashBookComponent {
   }
 
   submitWishlistForm(): void {
-    console.log(this.wishlistForm.value);
+    const requestData = {
+      name: this.wishlistForm.value.name ?? '',
+      budget: this.wishlistForm.value.budget ?? 0,
+      notes: this.wishlistForm.value.notes ?? '',
+      priority: this.wishlistForm.value.priority ?? false,
+    };
+    this.cashBookService.addWishlist(requestData).subscribe({
+      next: res => {
+        this.toastService.success('Wishlist added Successfully!');
+        this.getWishlistInfo();
+        this.resetWishlistForm();
+      },
+      error: e => this.toastService.error('Unable to add Wishlist!'),
+    });
   }
 
   resetWishlistForm(): void {
     this.wishlistForm.reset();
+  }
+
+  getWishlistInfo(): void {
+    this.cashBookService
+      .getAllWishlists()
+      .subscribe(data => this._wishlistStream.next(data));
   }
 
   get isRebill() {
