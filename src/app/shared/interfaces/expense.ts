@@ -9,6 +9,7 @@ export interface Expense {
   isRebill: boolean;
   isSubscription: boolean;
   paymentMode: string;
-  createdDate: Date;
-  updatedDate: Date;
+  createdDate?: Date;
+  updatedDate?: Date;
+  actions?: string[];
 }

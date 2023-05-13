@@ -3,8 +3,10 @@ import {
   Component,
   EventEmitter,
   Input,
+  OnChanges,
   OnInit,
   Output,
+  SimpleChanges,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CustomPaginatorComponent } from '../custom-paginator/custom-paginator.component';
@@ -26,14 +28,15 @@ const actions: { [key: string]: string } = {
   styleUrls: ['./custom-table.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CustomTableComponent implements OnInit {
+export class CustomTableComponent implements OnInit, OnChanges {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   @Input() tableData: any[] = [];
+  @Input() isClientSide = true;
+  @Input() itemsPerPage = 25;
   @Input() sortConfig: string[] = ['name', 'priority'];
   @Output() actionEmitter = new EventEmitter();
 
   currentPage = 1;
-  itemsPerPage = 10;
   totalItems = 100;
   totalPages = Math.ceil(this.totalItems / this.itemsPerPage);
   startIndex = 0;
@@ -46,6 +49,9 @@ export class CustomTableComponent implements OnInit {
   sortDirection = 'asc';
 
   get getTableHeaders() {
+    if (!this.tableData?.length) {
+      return [];
+    }
     return Object.keys(this.tableData[0]);
   }
 
@@ -54,6 +60,14 @@ export class CustomTableComponent implements OnInit {
 
   ngOnInit(): void {
     this.deviceInfo$ = this.screenSizeService.getScreenSize();
+    this.refreshPageInfo();
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['tableData'].previousValue !== changes['tableData'].currentValue) {
+      this.tableData = changes['tableData'].currentValue;
+      this.refreshPageInfo();
+    }
   }
 
   iconName(name: string): string {
@@ -71,7 +85,8 @@ export class CustomTableComponent implements OnInit {
 
   onPageChange(pageIndex: number) {
     this.currentPage = pageIndex;
-    this.displayedData = this.tableData.slice(this.startIndex, this.endIndex);
+    this.changePage();
+    this.refreshPageInfo();
   }
 
   sort(column: string) {
@@ -94,7 +109,12 @@ export class CustomTableComponent implements OnInit {
   
         return sortValue;
       });  
+      this.refreshPageInfo();
     }
+  }
+
+  refreshPageInfo(): void {
+    this.displayedData = [...this.tableData.slice(this.startIndex, this.endIndex)];
   }
   
   isSortable(column: string): boolean {
@@ -108,6 +128,14 @@ export class CustomTableComponent implements OnInit {
       return 'asc';
     } else {
       return 'reset-sort';
+    }
+  }
+
+  get totalSize(): number {
+    if (this.isClientSide) {
+      return this.tableData?.length ?? 0;
+    } else {
+      return 100;
     }
   }
 }

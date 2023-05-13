@@ -5,34 +5,47 @@
         </select>
     </app-select>
     <span class="mobile-sort--icon cursor-pointer">
-        <img (click)="sort('name')" class="sort-icon" src="https://raw.githubusercontent.com/Liahus3003/gallery/main/icons/{{sortIcon('name')}}.svg" alt="">
+        <img (click)="sort('name')" class="sort-icon"
+            src="https://raw.githubusercontent.com/Liahus3003/gallery/main/icons/{{sortIcon('name')}}.svg" alt="">
     </span>
 </div>
-<table class="table">
-    <thead class="table-head">
-        <tr class="table-head--row">
-            <th *ngFor="let header of getTableHeaders" class="row-content" (click)="sort(header)" [class.cursor-pointer]="isSortable(header)">{{ header | titlecase }} 
-                <span *ngIf="isSortable(header)">
-                    <img class="sort-icon" src="https://raw.githubusercontent.com/Liahus3003/gallery/main/icons/{{sortIcon(header)}}.svg" alt="">
-                </span>
-            </th>
-        </tr>
-    </thead>
-    <tbody class="table-body">
-        <tr *ngFor="let row of tableData" class="table-body-row">
-            <td [attr.data-label]="header" *ngFor="let header of getTableHeaders" (click)="sort(header)" class="row-content {{header}}">
-                <ng-container *ngIf="header === 'actions'; else default">
-                    <span class="actions" *ngFor="let action of row[header]"
-                        (click)="triggerAction(row['no'], action)">
-                        <img class="input-icon" aria-hidden="true" src="https://raw.githubusercontent.com/Liahus3003/gallery/main/icons/{{
-                            iconName(action)}}.svg" alt="{{action}}" />
+<ng-container *ngIf="displayedData?.length; else emptyContent">
+    <table class="table">
+        <thead class="table-head">
+            <tr class="table-head--row">
+                <th *ngFor="let header of getTableHeaders" class="row-content" (click)="sort(header)"
+                    [class.cursor-pointer]="isSortable(header)">{{ header | titlecase }}
+                    <span *ngIf="isSortable(header)">
+                        <img class="sort-icon"
+                            src="https://raw.githubusercontent.com/Liahus3003/gallery/main/icons/{{sortIcon(header)}}.svg"
+                            alt="">
                     </span>
-                </ng-container>
-                <ng-template #default>
-                    {{ row[header] }}
-                </ng-template>
-            </td>
-        </tr>
-    </tbody>
-</table>
-<app-custom-paginator [pageSize]="itemsPerPage" [pageIndex]="currentPage" [totalItems]="totalItems" (pageChange)="onPageChange($event)"></app-custom-paginator>
+                </th>
+            </tr>
+        </thead>
+        <tbody class="table-body">
+            <tr *ngFor="let row of displayedData" class="table-body-row">
+                <td [attr.data-label]="header" *ngFor="let header of getTableHeaders" (click)="sort(header)"
+                    class="row-content {{header}}">
+                    <ng-container *ngIf="header === 'actions'; else default">
+                        <span class="actions" *ngFor="let action of row[header]"
+                            (click)="triggerAction(row['no'], action)">
+                            <img class="input-icon" aria-hidden="true" src="https://raw.githubusercontent.com/Liahus3003/gallery/main/icons/{{
+                                iconName(action)}}.svg" alt="{{action}}" />
+                        </span>
+                    </ng-container>
+                    <ng-template #default>
+                        {{ row[header] }}
+                    </ng-template>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <app-custom-paginator [pageSize]="itemsPerPage" [pageIndex]="currentPage" [totalItems]="totalSize"
+        (pageChange)="onPageChange($event)"></app-custom-paginator>
+</ng-container>
+<ng-template #emptyContent>
+    <div class="flex-center my-3">
+        No entries found
+    </div>
+</ng-template>
