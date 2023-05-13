@@ -1,23 +1,38 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { tap } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { Category } from '@shared/interfaces/category';
 import { DefaultResponse } from '@shared/interfaces/default-response';
-import { CategoriesComponent } from './categories.component';
 
 @Injectable({
-  providedIn: CategoriesComponent,
+  providedIn: 'root',
 })
 export class CategoryService {
   private readonly categoryUrl = 'http://localhost:3100/api/lookup';
-  
-  constructor(private http: HttpClient) {
-  }
+
+  constructor(private http: HttpClient) {}
 
   // Get all categories
   getAllcategories(): Observable<Category[]> {
-    return this.http.get<Category[]>(`${this.categoryUrl}`);
+    return this.http.get<Category[]>(`${this.categoryUrl}`).pipe(
+      map(data => {
+        if (data?.length) {
+          const response: Category[] = [];
+          data.forEach(info => {
+            response.push({
+              name: info.name,
+              type: info.type,
+              description: info.description,
+              status: info.isActive,
+              actions: ['edit', 'delete'],
+            });
+          });
+          return response;
+        }
+        return data;
+      })
+    );
   }
 
   // Get Category by ID
@@ -31,12 +46,20 @@ export class CategoryService {
   }
 
   // Update Category
-  updateCategory(categoryId: string, categoryReq: Partial<Category>): Observable<Category> {
-    return this.http.put<Category>(`${this.categoryUrl}/${categoryId}`, categoryReq);
+  updateCategory(
+    categoryId: string,
+    categoryReq: Partial<Category>
+  ): Observable<Category> {
+    return this.http.put<Category>(
+      `${this.categoryUrl}/${categoryId}`,
+      categoryReq
+    );
   }
 
   // Delete Category
   deleteCategory(categoryId: string): Observable<DefaultResponse> {
-    return this.http.delete<DefaultResponse>(`${this.categoryUrl}/${categoryId}`);
+    return this.http.delete<DefaultResponse>(
+      `${this.categoryUrl}/${categoryId}`
+    );
   }
 }

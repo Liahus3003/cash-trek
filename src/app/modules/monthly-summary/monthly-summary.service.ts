@@ -4,11 +4,10 @@ import { HttpClient } from '@angular/common/http';
 import { tap } from 'rxjs/operators';
 import { Expense } from '@shared/interfaces/expense';
 import { ExpenseSum } from '@shared/interfaces/expense-sum';
-import { MonthlySummaryComponent } from './monthly-summary.component';
 import { ExpenseByDay } from '@shared/interfaces/expense-day';
 
 @Injectable({
-  providedIn: MonthlySummaryComponent,
+  providedIn: 'root',
 })
 export class MonthlySummaryService {
   private readonly expenseSummaryUrl = 'http://localhost:3100/api/expense-summary';

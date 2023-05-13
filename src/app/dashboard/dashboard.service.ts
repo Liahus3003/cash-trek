@@ -2,13 +2,12 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { tap } from 'rxjs/operators';
-import { DashboardComponent } from './dashboard.component';
 import { Transaction } from '@shared/interfaces/transaction';
 import { Expense } from '@shared/interfaces/expense';
 import { ExpenseSum } from '@shared/interfaces/expense-sum';
 
 @Injectable({
-  providedIn: DashboardComponent,
+  providedIn: 'root',
 })
 export class DashboardService {
   private readonly dashboardUrl = 'http://localhost:3100/api/dashboard';

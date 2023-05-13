@@ -5,10 +5,9 @@ import { tap } from 'rxjs/operators';
 import { Expense } from '@shared/interfaces/expense';
 import { ExpenseSum } from '@shared/interfaces/expense-sum';
 import { ExpenseByDay } from '@shared/interfaces/expense-day';
-import { YearlySummaryComponent } from './yearly-summary.component';
 
 @Injectable({
-  providedIn: YearlySummaryComponent,
+  providedIn: 'root',
 })
 export class YearlySummaryService {
   private readonly expenseSummaryUrl = 'http://localhost:3100/api/expense-summary';
