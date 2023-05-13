@@ -85,7 +85,7 @@ export class LoginComponent implements OnInit {
     // Perform login action with email and password
     console.log('Login:', email, password);
     this.authService.login(email, password).subscribe(res => {
-      // this.toastService.success('Login Successful!')
+      this.toastService.success('Login Successful!')
       this.router.navigate(['dashboard']);
     });
   }
@@ -115,7 +115,7 @@ export class LoginComponent implements OnInit {
     // Perform signup action with signupEmail and signupPassword
     console.log('Signup:', signupEmail, signupPassword);
     this.authService.register(name, signupEmail, signupPassword).subscribe(res => {
-      // this.toastService.success('Signup Successful!')
+      this.toastService.success('Signup Successful!')
       this.router.navigate(['dashboard']);
     });
   }

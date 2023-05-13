@@ -16,8 +16,9 @@ import { YearlySummaryComponent } from './modules/yearly-summary/yearly-summary.
 import { CategoriesComponent } from './modules/categories/categories.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './login/login.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { HotToastModule } from '@ngneat/hot-toast';
+import { AuthInterceptor } from '@shared/interceptor/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,9 @@ import { HotToastModule } from '@ngneat/hot-toast';
     YearlySummaryComponent,
     LoginComponent
   ],
-  providers: [],
+  providers: [{ 
+    provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi:true
+  },],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
