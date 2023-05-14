@@ -28,20 +28,19 @@
                         <div class="col-12 col-sm-6 col-lg-4">
                             <app-select label="Category" iconSrc="branch-up-arrow">
                                 <select class="select-content" name="category" id="" formControlName="category">
-                                    <option selected value="">One</option>
-                                    <option value="">Two</option>
-                                    <option value="">Three</option>
-                                    <option value="">Four</option>
-                                    <option value="">Five</option>
-                                    <option value="">Six</option>
+                                    <ng-container *ngIf="(lookupObs | async) as categories">
+                                        <ng-container *ngFor="let category of categories">
+                                            <option [value]="category.name">{{category.name}}</option>
+                                        </ng-container>
+                                    </ng-container>
                                 </select>
                             </app-select>
                         </div>
                         <div class="col-12 col-sm-6 col-lg-4">
                             <app-select label="Transaction Type" iconSrc="branch-up-arrow">
                                 <select class="select-content" name="transactionType" id="" formControlName="transactionType">
-                                    <option selected value="">Expense</option>
-                                    <option value="">Credit</option>
+                                    <option selected value="Expense">Expense</option>
+                                    <option value="Credit">Credit</option>
                                 </select>
                             </app-select>
                         </div>
@@ -102,7 +101,7 @@
                     Transaction Summary
                 </h2>
                 <ng-container *ngIf="(expenseObs | async) as transactionData">
-                    <app-custom-table [tableData]="transactionData" [sortConfig]="['name', 'category', 'status']"></app-custom-table>
+                    <app-custom-table [tableData]="transactionData" [isClientSide]="true" [itemsPerPage]="5" [sortConfig]="['name', 'category', 'status']"></app-custom-table>
                 </ng-container>
             </div>
         </app-card-wrapper>
@@ -153,7 +152,7 @@
                     Wishlist
                 </h2>
                 <ng-container *ngIf="(wishlistObs | async) as wishlishData">
-                    <app-custom-table [tableData]="wishlishData" [sortConfig]="['name', 'budget', 'priority']"></app-custom-table>
+                    <app-custom-table [tableData]="wishlishData" [isClientSide]="true" [itemsPerPage]="5" [sortConfig]="['name', 'budget', 'priority']"></app-custom-table>
                 </ng-container>
             </div>
         </app-card-wrapper>

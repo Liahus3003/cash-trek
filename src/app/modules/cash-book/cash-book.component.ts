@@ -1,4 +1,4 @@
-import { AsyncPipe, NgIf } from '@angular/common';
+import { AsyncPipe, NgFor, NgIf } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CardWrapperComponent } from '@shared/components/card-wrapper/card-wrapper.component';
@@ -14,6 +14,9 @@ import { HotToastService } from '@ngneat/hot-toast';
 import { Expense } from '@shared/interfaces/expense';
 import { Subject } from 'rxjs';
 import { Wishlist } from '@shared/interfaces/wishlist';
+import { CategoryService } from '../categories/categories.service';
+import { Category } from '@shared/interfaces/category';
+import { ExpenseResponse } from '@shared/interfaces/expense-response';
 
 @Component({
   selector: 'app-cash-book',
@@ -31,13 +34,16 @@ import { Wishlist } from '@shared/interfaces/wishlist';
     CardWrapperComponent,
     CustomTableComponent,
     NgIf,
+    NgFor,
     AsyncPipe
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CashBookComponent {
-  private _expenseStream = new Subject<Expense[]>();
+  private _expenseStream = new Subject<ExpenseResponse[]>();
   private _wishlistStream = new Subject<Wishlist[]>();
+  private _lookupStream = new Subject<Category[]>();
+  lookupObs = this._lookupStream.asObservable();
 
   expenseObs = this._expenseStream.asObservable();
   wishlistObs = this._wishlistStream.asObservable();
@@ -64,10 +70,20 @@ export class CashBookComponent {
   constructor(
     private fb: FormBuilder,
     private cashBookService: CashBookService,
+    private categoryService: CategoryService,
     private toastService: HotToastService
   ) {
     this.getExpenseInfo();
     this.getWishlistInfo();
+    this.getLookupInfo();
+  }
+
+  getLookupInfo(): void {
+    this.categoryService
+      .getAllcategories()
+      .subscribe(data => {
+        this._lookupStream.next(data.filter(info => info.type === 'Category'));
+      });
   }
 
   submitExpenseForm(): void {
