@@ -26,17 +26,38 @@
         <tbody class="table-body">
             <tr *ngFor="let row of displayedData" class="table-body-row">
                 <td [attr.data-label]="header" *ngFor="let header of getTableHeaders" (click)="sort(header)"
-                    class="row-content {{header}}">
-                    <ng-container *ngIf="header === 'actions'; else default">
-                        <span class="actions" *ngFor="let action of row[header]"
-                            (click)="triggerAction(row['no'], action)">
-                            <img class="input-icon" aria-hidden="true" src="https://raw.githubusercontent.com/Liahus3003/gallery/main/icons/{{
-                                iconName(action)}}.svg" alt="{{action}}" />
-                        </span>
+                    class="row-content {{header}}"
+                    [ngClass]="{'title': header === 'name', 'info': (['amount', 'budget', 'type'].includes(header)), 'desc': (['notes', 'description'].includes(header))}">
+                    <ng-container [ngSwitch]="header">
+                        <ng-container *ngSwitchCase="'actions'">
+                            <span class="actions" *ngFor="let action of row[header]"
+                                (click)="triggerAction(row['no'], action)">
+                                <img class="input-icon" aria-hidden="true" src="https://raw.githubusercontent.com/Liahus3003/gallery/main/icons/{{
+                                                        iconName(action)}}.svg" alt="{{action}}" />
+                            </span>
+                        </ng-container>
+                        <ng-container *ngSwitchCase="'rebill'">
+                            <span class="value" [ngClass]="{'green': row[header], 'red': !row[header]}">{{ row[header] ? 'Yes' : 'No' }}</span>
+                        </ng-container>
+                        <ng-container *ngSwitchCase="'priority'">
+                            <span class="value" [ngClass]="{'green': row[header], 'red': !row[header]}">{{ row[header] ? 'Yes' : 'No' }}</span>
+                        </ng-container>
+                        <ng-container *ngSwitchCase="'status'">
+                            <span class="value" [ngClass]="{'green': row[header], 'red': !row[header]}">{{ row[header] ? 'Active' : 'In Active' }}</span>
+                        </ng-container>
+                        <ng-container *ngSwitchDefault>
+                            <ng-container *ngIf="isObject(row[header]); else text">
+                                <ng-container *ngFor="let item of row[header] | keyvalue">
+                                    <div class="inner-value">
+                                        <div class="key">{{item.key}}</div>
+                                        <div class="values mb-2">{{item.value}}</div>
+                                    </div>
+                                </ng-container>
+                            </ng-container>
+                            <ng-template #text>{{ row[header] }}
+                            </ng-template>
+                        </ng-container>
                     </ng-container>
-                    <ng-template #default>
-                        {{ row[header] }}
-                    </ng-template>
                 </td>
             </tr>
         </tbody>

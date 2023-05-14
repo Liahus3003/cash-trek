@@ -8,7 +8,7 @@ import {
   Output,
   SimpleChanges,
 } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, KeyValuePipe, TitleCasePipe } from '@angular/common';
 import { CustomPaginatorComponent } from '../custom-paginator/custom-paginator.component';
 import { ScreenSizeService } from '@shared/services/screen-size.service';
 import { Observable } from 'rxjs';
@@ -22,7 +22,7 @@ const actions: { [key: string]: string } = {
 @Component({
   selector: 'app-custom-table',
   standalone: true,
-  imports: [CommonModule, CustomPaginatorComponent, SelectComponent
+  imports: [CommonModule, CustomPaginatorComponent, SelectComponent, KeyValuePipe, TitleCasePipe
   ],
   templateUrl: './custom-table.component.html',
   styleUrls: ['./custom-table.component.less'],
@@ -85,7 +85,6 @@ export class CustomTableComponent implements OnInit, OnChanges {
 
   onPageChange(pageIndex: number) {
     this.currentPage = pageIndex;
-    this.changePage();
     this.refreshPageInfo();
   }
 
@@ -114,6 +113,7 @@ export class CustomTableComponent implements OnInit, OnChanges {
   }
 
   refreshPageInfo(): void {
+    this.changePage();
     this.displayedData = [...this.tableData.slice(this.startIndex, this.endIndex)];
   }
   
@@ -137,5 +137,9 @@ export class CustomTableComponent implements OnInit, OnChanges {
     } else {
       return 100;
     }
+  }
+
+  isObject(value: unknown): boolean {
+    return (typeof value === 'object') && value !== null;
   }
 }

@@ -33,6 +33,45 @@
           display: inline-block;
           margin: 0 4px;
         }
+
+        &.title {
+          font-weight: 600;
+        }
+        &.info {
+          color: @description;
+          font-weight: 500;
+        }
+        &.desc {
+          font-size: 12px;
+        }
+        .value {
+          padding: 4px 12px;
+          background-color: @value;
+          border-radius: 8px;
+          font-weight: 600;
+          font-size: 12px;
+          min-width: 50px;
+          text-align: center;
+          display: inline-block;
+          &.green {
+            color: #2da72d;
+          }
+          &.red {
+            color: #ff0000;
+          }
+        }
+        .inner-value {
+          .key {
+            text-transform: capitalize;
+            font-size: 12px;
+            font-weight: 600;
+            color: @description;
+          }
+          .values {
+            font-size: 12px;
+            text-transform: capitalize;
+          }
+        }
       }
     }
   }
