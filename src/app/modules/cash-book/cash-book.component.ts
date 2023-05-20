@@ -11,7 +11,6 @@ import { SelectComponent } from '@shared/components/select/select.component';
 import { TextareaComponent } from '@shared/components/textarea/textarea.component';
 import { CashBookService } from './cash-book.service';
 import { HotToastService } from '@ngneat/hot-toast';
-import { Expense } from '@shared/interfaces/expense';
 import { Subject } from 'rxjs';
 import { Wishlist } from '@shared/interfaces/wishlist';
 import { CategoryService } from '../categories/categories.service';
@@ -40,12 +39,16 @@ import { ExpenseResponse } from '@shared/interfaces/expense-response';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CashBookComponent {
+  private _expenseModeStream = new Subject<ExpenseResponse>();
   private _expenseStream = new Subject<ExpenseResponse[]>();
+  private _wishlistModeStream = new Subject<Wishlist>();
   private _wishlistStream = new Subject<Wishlist[]>();
   private _lookupStream = new Subject<Category[]>();
   lookupObs = this._lookupStream.asObservable();
 
+  expenseModeObs = this._expenseModeStream.asObservable();
   expenseObs = this._expenseStream.asObservable();
+  wishlistModeObs = this._wishlistModeStream.asObservable();
   wishlistObs = this._wishlistStream.asObservable();
   expenseInfoForm = this.fb.group({
     name: ['', Validators.required],
@@ -73,9 +76,47 @@ export class CashBookComponent {
     private categoryService: CategoryService,
     private toastService: HotToastService
   ) {
+    this.listenToModeChange();
     this.getExpenseInfo();
     this.getWishlistInfo();
     this.getLookupInfo();
+  }
+
+  listenToModeChange(): void {
+    this.expenseModeObs.subscribe(data => {
+      if (data) {
+        console.log(data);
+      }
+    });
+    this.wishlistModeObs.subscribe(data => {
+      if (data) {
+        console.log(data);
+      }
+    });
+  }
+
+  patchExpenseForm(data: ExpenseResponse): void {
+    this.expenseInfoForm.patchValue({
+      name: data.name,
+      amount: data.details.amount,
+      transactionType: data.meta.transaction,
+      date: data.reason.date,
+      notes: data.reason.notes,
+      category: data.details.category,
+      paymentMode: data.meta.payment,
+      isSubscription: data.subscription.subscribed,
+      rebill: data.rebill,
+      site: data.subscription.site,
+    });
+  }
+
+  patchWishlistForm(data: Wishlist): void {
+    this.wishlistForm.patchValue({
+      name: data.name,
+      budget: data.budget,
+      notes: data.notes,
+      priority: data.priority,
+    });
   }
 
   getLookupInfo(): void {
@@ -84,6 +125,33 @@ export class CashBookComponent {
       .subscribe(data => {
         this._lookupStream.next(data.filter(info => info.type === 'Category'));
       });
+  }
+
+  expenseAction(event: any): void {
+    if (event.type === 'edit') {
+      // this.editExpense(event.id);
+      this._expenseModeStream.next(event.data);
+    } else if (event.type === 'delete') {
+      this.deleteExpense(event.id);
+    }
+  }
+
+  editExpense(id: string): void {
+    this.cashBookService
+    .deleteExpenses(id)
+    .subscribe(data => {
+      this.toastService.success('Expense edited Successfully!');
+      this.getExpenseInfo();
+    });
+  }
+
+  deleteExpense(id: string): void {
+    this.cashBookService
+    .deleteExpenses(id)
+    .subscribe(data => {
+      this.toastService.success('Expense deleted Successfully!');
+      this.getExpenseInfo();
+    });
   }
 
   submitExpenseForm(): void {
@@ -117,6 +185,35 @@ export class CashBookComponent {
 
   resetExpenseForm(): void {
     this.expenseInfoForm.reset();
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  wishlistAction(event: any): void {
+    console.log(event);
+    if (event.type === 'edit') {
+      // this.editWishlist(event.id);
+      this._wishlistModeStream.next(event.data);
+    } else if (event.type === 'delete') {
+      this.deleteWishlist(event.id);
+    }
+  }
+
+  editWishlist(id: string): void {
+    this.cashBookService
+    .deleteExpenses(id)
+    .subscribe(data => {
+      this.toastService.success('Wishlist edited Successfully!');
+      this.getExpenseInfo();
+    });
+  }
+
+  deleteWishlist(id: string): void {
+    this.cashBookService
+    .deleteExpenses(id)
+    .subscribe(data => {
+      this.toastService.success('Wishlist deleted Successfully!');
+      this.getExpenseInfo();
+    });
   }
 
   submitWishlistForm(): void {

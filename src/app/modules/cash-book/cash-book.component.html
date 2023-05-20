@@ -101,7 +101,7 @@
                     Transaction Summary
                 </h2>
                 <ng-container *ngIf="(expenseObs | async) as transactionData">
-                    <app-custom-table [tableData]="transactionData" [isClientSide]="true" [itemsPerPage]="5" [sortConfig]="['name', 'category', 'status']"></app-custom-table>
+                    <app-custom-table [tableData]="transactionData" [isClientSide]="true" [itemsPerPage]="5" [sortConfig]="['name', 'category', 'status']" (triggerAction)="expenseAction($event)"></app-custom-table>
                 </ng-container>
             </div>
         </app-card-wrapper>

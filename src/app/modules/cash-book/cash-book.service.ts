@@ -32,6 +32,7 @@ export class CashBookService {
           const response: Wishlist[] = [];
           data.forEach(info => {
             response.push({
+              _id: info._id,
               name: info.name,
               budget: info.budget ?? 0,
               notes: info.notes ?? '',
@@ -74,6 +75,7 @@ export class CashBookService {
           const response: ExpenseResponse[] = [];
           data.forEach(info => {
             response.push({
+              _id: info._id ?? '',
               name: info.name,
               details: {
                 amount: info.amount ?? 0,
