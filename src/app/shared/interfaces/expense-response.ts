@@ -1,4 +1,5 @@
 export interface ExpenseResponse {
+  _id: string;
   name: string;
   details: {
     amount: number;

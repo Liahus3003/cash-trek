@@ -1,4 +1,5 @@
 export interface Wishlist {
+  _id?: string;
   name: string;
   budget: number;
   createdDate?: Date;
