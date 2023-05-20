@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {
   ChangeDetectionStrategy,
   Component,
@@ -34,7 +35,7 @@ export class CustomTableComponent implements OnInit, OnChanges {
   @Input() isClientSide = true;
   @Input() itemsPerPage = 25;
   @Input() sortConfig: string[] = ['name', 'priority'];
-  @Output() actionEmitter = new EventEmitter();
+  @Output() actionEmitter = new EventEmitter<{data: any; type: string}>();
 
   currentPage = 1;
   totalItems = 100;
@@ -74,8 +75,9 @@ export class CustomTableComponent implements OnInit, OnChanges {
     return actions[name];
   }
 
-  triggerAction(id: number, type: string): void {
-    this.actionEmitter.emit({ id, type });
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  triggerAction(row: any, type: string): void {
+    this.actionEmitter.emit({ data: row, type });
   }
 
   changePage(): void {
