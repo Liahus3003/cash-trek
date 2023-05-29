@@ -34,6 +34,7 @@ export class CashBookService {
             response.push({
               _id: info._id,
               name: info.name,
+              date: info.updatedDate,
               budget: info.budget ?? 0,
               notes: info.notes ?? '',
               priority: info.priority ?? false,

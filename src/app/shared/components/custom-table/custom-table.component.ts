@@ -147,6 +147,6 @@ export class CustomTableComponent implements OnInit, OnChanges {
   }
 
   transformDate(value: any): string {
-    return this.datePipe.transform(value, "yyyy-MMM-dd") ?? '';
+    return this.datePipe.transform(value, "dd-MMM-yyyy") ?? '';
   }
 }

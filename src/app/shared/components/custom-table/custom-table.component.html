@@ -52,7 +52,7 @@
                                 <span class="value" [ngClass]="{'green': row[header], 'red': !row[header]}">{{ row[header] ? 'Active' : 'In Active' }}</span>
                             </ng-container>
                             <ng-container *ngSwitchCase="'date' || 'createdDate'">
-                                <span class="value">{{ row[header] | date:'dd/MM/yyyy' }}</span>
+                                <span>{{ row[header] | date:'dd-MMM-yyyy' }}</span>
                             </ng-container>
                             <ng-container *ngSwitchDefault>
                                 <ng-container *ngIf="isObject(row[header]); else text">
