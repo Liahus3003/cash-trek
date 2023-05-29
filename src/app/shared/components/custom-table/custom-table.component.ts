@@ -9,7 +9,7 @@ import {
   Output,
   SimpleChanges,
 } from '@angular/core';
-import { CommonModule, KeyValuePipe, TitleCasePipe } from '@angular/common';
+import { CommonModule, DatePipe, KeyValuePipe, TitleCasePipe } from '@angular/common';
 import { CustomPaginatorComponent } from '../custom-paginator/custom-paginator.component';
 import { ScreenSizeService } from '@shared/services/screen-size.service';
 import { Observable } from 'rxjs';
@@ -23,10 +23,11 @@ const actions: { [key: string]: string } = {
 @Component({
   selector: 'app-custom-table',
   standalone: true,
-  imports: [CommonModule, CustomPaginatorComponent, SelectComponent, KeyValuePipe, TitleCasePipe
+  imports: [CommonModule, CustomPaginatorComponent, SelectComponent, KeyValuePipe, TitleCasePipe, DatePipe
   ],
   templateUrl: './custom-table.component.html',
   styleUrls: ['./custom-table.component.less'],
+  providers: [DatePipe],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CustomTableComponent implements OnInit, OnChanges {
@@ -56,7 +57,7 @@ export class CustomTableComponent implements OnInit, OnChanges {
     return Object.keys(this.tableData[0]);
   }
 
-  constructor(private screenSizeService: ScreenSizeService) {
+  constructor(private screenSizeService: ScreenSizeService, private datePipe: DatePipe) {
   }
 
   ngOnInit(): void {
@@ -143,5 +144,9 @@ export class CustomTableComponent implements OnInit, OnChanges {
 
   isObject(value: unknown): boolean {
     return (typeof value === 'object') && value !== null;
+  }
+
+  transformDate(value: any): string {
+    return this.datePipe.transform(value, "yyyy-MMM-dd") ?? '';
   }
 }

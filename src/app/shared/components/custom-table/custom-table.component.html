@@ -31,7 +31,7 @@
             <tr *ngFor="let row of displayedData" class="table-body-row">
                 <ng-container *ngFor="let header of getTableHeaders">
                     <ng-container *ngIf="header !== '_id'">
-                        <td [attr.data-label]="header" (click)="sort(header)"
+                        <td [attr.data-label]="header"
                         class="row-content {{header}}"
                         [ngClass]="{'title': header === 'name', 'info': (['amount', 'budget', 'type'].includes(header)), 'desc': (['notes', 'description'].includes(header))}">
                         <ng-container [ngSwitch]="header">
@@ -51,12 +51,20 @@
                             <ng-container *ngSwitchCase="'status'">
                                 <span class="value" [ngClass]="{'green': row[header], 'red': !row[header]}">{{ row[header] ? 'Active' : 'In Active' }}</span>
                             </ng-container>
+                            <ng-container *ngSwitchCase="'date' || 'createdDate'">
+                                <span class="value">{{ row[header] | date:'dd/MM/yyyy' }}</span>
+                            </ng-container>
                             <ng-container *ngSwitchDefault>
                                 <ng-container *ngIf="isObject(row[header]); else text">
                                     <ng-container *ngFor="let item of row[header] | keyvalue">
                                         <div class="inner-value">
                                             <div class="key">{{item.key}}</div>
-                                            <div class="values mb-2">{{item.value}}</div>
+                                            <div class="values mb-2">
+                                                <ng-container *ngIf="item.key === 'date'; else defValue">
+                                                    {{ transformDate(item.value) }}
+                                                </ng-container>
+                                                <ng-template #defValue>{{item.value}}</ng-template>
+                                            </div>
                                         </div>
                                     </ng-container>
                                 </ng-container>
