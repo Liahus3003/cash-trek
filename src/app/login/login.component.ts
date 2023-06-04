@@ -63,7 +63,9 @@ export class LoginComponent implements OnInit {
     private fb: FormBuilder,
     private router: Router,
     private toastService: HotToastService
-  ) {}
+  ) {
+    localStorage.removeItem('user-info');
+  }
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
