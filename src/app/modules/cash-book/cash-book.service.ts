@@ -95,7 +95,7 @@ export class CashBookService {
                 site: info.site || 'NA',
               },
               rebill: info.isRebill ?? false,
-              actions: ['edit', 'delete'],
+              actions: ['edit', info.isActive ? 'delete' : 'activate'],
             });
           });
           return response;
