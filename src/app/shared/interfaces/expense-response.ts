@@ -10,7 +10,7 @@ export interface ExpenseResponse {
     transaction: string;
   };
   reason: {
-    date: Date;
+    date: Date | string;
     notes: string;
   }
   subscription: {

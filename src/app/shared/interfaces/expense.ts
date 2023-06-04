@@ -4,7 +4,7 @@ export interface Expense {
   amount: number;
   category: string;
   transactionType: string;
-  date: Date;
+  date: Date | string;
   notes: string;
   site: string;
   isRebill: boolean;
@@ -12,5 +12,6 @@ export interface Expense {
   paymentMode: string;
   createdDate?: Date;
   updatedDate?: Date;
+  isActive?: boolean,
   actions?: string[];
 }
