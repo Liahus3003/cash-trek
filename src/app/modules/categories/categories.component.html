@@ -4,36 +4,42 @@
     </h1>
     <div class="row row-cols-1 g-4">
         <app-card-wrapper>
-            <div class="mb-5" *ngIf="VIEW_MODE">
-                <h2 class="sub-header">
-                    {{VIEW_MODE}} Lookup
+            <div class="mb-5">
+                <h2 #lookupSource class="sub-header">
+                    {{ (lookupModeObs | async)?._id ? 'Edit' : 'Add' }} Lookup
                 </h2>
-                <form (ngSubmit)="submitForm()" [formGroup]="lookupInfoForm">
-                    <div class="row mx-0 g-3">
-                        <div class="col-12 col-sm-6 col-lg-4">
-                            <app-input label="Name" iconSrc="tag">
-                                <input class="input-content" type="text" placeholder="" name="name" id="" formControlName="name" />
-                            </app-input>
+                <ng-container *ngIf="(lookupModeObs | async) as lookupInfo">
+                    <form (ngSubmit)="submitForm(lookupInfo)" [formGroup]="lookupInfoForm">
+                        <div class="row mx-0 g-3">
+                            <div class="col-12 col-sm-6 col-lg-4">
+                                <app-input label="Name" iconSrc="tag">
+                                    <input class="input-content" type="text" placeholder="" name="name" id=""
+                                        formControlName="name" />
+                                </app-input>
+                            </div>
+                            <div class="col-12 col-sm-6 col-lg-4">
+                                <app-select label="Type" iconSrc="branch-up-arrow">
+                                    <select class="select-content" name="type" id="type" formControlName="type">
+                                        <option selected value="Category">Category</option>
+                                        <option value="Currency">Currency</option>
+                                    </select>
+                                </app-select>
+                            </div>
+                            <div class="col-12 col-sm-6 col-lg-4">
+                                <app-textarea label="Notes" iconSrc="notes">
+                                    <textarea class="input-content" name="description" id="" cols="20" rows="3"
+                                        formControlName="description"></textarea>
+                                </app-textarea>
+                            </div>
+                            <div class="buttons-group">
+                                <app-default-button type="submit" buttonType="success"
+                                    label="Add Info"></app-default-button>
+                                <app-default-button type="reset" buttonType="cancel" label="Reset"
+                                    (buttonClicked)="resetForm()"></app-default-button>
+                            </div>
                         </div>
-                        <div class="col-12 col-sm-6 col-lg-4">
-                            <app-select label="Type" iconSrc="branch-up-arrow">
-                                <select class="select-content" name="type" id="type" formControlName="type">
-                                    <option selected value="Category">Category</option>
-                                    <option value="Currency">Currency</option>
-                                </select>
-                            </app-select>
-                        </div>
-                        <div class="col-12 col-sm-6 col-lg-4">
-                            <app-textarea label="Notes" iconSrc="notes">
-                                <textarea class="input-content" name="description" id="" cols="20" rows="3" formControlName="description"></textarea>
-                            </app-textarea>
-                        </div>
-                        <div class="buttons-group">
-                            <app-default-button type="submit" buttonType="success" label="Add Info"></app-default-button>
-                            <app-default-button type="reset" buttonType="cancel" label="Reset" (buttonClicked)="resetForm()"></app-default-button>
-                        </div>
-                    </div>
-                </form>
+                    </form>
+                </ng-container>
             </div>
         </app-card-wrapper>
         <app-card-wrapper>
@@ -42,7 +48,9 @@
                     Lookup Info
                 </h2>
                 <ng-container *ngIf="(lookupObs | async) as categoriesData">
-                    <app-custom-table [tableData]="categoriesData" [isClientSide]="true" [itemsPerPage]="5" [sortConfig]="['name', 'type', 'status']"></app-custom-table>
+                    <app-custom-table [tableData]="categoriesData" [isClientSide]="true" [itemsPerPage]="5"
+                        [sortConfig]="['name', 'type', 'status']"
+                        (actionEmitter)="categoryAction($event)"></app-custom-table>
                 </ng-container>
             </div>
         </app-card-wrapper>

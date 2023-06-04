@@ -21,6 +21,7 @@ export class CategoryService {
           const response: Category[] = [];
           data.forEach(info => {
             response.push({
+              _id: info._id ?? '',
               name: info.name,
               type: info.type,
               description: info.description,
