@@ -73,7 +73,7 @@ export class CashBookComponent {
     category: ['', Validators.required],
     paymentMode: ['', Validators.required],
     isSubscription: [false, Validators.required],
-    rebill: [false, Validators.required],
+    rebill: ['', Validators.required],
     site: ['', Validators.required],
   });
 
@@ -197,7 +197,7 @@ export class CashBookComponent {
       date: this.expenseInfoForm.value.date ?? new Date(),
       notes: this.expenseInfoForm.value.notes ?? '',
       site: this.expenseInfoForm.value.site ?? '',
-      isRebill: this.expenseInfoForm.value.rebill ?? false,
+      rebill: this.expenseInfoForm.value.rebill ?? '',
       isSubscription: this.expenseInfoForm.value.isSubscription ?? false,
       paymentMode: this.expenseInfoForm.value.paymentMode ?? '',
     };

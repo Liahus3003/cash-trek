@@ -17,6 +17,6 @@ export interface ExpenseResponse {
     subscribed: boolean;
     site: string;
   };
-  rebill: boolean;
+  rebill: string;
   actions?: string[];
 }

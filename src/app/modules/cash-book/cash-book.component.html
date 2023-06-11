@@ -73,12 +73,11 @@
                             <div class="col-12 col-sm-6 col-lg-4" *ngIf="isRebill">
                                 <app-select label="Rebill" iconSrc="timelapse">
                                     <select class="select-content" name="rebill" id="" formControlName="rebill">
-                                        <option selected value="">One</option>
-                                        <option value="">Two</option>
-                                        <option value="">Three</option>
-                                        <option value="">Four</option>
-                                        <option value="">Five</option>
-                                        <option value="">Six</option>
+                                        <option selected value="1">One Month</option>
+                                        <option value="3">Three Months</option>
+                                        <option value="6">Six Months</option>
+                                        <option value="12">1 Year</option>
+                                        <option value="24">2 Years</option>
                                     </select>
                                 </app-select>
                             </div>

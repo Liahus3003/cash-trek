@@ -7,7 +7,7 @@ export interface Expense {
   date: Date | string;
   notes: string;
   site: string;
-  isRebill: boolean;
+  rebill: string;
   isSubscription: boolean;
   paymentMode: string;
   createdDate?: Date;
