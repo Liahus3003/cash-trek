@@ -32,19 +32,19 @@ const actions: { [key: string]: string } = {
 })
 export class CustomTableComponent implements OnInit, OnChanges {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  @Input() tableData: any[] = [];
+  @Input() tableData: any[] | undefined = [];
   @Input() isClientSide = true;
   @Input() itemsPerPage = 25;
   @Input() sortConfig: string[] = ['name', 'priority'];
+  @Input() totalRecords!: number;
   @Output() actionEmitter = new EventEmitter<{data: any; type: string}>();
+  @Output() pageChange = new EventEmitter<{currentPage: number}>();
 
   currentPage = 1;
-  totalItems = 100;
-  totalPages = Math.ceil(this.totalItems / this.itemsPerPage);
   startIndex = 0;
-  endIndex = this.itemsPerPage;
+  endIndex!: number;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  displayedData: any[] = [];
+  displayedData: any[] | undefined = [];
   deviceInfo$!: Observable<string>;
 
   sortedColumn = 'name';
@@ -61,6 +61,7 @@ export class CustomTableComponent implements OnInit, OnChanges {
   }
 
   ngOnInit(): void {
+    this.endIndex = this.itemsPerPage;
     this.deviceInfo$ = this.screenSizeService.getScreenSize();
     this.refreshPageInfo();
   }
@@ -68,7 +69,11 @@ export class CustomTableComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges) {
     if (changes['tableData'].previousValue !== changes['tableData'].currentValue) {
       this.tableData = changes['tableData'].currentValue;
-      this.refreshPageInfo();
+      if (!this.isClientSide) {
+        this.displayedData = [...this.tableData ?? []];
+      } else {
+        this.refreshPageInfo();
+      }
     }
   }
 
@@ -88,7 +93,14 @@ export class CustomTableComponent implements OnInit, OnChanges {
 
   onPageChange(pageIndex: number) {
     this.currentPage = pageIndex;
-    this.refreshPageInfo();
+    if (this.isClientSide) {
+      this.refreshPageInfo();
+    } else {
+      this.changePage();
+      this.pageChange.emit({
+        currentPage: this.currentPage
+      });
+    }
   }
 
   sort(column: string) {
@@ -96,7 +108,7 @@ export class CustomTableComponent implements OnInit, OnChanges {
     this.sortedColumn = column;
 
     if (this.isSortable(column)) {
-      this.tableData.sort((a, b) => {
+      this.tableData?.sort((a, b) => {
         let sortValue = 0;
   
         if (a[column] > b[column]) {
@@ -116,8 +128,10 @@ export class CustomTableComponent implements OnInit, OnChanges {
   }
 
   refreshPageInfo(): void {
-    this.changePage();
-    this.displayedData = [...this.tableData.slice(this.startIndex, this.endIndex)];
+    if (this.isClientSide) {
+      this.changePage();
+      this.displayedData = [...this.tableData?.slice(this.startIndex, this.endIndex) ?? []];
+    }
   }
   
   isSortable(column: string): boolean {
@@ -138,7 +152,7 @@ export class CustomTableComponent implements OnInit, OnChanges {
     if (this.isClientSide) {
       return this.tableData?.length ?? 0;
     } else {
-      return 100;
+      return this.totalRecords;
     }
   }
 
