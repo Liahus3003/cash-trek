@@ -62,30 +62,6 @@ export class YearlySummaryComponent implements OnInit, AfterViewInit {
   };
   view: [number, number] = [700, 375];
 
-  yearlyData = [
-    {
-      no: 1,
-      name: 'Food',
-      budget: 'Category',
-      description: 'Items include food, beverages, snacks and cool drinks',
-      priority: 'Yes',
-    },
-    {
-      no: 2,
-      name: 'Food',
-      budget: 'Category',
-      description: 'Items include food, beverages, snacks and cool drinks',
-      priority: 'No',
-    },
-    {
-      no: 3,
-      name: 'Food',
-      budget: 'Category',
-      description: 'Items include food, beverages, snacks and cool drinks',
-      priority: 'Yes',
-    },
-  ];
-
   _treeInfoStream = new BehaviorSubject<
     { name: string; value: number }[] | undefined
   >(undefined);
