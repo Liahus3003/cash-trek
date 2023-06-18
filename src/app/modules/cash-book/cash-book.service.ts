@@ -26,7 +26,7 @@ export class CashBookService {
 
   // Get all wishlists
   getAllWishlists(): Observable<Wishlist[]> {
-    return this.http.get<Wishlist[]>(`${this.wishlistUrl}?userId=${this.userInfo?._id}`).pipe(
+    return this.http.get<Wishlist[]>(`${this.wishlistUrl}`).pipe(
       map(data => {
         if (data?.length) {
           const response: Wishlist[] = [];
@@ -55,7 +55,7 @@ export class CashBookService {
 
   // Add new wishlist
   addWishlist(wishlistReq: Partial<Wishlist>): Observable<Wishlist> {
-    return this.http.post<Wishlist>(`${this.wishlistUrl}`, {...wishlistReq, userId: this.userInfo._id});
+    return this.http.post<Wishlist>(`${this.wishlistUrl}`, {...wishlistReq});
   }
 
   // Update wishlist
@@ -70,7 +70,7 @@ export class CashBookService {
 
   // Get all expenses
   getAllExpenses(): Observable<ExpenseResponse[]> {
-    return this.http.get<Expense[]>(`${this.expensesUrl}?userId=${this.userInfo?._id}`).pipe(
+    return this.http.get<Expense[]>(`${this.expensesUrl}`).pipe(
       map(data => {
         if (data?.length) {
           const response: ExpenseResponse[] = [];
@@ -112,7 +112,7 @@ export class CashBookService {
 
   // Add new expense
   addExpense(expenseReq: Partial<Expense>): Observable<Expense> {
-    return this.http.post<Expense>(`${this.expensesUrl}`, {...expenseReq, userId: this.userInfo._id});
+    return this.http.post<Expense>(`${this.expensesUrl}`, {...expenseReq});
   }
 
   // Update expenses
