@@ -42,7 +42,6 @@
     <app-card-wrapper [isDefault]="true" [hasDescription]="true">
       <h2 class="sub-header flex-space-between">
         <span class="mx-4">Month comparison</span>
-        <span>Jan vs Feb</span>
       </h2>
       <ng-container *ngIf="(lineInfo$ | async) as lineChartInfo">
         <ngx-charts-line-chart [view]="[view[0], view[1] - 50]" [scheme]="colorScheme" [legend]="true"

@@ -55,7 +55,7 @@
     <app-card-wrapper [isDefault]="true" [hasDescription]="true">
       <h2 class="sub-header flex-space-between">
         <span class="mx-4">Year comparison</span>
-        <span>2023 vs 2022</span>
+        <span>{{ currentYear }} vs {{ currentYear - 1 }}</span>
       </h2>
       <ng-container *ngIf="(lineInfo$ | async) as lineChartInfo">
         <ngx-charts-line-chart
