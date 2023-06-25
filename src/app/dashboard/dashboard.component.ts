@@ -1,8 +1,10 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {
   AfterViewInit,
   Component,
   ElementRef,
   NgZone,
+  OnInit,
   ViewChild,
 } from '@angular/core';
 import { UntilDestroy } from '@ngneat/until-destroy';
@@ -16,7 +18,15 @@ import {
   NgxChartsModule,
   ScaleType,
 } from '@swimlane/ngx-charts';
-import { debounceTime, distinctUntilChanged, fromEvent, Subject } from 'rxjs';
+import {
+  BehaviorSubject,
+  debounceTime,
+  distinctUntilChanged,
+  fromEvent,
+  Observable,
+  Subject,
+} from 'rxjs';
+import { DashboardService } from './dashboard.service';
 
 @UntilDestroy({ checkProperties: true })
 @Component({
@@ -24,9 +34,27 @@ import { debounceTime, distinctUntilChanged, fromEvent, Subject } from 'rxjs';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.less'],
   standalone: true,
-  imports: [CardWrapperComponent, CustomPopoverComponent, CustomTableComponent, NgxChartsModule, CounterBoxComponent],
+  imports: [
+    CardWrapperComponent,
+    CustomPopoverComponent,
+    CustomTableComponent,
+    NgxChartsModule,
+    CounterBoxComponent,
+  ],
 })
-export class DashboardComponent implements AfterViewInit {
+export class DashboardComponent implements AfterViewInit, OnInit {
+  _treeInfoStream = new BehaviorSubject<
+    { name: string; value: number }[] | undefined
+  >(undefined);
+  _seriesInfoStream = new BehaviorSubject<
+    { name: string; value: number; label: string }[]
+  >([]);
+  _multiInfoStream = new BehaviorSubject<any[]>([]);
+  treeInfo$: Observable<{ name: string; value: number }[] | undefined> =
+    this._treeInfoStream.asObservable();
+  seriesInfo$: Observable<{ name: string; value: number; label: string }[]> =
+    this._seriesInfoStream.asObservable();
+  multiInfo$ = this._multiInfoStream.asObservable();
   legendPosition: LegendPosition = LegendPosition.Below;
   colorScheme: Color = {
     domain: ['#99CCE5', '#FF7F7F'],
@@ -35,161 +63,82 @@ export class DashboardComponent implements AfterViewInit {
     name: 'Customer Usage',
   };
   view: [number, number] = [700, 375];
-  multi = [
-    {
-      name: 'Oct 22',
-      series: [
-        {
-          name: 'Median',
-          value: 300,
-        },
-        {
-          name: 'Spent',
-          value: -700,
-        },
-      ],
-    },
-    {
-      name: 'Nov 22',
-      series: [
-        {
-          name: 'Median',
-          value: 300,
-        },
-        {
-          name: 'Spent',
-          value: 0,
-        },
-      ],
-    },
-    {
-      name: 'Dec 22',
-      series: [
-        {
-          name: 'Median',
-          value: 300,
-        },
-        {
-          name: 'Spent',
-          value: 700,
-        },
-      ],
-    },
-    {
-      name: 'Jan 23',
-      series: [
-        {
-          name: 'Median',
-          value: 300,
-        },
-        {
-          name: 'Spent',
-          value: -1500,
-        },
-      ],
-    },
-    {
-      name: 'Feb 23',
-      series: [
-        {
-          name: 'Median',
-          value: 0,
-        },
-        {
-          name: 'Spent',
-          value: 0,
-        },
-      ],
-    },
-    {
-      name: 'Mar 23',
-      series: [
-        {
-          name: 'Median',
-          value: 0,
-        },
-        {
-          name: 'Spent',
-          value: 0,
-        },
-      ],
-    },
-    {
-      name: 'Apr 23',
-      series: [
-        {
-          name: 'Median',
-          value: 0,
-        },
-        {
-          name: 'Spent',
-          value: 0,
-        },
-      ],
-    }
-  ];
 
-  series = [
+  creditsData = [
     {
-      name: 'Family',
-      value: 20,
-      label: '20%',
-    },
-    {
-      name: 'Invest',
-      value: 70,
-      label: '70%',
-    },
-    {
-      name: 'Outing',
-      value: 10,
-      label: '10%',
-    },
-  ];
-
-  treeInfo = [
-    {
-      name: 'Family',
-      value: 33000,
-    },
-    {
-      name: 'Netflix',
-      value: 699,
-    },
-    {
-      name: 'Invest',
-      value: 15000,
-    },
-    {
-      name: 'Entertainment',
-      value: 1240,
-    },
-    {
-      name: 'Outing',
-      value: 2000,
+      name: 'Travel',
+      date: 'Today',
+      amount: '$369',
+      description: 'Sample description',
     },
     {
       name: 'Travel',
-      value: 500,
+      date: '23/1/24',
+      amount: '$369',
+      description: 'Sample description',
+    },
+    {
+      name: 'Travel',
+      date: '23/1/24',
+      amount: '$369',
+      description: 'Sample description',
     },
   ];
 
-  creditsData = [
-    {name: 'Travel', date: 'Today', amount: '$369', description: 'Sample description'},
-    {name: 'Travel', date: '23/1/24', amount: '$369', description: 'Sample description'},
-    {name: 'Travel', date: '23/1/24', amount: '$369', description: 'Sample description'}
-  ];
-
   expenseData = [
-    {name: 'Travel', date: '23/1/24', amount: '$369', description: 'Sample description'},
-    {name: 'Travel', date: '23/1/24', amount: '$369', description: 'Sample description'},
-    {name: 'Travel', date: '23/1/24', amount: '$369', description: 'Sample description'}
+    {
+      name: 'Travel',
+      date: '23/1/24',
+      amount: '$369',
+      description: 'Sample description',
+    },
+    {
+      name: 'Travel',
+      date: '23/1/24',
+      amount: '$369',
+      description: 'Sample description',
+    },
+    {
+      name: 'Travel',
+      date: '23/1/24',
+      amount: '$369',
+      description: 'Sample description',
+    },
   ];
 
   @ViewChild('graphWrapper') graphWrapper!: ElementRef;
   changeSize = new Subject<Event>();
+  expenseInfo$!: Observable<any[]>;
+  creditInfo$!: Observable<any[]>;
 
-  constructor(private zone: NgZone) {}
+  constructor(
+    private zone: NgZone,
+    private dashboardService: DashboardService
+  ) {}
+
+  ngOnInit(): void {
+    this.populateTransactions();
+    this.populateExpenseSummary();
+    this.populateExpenseInfo();
+  }
+
+  populateTransactions(): void {
+    this.expenseInfo$ = this.dashboardService.getTransactions('Expense');
+    this.creditInfo$ = this.dashboardService.getTransactions('Credit');
+  }
+
+  populateExpenseSummary(): void {
+    this.dashboardService.getLastSixMonthsExpenseSum().subscribe(data => {
+      this.mapTreeInfo({ ...data });
+      this.mapSeriesInfo({ ...data });
+    });
+  }
+
+  populateExpenseInfo(): void {
+    this.dashboardService.getLastSixMonthsExpense().subscribe(data => {
+      this.mapMultiInfo({ ...data });
+    });
+  }
 
   ngAfterViewInit(): void {
     this.fixGraphPosition();
@@ -211,6 +160,52 @@ export class DashboardComponent implements AfterViewInit {
     this.changeSize.subscribe((e: Event) => {
       this.onResize(e);
     });
+  }
+
+  mapMultiInfo(data: any): void {
+    const details: any[] = [];
+    data.expenseDetails?.forEach((info: any) => {
+      details.push({
+        name: `${info.period}`,
+        series: [
+          {
+            name: 'Credit',
+            value: info.totalCredit,
+          },
+          {
+            name: 'Spent',
+            value: info.totalExpense,
+          },
+        ],
+      });
+    });
+    this._multiInfoStream.next(details.reverse());
+  }
+
+  mapTreeInfo(data: any): void {
+    const treeInfo: { name: string; value: number }[] = data.expenses.map(
+      (transaction: { categoryType: any; total: any }) => {
+        return {
+          name: transaction.categoryType,
+          value: transaction.total,
+        };
+      }
+    );
+    this._treeInfoStream.next([...treeInfo]);
+  }
+
+  mapSeriesInfo(data: any): void {
+    const seriesInfo: { name: string; value: number; label: string }[] =
+      data.expenses.map((transaction: { categoryType: any; total: any }) => {
+        return {
+          name: transaction.categoryType,
+          value: transaction.total,
+          label: `${((transaction.total / data.overallTotal) * 100).toFixed(
+            1
+          )}%`,
+        };
+      });
+    this._seriesInfoStream.next([...seriesInfo]);
   }
 
   pieChartLabel(
