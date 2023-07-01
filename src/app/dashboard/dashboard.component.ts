@@ -24,6 +24,7 @@ import {
   distinctUntilChanged,
   fromEvent,
   Observable,
+  of,
   Subject,
 } from 'rxjs';
 import { DashboardService } from './dashboard.service';
@@ -50,11 +51,16 @@ export class DashboardComponent implements AfterViewInit, OnInit {
     { name: string; value: number; label: string }[]
   >([]);
   _multiInfoStream = new BehaviorSubject<any[]>([]);
+  _accumulationInfoStream = new BehaviorSubject<any>(null);
+
   treeInfo$: Observable<{ name: string; value: number }[] | undefined> =
     this._treeInfoStream.asObservable();
   seriesInfo$: Observable<{ name: string; value: number; label: string }[]> =
     this._seriesInfoStream.asObservable();
   multiInfo$ = this._multiInfoStream.asObservable();
+  accumulationInfo$ = this._accumulationInfoStream.asObservable();
+
+  accumulationInfo = of(null);
   legendPosition: LegendPosition = LegendPosition.Below;
   colorScheme: Color = {
     domain: ['#99CCE5', '#FF7F7F'],
@@ -163,6 +169,12 @@ export class DashboardComponent implements AfterViewInit, OnInit {
   }
 
   mapMultiInfo(data: any): void {
+    this._accumulationInfoStream.next({
+      credits: data.accCredit?.toFixed(2),
+      expenses: data.accExpense?.toFixed(2),
+      balance: (data.accCredit - data.accExpense)?.toFixed(2),
+      spendThreshold: 240_000
+    });
     const details: any[] = [];
     data.expenseDetails?.forEach((info: any) => {
       details.push({

@@ -9,36 +9,40 @@
           <h2 class="sub-header">
             Last 6 Months Summary
           </h2>
-        </div>      
-        <div class="col-12 col-sm-6">
-          <app-counter-box [iconSrc]="'color-icons/coin.svg'" [value]="68000" [text]="'Income'"></app-counter-box>
-        </div>
-        <div class="col-12 col-sm-6">
-          <app-counter-box [iconSrc]="'color-icons/visiting-card.svg'" [value]="30000" [text]="'Expense'"></app-counter-box>
-        </div>
+        </div>    
+        <ng-container *ngIf="(accumulationInfo$ | async) as accumulation">
+          <div class="col-12 col-sm-6">
+            <app-counter-box [iconSrc]="'color-icons/coin.svg'" [value]="accumulation.credits" [text]="'Income'"></app-counter-box>
+          </div>
+          <div class="col-12 col-sm-6">
+            <app-counter-box [iconSrc]="'color-icons/visiting-card.svg'" [value]="accumulation.expenses" [text]="'Expense'"></app-counter-box>
+          </div>
+        </ng-container>  
       </div>
     </app-card-wrapper>
     <app-card-wrapper [isDefault]="true" [hasDescription]="true">
       <h2 class="sub-header">
         Last 6 Months Expense vs Threshold
       </h2>
-      <ngx-charts-linear-gauge [view]="[view[0], 150]" [scheme]="colorScheme" [value]="150000" [previousValue]="120000"
-        [units]="'Expense'">
-      </ngx-charts-linear-gauge>
-      <div class="row gap-2">
-        <div class="card-caption flex-space-between">
-            <span class="label">Your spendings exceeded by 35000$</span>
-            <span class="value">$180000
+      <ng-container *ngIf="(accumulationInfo$ | async) as accumulation">
+        <ngx-charts-linear-gauge [view]="[view[0], 150]" [scheme]="colorScheme" [value]="accumulation.expenses" [previousValue]="accumulation.spendThreshold"
+          [units]="'Expense'">
+        </ngx-charts-linear-gauge>
+        <div class="row gap-2">
+          <div class="card-caption flex-space-between">
+            <span class="label">Your balance right now {{accumulation.balance}}</span>
+            <span class="value">{{accumulation.expenses}}
               <app-custom-popover></app-custom-popover>
             </span>
-        </div>
-        <div class="card-caption flex-space-between">
+          </div>
+          <div class="card-caption flex-space-between">
             <span class="label">Upcoming bills</span>
-            <span class="value">$990 
+            <span class="value">$990
               <app-custom-popover></app-custom-popover>
             </span>
+          </div>
         </div>
-    </div>
+      </ng-container>
     </app-card-wrapper>
     <app-card-wrapper>
       <div>
