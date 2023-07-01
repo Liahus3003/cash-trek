@@ -43,47 +43,62 @@
       <h2 class="sub-header flex-space-between">
         <span class="mx-4">Month comparison</span>
       </h2>
-      <ng-container *ngIf="(lineInfo$ | async) as lineChartInfo">
-        <ngx-charts-line-chart [view]="[view[0], view[1] - 50]" [scheme]="colorScheme" [legend]="true"
-          [roundDomains]="true" [showXAxisLabel]="true" [showYAxisLabel]="true" [xAxis]="true" [yAxis]="true"
-          [xAxisLabel]="'Days'" [yAxisLabel]="'Expense'" [results]="lineChartInfo" [legendPosition]="legendPosition">
-        </ngx-charts-line-chart>
+      <ng-container *ngIf="(lineInfo$ | async) as lineChartInfo; else emptyContent">
+        <ng-container *ngIf="lineChartInfo; else emptyContent">
+          <ngx-charts-line-chart [view]="[view[0], view[1] - 50]" [scheme]="colorScheme" [legend]="true"
+            [roundDomains]="true" [showXAxisLabel]="true" [showYAxisLabel]="true" [xAxis]="true" [yAxis]="true"
+            [xAxisLabel]="'Days'" [yAxisLabel]="'Expense'" [results]="lineChartInfo" [legendPosition]="legendPosition">
+          </ngx-charts-line-chart>
+        </ng-container>
       </ng-container>
     </app-card-wrapper>
     <app-card-wrapper [isDefault]="true" [hasDescription]="true">
       <h2 class="sub-header">Expenses Tree Map</h2>
-      <ng-container *ngIf="(treeInfo$ | async) as treeInfo">
-        <ngx-charts-tree-map [view]="view" [results]="treeInfo" [animations]="true"
+      <ng-container *ngIf="(treeInfo$ | async) as treeInfo; else emptyContent">
+        <ng-container *ngIf="treeInfo?.length; else emptyContent">
+          <ngx-charts-tree-map [view]="view" [results]="treeInfo" [animations]="true"
           [labelFormatting]="treeLabelFormatting">
         </ngx-charts-tree-map>
+        </ng-container>
       </ng-container>
     </app-card-wrapper>
     <app-card-wrapper [isDefault]="true" [hasDescription]="true">
       <h2 class="sub-header">Per Day Expenses vs Median</h2>
-      <ng-container *ngIf="(multiInfo$ | async) as multiInfo">
-        <ngx-charts-bar-vertical-stacked [view]="view" [results]="multiInfo" [gradient]="false" [xAxis]="true"
+      <ng-container *ngIf="(multiInfo$ | async) as multiInfo; else emptyContent">
+        <ng-container *ngIf="multiInfo?.length; else emptyContent">
+          <ngx-charts-bar-vertical-stacked [view]="view" [results]="multiInfo" [gradient]="false" [xAxis]="true"
           [yAxis]="true" [legend]="true" [legendTitle]="''" [showXAxisLabel]="true" [showYAxisLabel]="true"
           [xAxisLabel]="'Day'" [yAxisLabel]="'Expense'" [animations]="true" [legendPosition]="legendPosition">
         </ngx-charts-bar-vertical-stacked>
+        </ng-container>
       </ng-container>
     </app-card-wrapper>
     <app-card-wrapper [isDonutChart]="true">
       <h2 class="sub-header">Expenses Donut</h2>
-      <ng-container *ngIf="(seriesInfo$ | async) as seriesData">
-        <ngx-charts-pie-chart [view]="view" [legendPosition]="legendPosition" [results]="seriesData" [legend]="true"
+      <ng-container *ngIf="(seriesInfo$ | async) as seriesData; else emptyContent">
+        <ng-container *ngIf="seriesData?.length; else emptyContent">
+          <ngx-charts-pie-chart [view]="view" [legendPosition]="legendPosition" [results]="seriesData" [legend]="true"
           [labels]="true" [doughnut]="true" [legendTitle]="''" [labelFormatting]="pieChartLabel.bind(this, seriesData)"
           [animations]="false">
         </ngx-charts-pie-chart>
+        </ng-container>
       </ng-container>
     </app-card-wrapper>
     <app-card-wrapper [isDonutChart]="true">
       <h2 class="sub-header">Expenses Pie</h2>
-      <ng-container *ngIf="(seriesInfo$ | async) as seriesData">
-        <ngx-charts-pie-chart [view]="view" [legendPosition]="legendPosition" [results]="seriesData" [legend]="true"
+      <ng-container *ngIf="(seriesInfo$ | async) as seriesData; else emptyContent">
+        <ng-container *ngIf="seriesData?.length; else emptyContent">
+          <ngx-charts-pie-chart [view]="view" [legendPosition]="legendPosition" [results]="seriesData" [legend]="true"
           [labels]="true" [explodeSlices]="true" [legendTitle]="''"
           [labelFormatting]="pieChartLabel.bind(this, seriesData)" [animations]="false">
         </ngx-charts-pie-chart>
+        </ng-container>
       </ng-container>
     </app-card-wrapper>
   </div>
 </div>
+<ng-template #emptyContent>
+  <div class="flex-center my-3">
+      No entries found
+  </div>
+</ng-template>
