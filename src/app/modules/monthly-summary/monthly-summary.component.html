@@ -3,7 +3,7 @@
   <div class="m-3">
     <div class="time-selector flex-end mb-4 mb-sm-2">
       <app-input label="Date" iconSrc="calendar" [removeXMargin]="true">
-        <input class="input-content" type="month" [(ngModel)]="selectedYear" name="" id="" max="maxYear" />
+        <input class="input-content" type="month" [ngModel]="selectedYear" (ngModelChange)="changeMonth($event)" name="" id="" max="maxYear" />
       </app-input>
     </div>
     <app-card-wrapper>

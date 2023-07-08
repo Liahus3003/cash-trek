@@ -86,9 +86,7 @@ export class YearlySummaryComponent implements OnInit, AfterViewInit {
   ) {}
 
   ngOnInit(): void {
-    this.populateTransactionTable();
-    this.populateTransactionPerMonth();
-    this.populateGroupedTransaction();
+    this.getYearWiseData()
   }
 
   ngAfterViewInit(): void {
@@ -98,15 +96,26 @@ export class YearlySummaryComponent implements OnInit, AfterViewInit {
     }, 0);
   }
 
+  changeYear($event: number) {
+    this.selectedYear = $event;
+    this.getYearWiseData();
+  }
+
+  getYearWiseData(): void {
+    this.populateTransactionTable();
+    this.populateTransactionPerMonth();
+    this.populateGroupedTransaction();
+  }
+
   populateTransactionTable(startIndex = 1, limit = 5): void {
     this.yearlySummaryService
-      .getExpensesByYear(this.currentYear.toString(), startIndex, limit)
+      .getExpensesByYear(this.selectedYear.toString(), startIndex, limit)
       .subscribe((data) => this._transactionStream.next(data));
   }
 
   populateTransactionPerMonth(): void {
     this.yearlySummaryService
-      .getExpensesByYearPerMonth(this.currentYear.toString())
+      .getExpensesByYearPerMonth(this.selectedYear.toString())
       .subscribe(data => {
         this.mapLineInfo({ ...data });
         this.mapMultiInfo({ ...data });
@@ -159,7 +168,7 @@ export class YearlySummaryComponent implements OnInit, AfterViewInit {
 
   populateGroupedTransaction(): void {
     this.yearlySummaryService
-      .getYearlyTransactionsByCategoryType(this.currentYear.toString())
+      .getYearlyTransactionsByCategoryType(this.selectedYear.toString())
       .subscribe(data => {
         this.mapTreeInfo({ ...data });
         this.mapSeriesInfo({ ...data });

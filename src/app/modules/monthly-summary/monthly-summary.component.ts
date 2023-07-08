@@ -81,6 +81,10 @@ export class MonthlySummaryComponent implements AfterViewInit, OnInit {
   }
 
   ngOnInit(): void {
+    this.getMonthwiseInfo();
+  }
+
+  getMonthwiseInfo(): void {
     this.populateTransactionTable();
     this.populateTransactionPerMonth();
     this.populateGroupedTransaction();
@@ -91,6 +95,11 @@ export class MonthlySummaryComponent implements AfterViewInit, OnInit {
     setTimeout(() => {
       this.onResize();
     }, 0);
+  }
+
+  changeMonth($event: string) {
+    this.selectedYear = $event;
+    this.getMonthwiseInfo();
   }
 
   populateTransactionTable(startIndex = 1, limit = 5): void {
@@ -233,10 +242,10 @@ export class MonthlySummaryComponent implements AfterViewInit, OnInit {
   }
 
   get currentMonth(): number {
-    return new Date().getMonth() + 1;
+    return +(this.selectedYear?.split('-')[1] ?? 0);
   }
 
   get currentYear(): number {
-    return new Date().getFullYear();
+    return +(this.selectedYear?.split('-')[0] ?? 0);
   }
 }
