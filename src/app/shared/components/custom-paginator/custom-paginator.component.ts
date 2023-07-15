@@ -31,4 +31,14 @@ export class CustomPaginatorComponent {
     this.pageIndex++;
     this.pageChange.emit(this.pageIndex);
   }
+
+  seekForward() {
+    this.pageIndex = this.totalPages;
+    this.pageChange.emit(this.pageIndex);
+  }
+
+  seekBackward() {
+    this.pageIndex = 1;
+    this.pageChange.emit(this.pageIndex);
+  }
 }

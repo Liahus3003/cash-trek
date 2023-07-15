@@ -1,5 +1,5 @@
 <div class="paginator flex-center">
-    <button class="reset-button" [disabled]="pageIndex === 1" (click)="previousPage()">
+    <button class="reset-button" [disabled]="pageIndex === 1" (click)="seekBackward()">
         <img src="https://raw.githubusercontent.com/Liahus3003/gallery/main/icons/skip-back.svg" alt="">
     </button>
     <button class="reset-button" [disabled]="pageIndex === 1" (click)="previousPage()">
@@ -10,7 +10,7 @@
         <span>Next</span>
         <img src="https://raw.githubusercontent.com/Liahus3003/gallery/main/icons/chevron-right-plain.svg" alt="">
     </button>
-    <button class="reset-button" [disabled]="pageIndex === totalPages" (click)="previousPage()">
+    <button class="reset-button" [disabled]="pageIndex === totalPages" (click)="seekForward()">
         <img src="https://raw.githubusercontent.com/Liahus3003/gallery/main/icons/fast-forward.svg" alt="">
     </button>
 </div>
