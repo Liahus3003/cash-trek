@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { map, tap } from 'rxjs/operators';
-import { Expense } from '@shared/interfaces/expense';
-import { ExpenseSum } from '@shared/interfaces/expense-sum';
+import { map } from 'rxjs/operators';
+import { ExpenseInfo } from '@shared/interfaces/expense-sum';
 import { ExpenseByDay } from '@shared/interfaces/expense-day';
 
 @Injectable({
@@ -47,7 +46,7 @@ export class YearlySummaryService {
   }
 
   // Get Expenses based on Category Type for a year
-  getYearlyTransactionsByCategoryType(year: string): Observable<ExpenseSum[]> {
-    return this.http.get<ExpenseSum[]>(`${this.expenseSummaryUrl}/grouped-yearly-expense?year=${year}`);
+  getYearlyTransactionsByCategoryType(year: string): Observable<ExpenseInfo> {
+    return this.http.get<ExpenseInfo>(`${this.expenseSummaryUrl}/grouped-yearly-expense?year=${year}`);
   }
 }

@@ -232,7 +232,7 @@ export class DashboardComponent implements AfterViewInit, OnInit {
   }
 
   treeLabelFormatting(c: { name: string; label: string }) {
-    return `${c.label} Expense`;
+    return `${c.label}`;
   }
 
   onResize(event?: Event) {

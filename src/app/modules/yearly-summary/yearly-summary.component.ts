@@ -31,6 +31,7 @@ import {
   Observable,
   BehaviorSubject,
 } from 'rxjs';
+import { calculateMonthsRemaining } from '@shared/helpers/util';
 
 @UntilDestroy({ checkProperties: true })
 @Component({
@@ -70,7 +71,17 @@ export class YearlySummaryComponent implements OnInit, AfterViewInit {
   >([]);
   _lineInfoStream = new BehaviorSubject<any[]>([]);
   _multiInfoStream = new BehaviorSubject<any[]>([]);
-  _transactionStream = new BehaviorSubject<{expenses: any[]; totalExpenses: number } | undefined>(undefined);
+  _transactionStream = new BehaviorSubject<
+    { expenses: any[]; totalExpenses: number } | undefined
+  >(undefined);
+  _expenseStream = new BehaviorSubject<
+    | {
+        averageComparison: number;
+        overallTotal: number;
+        periodRemaining: number;
+      }
+    | undefined
+  >(undefined);
 
   treeInfo$: Observable<{ name: string; value: number }[] | undefined> =
     this._treeInfoStream.asObservable();
@@ -79,6 +90,7 @@ export class YearlySummaryComponent implements OnInit, AfterViewInit {
   lineInfo$ = this._lineInfoStream.asObservable();
   multiInfo$ = this._multiInfoStream.asObservable();
   transactionInfo$ = this._transactionStream.asObservable();
+  expenseInfo$ = this._expenseStream.asObservable();
 
   constructor(
     private zone: NgZone,
@@ -86,7 +98,7 @@ export class YearlySummaryComponent implements OnInit, AfterViewInit {
   ) {}
 
   ngOnInit(): void {
-    this.getYearWiseData()
+    this.getYearWiseData();
   }
 
   ngAfterViewInit(): void {
@@ -110,7 +122,7 @@ export class YearlySummaryComponent implements OnInit, AfterViewInit {
   populateTransactionTable(startIndex = 1, limit = 5): void {
     this.yearlySummaryService
       .getExpensesByYear(this.selectedYear.toString(), startIndex, limit)
-      .subscribe((data) => this._transactionStream.next(data));
+      .subscribe(data => this._transactionStream.next(data));
   }
 
   populateTransactionPerMonth(): void {
@@ -146,7 +158,7 @@ export class YearlySummaryComponent implements OnInit, AfterViewInit {
     this._multiInfoStream.next(info.flat());
   }
 
-  onPageUpdate($event: {currentPage: number}): void {
+  onPageUpdate($event: { currentPage: number }): void {
     this.populateTransactionTable($event.currentPage);
   }
 
@@ -172,6 +184,11 @@ export class YearlySummaryComponent implements OnInit, AfterViewInit {
       .subscribe(data => {
         this.mapTreeInfo({ ...data });
         this.mapSeriesInfo({ ...data });
+        this._expenseStream.next({
+          averageComparison: data.averageComparison,
+          overallTotal: data.overallTotal,
+          periodRemaining: calculateMonthsRemaining(this.selectedYear),
+        });
       });
   }
 
@@ -228,7 +245,7 @@ export class YearlySummaryComponent implements OnInit, AfterViewInit {
   }
 
   treeLabelFormatting(c: { name: string; label: string }) {
-    return `${c.label} Expense`;
+    return `${c.label}`;
   }
 
   onResize(event?: Event) {

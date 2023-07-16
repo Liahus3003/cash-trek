@@ -20,24 +20,20 @@
   <div class="row mx-0 row-cols-1 row-cols-md-2 g-4" #graphWrapper>
     <app-card-wrapper [isDefault]="true" [hasDescription]="true">
       <h2 class="sub-header">Expense vs Threshold</h2>
-      <ngx-charts-linear-gauge [view]="[300, 300]" [scheme]="colorScheme" [value]="1500" [previousValue]="1200"
-        [units]="'Expense'">
-      </ngx-charts-linear-gauge>
-      <div class="row gap-2">
-        <div class="card-caption flex-space-between">
-          <span class="label">Your spendings exceeded by 300$</span>
-          <span class="value">$1800
-            <app-custom-popover></app-custom-popover>
-          </span>
+      <ng-container *ngIf="(expenseInfo$ | async) as expenseData">
+        <ngx-charts-linear-gauge [view]="[300, 300]" [scheme]="colorScheme" [value]="expenseData.overallTotal" [previousValue]="expenseData.averageComparison"
+          [units]="'Expense'">
+        </ngx-charts-linear-gauge>
+        <div class="row gap-2">
+          <div class="card-caption flex-space-between">
+            <span class="label">Your average monthly spendings</span>
+            <span class="value">{{expenseData.averageComparison}}
+              <app-custom-popover></app-custom-popover>
+            </span>
+          </div>
+          <div class="note-section">*Days remaining in this month: {{ expenseData.periodRemaining }}</div>
         </div>
-        <div class="card-caption flex-space-between">
-          <span class="label">Upcoming bills</span>
-          <span class="value">$990
-            <app-custom-popover></app-custom-popover>
-          </span>
-        </div>
-        <div class="note-section">*Days remaining in this month: 4</div>
-      </div>
+      </ng-container>
     </app-card-wrapper>
     <app-card-wrapper [isDefault]="true" [hasDescription]="true">
       <h2 class="sub-header flex-space-between">

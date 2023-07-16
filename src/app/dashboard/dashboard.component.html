@@ -28,19 +28,11 @@
         <ngx-charts-linear-gauge [view]="[view[0], 150]" [scheme]="colorScheme" [value]="accumulation.expenses" [previousValue]="accumulation.spendThreshold"
           [units]="'Expense'">
         </ngx-charts-linear-gauge>
-        <div class="row gap-2">
-          <div class="card-caption flex-space-between">
-            <span class="label">Your current balance</span>
+        <div class="gap-2 card-caption flex-space-between w-100">
+          <span class="label">Your current balance</span>
             <span class="value">{{accumulation.balance}}
               <app-custom-popover></app-custom-popover>
             </span>
-          </div>
-          <div class="card-caption flex-space-between">
-            <span class="label">Upcoming bills</span>
-            <span class="value">$990
-              <app-custom-popover></app-custom-popover>
-            </span>
-          </div>
         </div>
       </ng-container>
     </app-card-wrapper>

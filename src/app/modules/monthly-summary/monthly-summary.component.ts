@@ -23,6 +23,7 @@ import { Subject, fromEvent, debounceTime, distinctUntilChanged, Observable, Beh
 import { MonthlySummaryService } from './monthly-summary.service';
 import { FormsModule } from '@angular/forms';
 import { DatePipe } from '@angular/common';
+import { calculateDaysRemainingInMonth } from '@shared/helpers/util';
 
 @UntilDestroy({ checkProperties: true })
 @Component({
@@ -66,6 +67,7 @@ export class MonthlySummaryComponent implements AfterViewInit, OnInit {
   _lineInfoStream = new BehaviorSubject<any[]>([]);
   _multiInfoStream = new BehaviorSubject<any[]>([]);
   _transactionStream = new BehaviorSubject<{expenses: any[]; totalExpenses: number } | undefined>(undefined);
+  _expenseStream = new BehaviorSubject<{averageComparison: number; overallTotal: number; periodRemaining: number } | undefined>(undefined);
 
   treeInfo$: Observable<{ name: string; value: number }[] | undefined> =
     this._treeInfoStream.asObservable();
@@ -74,6 +76,7 @@ export class MonthlySummaryComponent implements AfterViewInit, OnInit {
   lineInfo$ = this._lineInfoStream.asObservable();
   multiInfo$ = this._multiInfoStream.asObservable();
   transactionInfo$ = this._transactionStream.asObservable();
+  expenseInfo$ = this._expenseStream.asObservable();
 
   constructor(private zone: NgZone, 
     private datePipe: DatePipe,
@@ -167,6 +170,7 @@ export class MonthlySummaryComponent implements AfterViewInit, OnInit {
       .subscribe(data => {
         this.mapTreeInfo({ ...data });
         this.mapSeriesInfo({ ...data });
+        this._expenseStream.next({ averageComparison: data.averageComparison , overallTotal: data.overallTotal, periodRemaining: calculateDaysRemainingInMonth(this.currentYear, this.currentMonth)});
       });
   }
 
@@ -223,7 +227,7 @@ export class MonthlySummaryComponent implements AfterViewInit, OnInit {
   }
 
   treeLabelFormatting(c: { name: string; label: string }) {
-    return `${c.label} Expense`;
+    return `${c.label}`;
   }
 
   onResize(event?: Event) {
