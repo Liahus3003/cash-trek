@@ -1,7 +1,7 @@
 <div class="mx-2 my-3">
-    <button [type]="type" [disabled]="isDisabled" class="default-button success m-2" [ngClass]="{'success': buttonType === 'success', 'cancel': buttonType === 'cancel', 'default': buttonType === 'default'}" (click)="triggerClick()">
-       <ng-container *ngIf="logo">
-        <img class="button-icon" src="https://raw.githubusercontent.com/Liahus3003/gallery/main/{{logo}}" alt="Logo">
-       </ng-container> {{label}}
+  <button [type]="type" [disabled]="isDisabled" class="default-button success m-2" [ngClass]="{'success': buttonType === 'success', 'cancel': buttonType === 'cancel', 'default': buttonType === 'default'}" (click)="triggerClick()">
+    @if (logo) {
+      <img class="button-icon" src="https://raw.githubusercontent.com/Liahus3003/gallery/main/{{logo}}" alt="Logo">
+      } {{label}}
     </button>
-</div>
+  </div>

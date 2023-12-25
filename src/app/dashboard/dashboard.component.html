@@ -4,37 +4,37 @@
   </h1>
   <div class="row mx-0 row-cols-1 row-cols-md-2 g-4" #graphWrapper>
     <app-card-wrapper [isDefault]="true">
-      <div class="row mx-0">  
+      <div class="row mx-0">
         <div class="col-12">
           <h2 class="sub-header">
             Last 6 Months Summary
           </h2>
-        </div>    
-        <ng-container *ngIf="(accumulationInfo$ | async) as accumulation">
+        </div>
+        @if ((accumulationInfo$ | async); as accumulation) {
           <div class="col-12 col-sm-6">
             <app-counter-box [iconSrc]="'color-icons/coin.svg'" [value]="accumulation.credits" [text]="'Income'"></app-counter-box>
           </div>
           <div class="col-12 col-sm-6">
             <app-counter-box [iconSrc]="'color-icons/visiting-card.svg'" [value]="accumulation.expenses" [text]="'Expense'"></app-counter-box>
           </div>
-        </ng-container>  
+        }
       </div>
     </app-card-wrapper>
     <app-card-wrapper [isDefault]="true" [hasDescription]="true">
       <h2 class="sub-header">
         Last 6 Months Expense vs Threshold
       </h2>
-      <ng-container *ngIf="(accumulationInfo$ | async) as accumulation">
+      @if ((accumulationInfo$ | async); as accumulation) {
         <ngx-charts-linear-gauge [view]="[view[0], 150]" [scheme]="colorScheme" [value]="accumulation.expenses" [previousValue]="accumulation.spendThreshold"
           [units]="'Expense'">
         </ngx-charts-linear-gauge>
         <div class="gap-2 card-caption flex-space-between w-100">
           <span class="label">Your current balance</span>
-            <span class="value">{{accumulation.balance}}
-              <app-custom-popover></app-custom-popover>
-            </span>
+          <span class="value">{{accumulation.balance}}
+            <app-custom-popover></app-custom-popover>
+          </span>
         </div>
-      </ng-container>
+      }
     </app-card-wrapper>
     <app-card-wrapper>
       <div>
@@ -42,9 +42,9 @@
           Recent Expenses
         </h2>
         <div class="my-3">
-          <ng-container *ngIf="(expenseInfo$ | async) as expenses">
+          @if ((expenseInfo$ | async); as expenses) {
             <app-custom-table [tableData]="expenses" [isClientSide]="true" [itemsPerPage]="3" [sortConfig]="['name', 'date', 'amount']"></app-custom-table>
-          </ng-container>
+          }
         </div>
       </div>
     </app-card-wrapper>
@@ -54,9 +54,9 @@
           Recent Credits
         </h2>
         <div class="my-3">
-          <ng-container *ngIf="(creditInfo$ | async) as credits">
+          @if ((creditInfo$ | async); as credits) {
             <app-custom-table [tableData]="credits" [isClientSide]="true" [itemsPerPage]="3" [sortConfig]="['name', 'date', 'amount']"></app-custom-table>
-          </ng-container>
+          }
         </div>
       </div>
     </app-card-wrapper>
@@ -64,44 +64,44 @@
       <h2 class="sub-header">
         Last 6 Months Expenses Tree Map
       </h2>
-      <ng-container *ngIf="(treeInfo$ | async) as treeInfo">
+      @if ((treeInfo$ | async); as treeInfo) {
         <ngx-charts-tree-map [view]="view" [results]="treeInfo" [animations]="true"
-        [labelFormatting]="treeLabelFormatting">
-      </ngx-charts-tree-map>
-      </ng-container>
+          [labelFormatting]="treeLabelFormatting">
+        </ngx-charts-tree-map>
+      }
     </app-card-wrapper>
     <app-card-wrapper [isDefault]="true" [hasDescription]="true">
       <h2 class="sub-header">
         Last 6 Months Expenses vs Credits
       </h2>
-      <ng-container *ngIf="(multiInfo$ | async) as multiInfo">
+      @if ((multiInfo$ | async); as multiInfo) {
         <ngx-charts-bar-vertical-2d [view]="view" [results]="multiInfo" [gradient]="false"
           [xAxis]="true" [yAxis]="true" [legend]="true" [legendTitle]="''" [showXAxisLabel]="true"
           [showYAxisLabel]="true" [xAxisLabel]="'Month'" [yAxisLabel]="'Expense'" [legendPosition]="legendPosition">
         </ngx-charts-bar-vertical-2d>
-      </ng-container>
+      }
     </app-card-wrapper>
     <app-card-wrapper [isDonutChart]="true">
       <h2 class="sub-header">
         Last 6 Months Expenses Donut
       </h2>
-      <ng-container *ngIf="(seriesInfo$ | async) as seriesData">
+      @if ((seriesInfo$ | async); as seriesData) {
         <ngx-charts-pie-chart [view]="view" [legendPosition]="legendPosition" [results]="seriesData" [legend]="true"
-        [labels]="true" [doughnut]="true" [legendTitle]="''" [labelFormatting]="pieChartLabel.bind(this, seriesData)"
-        [animations]="false">
-      </ngx-charts-pie-chart>
-      </ng-container>
+          [labels]="true" [doughnut]="true" [legendTitle]="''" [labelFormatting]="pieChartLabel.bind(this, seriesData)"
+          [animations]="false">
+        </ngx-charts-pie-chart>
+      }
     </app-card-wrapper>
     <app-card-wrapper [isDonutChart]="true">
       <h2 class="sub-header">
         Last 6 Months Expenses Pie
       </h2>
-      <ng-container *ngIf="(seriesInfo$ | async) as seriesData">
+      @if ((seriesInfo$ | async); as seriesData) {
         <ngx-charts-pie-chart [view]="view" [legendPosition]="legendPosition" [results]="seriesData" [legend]="true"
-        [labels]="true" [explodeSlices]="true" [legendTitle]="''" [labelFormatting]="pieChartLabel.bind(this, seriesData)"
-        [animations]="false">
-      </ngx-charts-pie-chart>
-      </ng-container>
+          [labels]="true" [explodeSlices]="true" [legendTitle]="''" [labelFormatting]="pieChartLabel.bind(this, seriesData)"
+          [animations]="false">
+        </ngx-charts-pie-chart>
+      }
     </app-card-wrapper>
   </div>
 </div>

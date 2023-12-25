@@ -1,15 +1,16 @@
 <section class="navigation-wrapper">
   <ul class="mb-0 px-3">
-    <li
-      *ngFor="let navigation of navigationLinks"
-      [routerLink]="navigation.route">
-      <img
-        class="navigation-logo"
+    @for (navigation of navigationLinks; track navigation) {
+      <li
+        [routerLink]="navigation.route">
+        <img
+          class="navigation-logo"
         src="https://raw.githubusercontent.com/Liahus3003/gallery/main/icons/{{
           navigation.imgSrc
         }}.svg"
-        [alt]="navigation.label" />
-      <span class="navigation-label mt-1 d-block">{{ navigation.label }}</span>
-    </li>
+          [alt]="navigation.label" />
+        <span class="navigation-label mt-1 d-block">{{ navigation.label }}</span>
+      </li>
+    }
   </ul>
 </section>

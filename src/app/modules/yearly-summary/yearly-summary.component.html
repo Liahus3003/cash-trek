@@ -10,18 +10,18 @@
     <app-card-wrapper>
       <div class="row m-2 m-sm-4">
         <h2 class="sub-header mx-0 px-0">Summary</h2>
-        <ng-container *ngIf="(transactionInfo$ | async) as transactionData">
+        @if ((transactionInfo$ | async); as transactionData) {
           <app-custom-table [tableData]="transactionData?.expenses" [itemsPerPage]="5"
             [sortConfig]="['name', 'priority']" [isClientSide]="false" [totalRecords]="transactionData.totalExpenses"
-            (pageChange)="onPageUpdate($event)"></app-custom-table>
-        </ng-container>
+          (pageChange)="onPageUpdate($event)"></app-custom-table>
+        }
       </div>
     </app-card-wrapper>
   </div>
   <div class="row mx-0 row-cols-1 row-cols-md-2 g-4" #graphWrapper>
     <app-card-wrapper [isDefault]="true" [hasDescription]="true">
       <h2 class="sub-header">Expense vs Threshold</h2>
-      <ng-container *ngIf="(expenseInfo$ | async) as expenseData">
+      @if ((expenseInfo$ | async); as expenseData) {
         <ngx-charts-linear-gauge [view]="[300, 300]" [scheme]="colorScheme" [value]="expenseData.overallTotal" [previousValue]="expenseData.averageComparison"
           [units]="'Expense'">
         </ngx-charts-linear-gauge>
@@ -34,70 +34,105 @@
           </div>
           <div class="note-section">*Months remaining in this year: {{ expenseData.periodRemaining }}</div>
         </div>
-      </ng-container>
+      }
     </app-card-wrapper>
     <app-card-wrapper [isDefault]="true" [hasDescription]="true">
       <h2 class="sub-header flex-space-between">
         <span class="mx-4">Year comparison</span>
         <span>{{ selectedYear }} vs {{ selectedYear - 1 }}</span>
       </h2>
-      <ng-container *ngIf="(lineInfo$ | async) as lineChartInfo; else emptyContent">
-        <ng-container *ngIf="lineChartInfo; else emptyContent">
+      @if ((lineInfo$ | async); as lineChartInfo) {
+        @if (lineChartInfo) {
           <ngx-charts-line-chart [view]="[view[0], view[1] - 50]" [scheme]="colorScheme" [legend]="true"
             [roundDomains]="true" [showXAxisLabel]="true" [showYAxisLabel]="true" [xAxis]="true" [yAxis]="true"
             [xAxisLabel]="'Months'" [yAxisLabel]="'Expense'" [results]="lineChartInfo"
             [legendPosition]="legendPosition">
           </ngx-charts-line-chart>
-        </ng-container>
-      </ng-container>
+        } @else {
+          <div class="flex-center my-3">
+            No entries found
+          </div>
+        }
+      } @else {
+        <div class="flex-center my-3">
+          No entries found
+        </div>
+      }
     </app-card-wrapper>
     <app-card-wrapper [isDefault]="true" [hasDescription]="true">
       <h2 class="sub-header">Expenses Tree Map</h2>
-      <ng-container *ngIf="(treeInfo$ | async) as treeInfo; else emptyContent">
-        <ng-container *ngIf="treeInfo?.length; else emptyContent">
+      @if ((treeInfo$ | async); as treeInfo) {
+        @if (treeInfo?.length) {
           <ngx-charts-tree-map [view]="view" [results]="treeInfo" [animations]="true"
             [labelFormatting]="treeLabelFormatting">
           </ngx-charts-tree-map>
-        </ng-container>
-      </ng-container>
+        } @else {
+          <div class="flex-center my-3">
+            No entries found
+          </div>
+        }
+      } @else {
+        <div class="flex-center my-3">
+          No entries found
+        </div>
+      }
     </app-card-wrapper>
     <app-card-wrapper [isDefault]="true" [hasDescription]="true">
       <h2 class="sub-header">Per Month Expenses vs Median</h2>
-      <ng-container *ngIf="(multiInfo$ | async) as multiInfo; else emptyContent">
-        <ng-container *ngIf="multiInfo?.length; else emptyContent">
+      @if ((multiInfo$ | async); as multiInfo) {
+        @if (multiInfo?.length) {
           <ngx-charts-bar-vertical-stacked [view]="view" [results]="multiInfo" [gradient]="false" [xAxis]="true"
             [yAxis]="true" [legend]="true" [legendTitle]="''" [showXAxisLabel]="true" [showYAxisLabel]="true"
             [xAxisLabel]="'Month'" [yAxisLabel]="'Expense'" [animations]="true" [legendPosition]="legendPosition">
           </ngx-charts-bar-vertical-stacked>
-        </ng-container>
-      </ng-container>
+        } @else {
+          <div class="flex-center my-3">
+            No entries found
+          </div>
+        }
+      } @else {
+        <div class="flex-center my-3">
+          No entries found
+        </div>
+      }
     </app-card-wrapper>
     <app-card-wrapper [isDonutChart]="true">
       <h2 class="sub-header">Expenses Donut</h2>
-      <ng-container *ngIf="(seriesInfo$ | async) as seriesData; else emptyContent">
-        <ng-container *ngIf="seriesData?.length; else emptyContent">
+      @if ((seriesInfo$ | async); as seriesData) {
+        @if (seriesData?.length) {
           <ngx-charts-pie-chart [view]="view" [legendPosition]="legendPosition" [results]="seriesData" [legend]="true"
             [labels]="true" [doughnut]="true" [legendTitle]="''"
             [labelFormatting]="pieChartLabel.bind(this, seriesData)" [animations]="false">
           </ngx-charts-pie-chart>
-        </ng-container>
-      </ng-container>
+        } @else {
+          <div class="flex-center my-3">
+            No entries found
+          </div>
+        }
+      } @else {
+        <div class="flex-center my-3">
+          No entries found
+        </div>
+      }
     </app-card-wrapper>
     <app-card-wrapper [isDonutChart]="true">
       <h2 class="sub-header">Expenses Pie</h2>
-      <ng-container *ngIf="(seriesInfo$ | async) as seriesData; else emptyContent">
-        <ng-container *ngIf="seriesData?.length; else emptyContent">
+      @if ((seriesInfo$ | async); as seriesData) {
+        @if (seriesData?.length) {
           <ngx-charts-pie-chart [view]="view" [legendPosition]="legendPosition" [results]="seriesData" [legend]="true"
             [labels]="true" [explodeSlices]="true" [legendTitle]="''"
             [labelFormatting]="pieChartLabel.bind(this, seriesData)" [animations]="false">
           </ngx-charts-pie-chart>
-        </ng-container>
-      </ng-container>
+        } @else {
+          <div class="flex-center my-3">
+            No entries found
+          </div>
+        }
+      } @else {
+        <div class="flex-center my-3">
+          No entries found
+        </div>
+      }
     </app-card-wrapper>
   </div>
 </div>
-<ng-template #emptyContent>
-  <div class="flex-center my-3">
-    No entries found
-  </div>
-</ng-template>

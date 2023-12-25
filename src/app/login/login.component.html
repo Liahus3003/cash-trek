@@ -3,82 +3,88 @@
     <app-slap-toggle (toggleOption)="updateToggleOption($event)"></app-slap-toggle>
   </div>
   <div class="row login-wrapper">
-    <div class="account-login flex-center-vertical col-12 col-md-6" *ngIf="(toggleOptionObs$ | async) === 'login'">
-      <form [formGroup]="loginForm" (ngSubmit)="login()">
-        <div class="p-0">
-          <app-input label="Email" iconSrc="email-at" iconPath="color-icons/">
-            <input class="input-content" type="email" id="email" formControlName="email" />
-          </app-input>
-        </div>
-        <div class="p-0">
-          <app-input label="Password" iconSrc="password" iconPath="color-icons/">
-            <input class="input-content" type="password" id="password" formControlName="password" />
-          </app-input>
-        </div>
-        <div class="flex-center">
-          <app-default-button type="submit" buttonType="success" [isDisabled]="!loginForm.valid" label="Login"
+    @if ((toggleOptionObs$ | async) === 'login') {
+      <div class="account-login flex-center-vertical col-12 col-md-6">
+        <form [formGroup]="loginForm" (ngSubmit)="login()">
+          <div class="p-0">
+            <app-input label="Email" iconSrc="email-at" iconPath="color-icons/">
+              <input class="input-content" type="email" id="email" formControlName="email" />
+            </app-input>
+          </div>
+          <div class="p-0">
+            <app-input label="Password" iconSrc="password" iconPath="color-icons/">
+              <input class="input-content" type="password" id="password" formControlName="password" />
+            </app-input>
+          </div>
+          <div class="flex-center">
+            <app-default-button type="submit" buttonType="success" [isDisabled]="!loginForm.valid" label="Login"
             logo="color-icons/arrow-entrance.svg"></app-default-button>
-        </div>
-      </form>
-      <div>
-        <div class="login-separator text-center">Or</div>
-        <app-default-button type="submit" buttonType="default" label="Continue with Google"
+          </div>
+        </form>
+        <div>
+          <div class="login-separator text-center">Or</div>
+          <app-default-button type="submit" buttonType="default" label="Continue with Google"
           logo="color-icons/google.svg"></app-default-button>
+        </div>
+      </div>
+    }
+    @if ((toggleOptionObs$ | async) === 'signup') {
+      <div class="account-login flex-center-vertical col-12 col-md-6">
+        <form [formGroup]="signupForm" (ngSubmit)="signup()">
+          <div class="p-0">
+            <app-input label="Full Name" iconSrc="name-id" iconPath="color-icons/">
+              <input class="input-content" type="text" id="name" formControlName="name" />
+            </app-input>
+          </div>
+          <div class="p-0">
+            <app-input label="Email" iconSrc="email-at" iconPath="color-icons/">
+              <input class="input-content" type="email" id="email" formControlName="signupEmail" />
+            </app-input>
+          </div>
+          <div class="p-0">
+            <app-input label="Password" iconSrc="password" iconPath="color-icons/">
+              <input class="input-content" type="password" id="password" formControlName="signupPassword"
+                (input)="onPasswordInput()" />
+              </app-input>
+            </div>
+            @if ((passwordCriteriaObs$ | async); as passwordCriteria) {
+              <div class="password-strength-indicator mx-4 mx-md-5">
+                <div class="indicator-item" [class.satisfied]="passwordCriteria.minLength">
+                  <span class="indicator-icon"><ng-container *ngTemplateOutlet="passwordCriteria.minLength ? success: fail">
+                  </ng-container></span> Minimum length (8 characters)
+                </div>
+                <div class="indicator-item" [class.satisfied]="passwordCriteria.uppercase">
+                  <span class="indicator-icon"><ng-container *ngTemplateOutlet="passwordCriteria.uppercase ? success: fail">
+                  </ng-container></span> Uppercase character
+                </div>
+                <div class="indicator-item" [class.satisfied]="passwordCriteria.lowercase">
+                  <span class="indicator-icon"><ng-container *ngTemplateOutlet="passwordCriteria.lowercase ? success: fail">
+                  </ng-container></span> Lowercase character
+                </div>
+                <div class="indicator-item" [class.satisfied]="passwordCriteria.number">
+                  <span class="indicator-icon"><ng-container *ngTemplateOutlet="passwordCriteria.number ? success: fail">
+                  </ng-container></span> Numeric character
+                </div>
+                <div class="indicator-item" [class.satisfied]="passwordCriteria.specialChar">
+                  <span class="indicator-icon"><ng-container *ngTemplateOutlet="passwordCriteria.specialChar ? success: fail">
+                  </ng-container></span> Special character
+                </div>
+              </div>
+            }
+            <div class="flex-center">
+              <app-default-button type="submit" buttonType="success" label="Sign up"></app-default-button>
+            </div>
+          </form>
+        </div>
+      }
+      <div class="image-wrapper flex-center-vertical col-12 col-md-6">
+        <div class="content-info pb-4">
+          <span class="emph">ENTER INTO CASHTREK</span> your one-stop destination for all your financial planning
+        </div>
+        <img class="login-image" src="https://raw.githubusercontent.com/Liahus3003/gallery/main/images/tracking.png"
+          alt="">
+        </div>
       </div>
     </div>
-    <div class="account-login flex-center-vertical col-12 col-md-6" *ngIf="(toggleOptionObs$ | async) === 'signup'">
-      <form [formGroup]="signupForm" (ngSubmit)="signup()">
-        <div class="p-0">
-          <app-input label="Full Name" iconSrc="name-id" iconPath="color-icons/">
-            <input class="input-content" type="text" id="name" formControlName="name" />
-          </app-input>
-        </div>
-        <div class="p-0">
-          <app-input label="Email" iconSrc="email-at" iconPath="color-icons/">
-            <input class="input-content" type="email" id="email" formControlName="signupEmail" />
-          </app-input>
-        </div>
-        <div class="p-0">
-          <app-input label="Password" iconSrc="password" iconPath="color-icons/">
-            <input class="input-content" type="password" id="password" formControlName="signupPassword"
-              (input)="onPasswordInput()" />
-          </app-input>
-        </div>
-        <div class="password-strength-indicator mx-4 mx-md-5" *ngIf="(passwordCriteriaObs$ | async) as passwordCriteria">
-          <div class="indicator-item" [class.satisfied]="passwordCriteria.minLength">
-            <span class="indicator-icon"><ng-container *ngTemplateOutlet="passwordCriteria.minLength ? success: fail">
-              </ng-container></span> Minimum length (8 characters)
-          </div>
-          <div class="indicator-item" [class.satisfied]="passwordCriteria.uppercase">
-            <span class="indicator-icon"><ng-container *ngTemplateOutlet="passwordCriteria.uppercase ? success: fail">
-              </ng-container></span> Uppercase character
-          </div>
-          <div class="indicator-item" [class.satisfied]="passwordCriteria.lowercase">
-            <span class="indicator-icon"><ng-container *ngTemplateOutlet="passwordCriteria.lowercase ? success: fail">
-              </ng-container></span> Lowercase character
-          </div>
-          <div class="indicator-item" [class.satisfied]="passwordCriteria.number">
-            <span class="indicator-icon"><ng-container *ngTemplateOutlet="passwordCriteria.number ? success: fail">
-              </ng-container></span> Numeric character
-          </div>
-          <div class="indicator-item" [class.satisfied]="passwordCriteria.specialChar">
-            <span class="indicator-icon"><ng-container *ngTemplateOutlet="passwordCriteria.specialChar ? success: fail">
-              </ng-container></span> Special character
-          </div>
-        </div>
-        <div class="flex-center">
-          <app-default-button type="submit" buttonType="success" label="Sign up"></app-default-button>
-        </div>
-      </form>
-    </div>
-    <div class="image-wrapper flex-center-vertical col-12 col-md-6">
-      <div class="content-info pb-4">
-        <span class="emph">ENTER INTO CASHTREK</span> your one-stop destination for all your financial planning
-      </div>
-      <img class="login-image" src="https://raw.githubusercontent.com/Liahus3003/gallery/main/images/tracking.png"
-        alt="">
-    </div>
-  </div>
-</div>
-<ng-template #success>✔</ng-template>
-<ng-template #fail>❌</ng-template>
+    <ng-template #success>✔</ng-template>
+    <ng-template #fail>❌</ng-template>

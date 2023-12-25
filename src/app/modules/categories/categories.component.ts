@@ -1,4 +1,4 @@
-import { AsyncPipe, NgIf } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ElementRef, ViewChild } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CardWrapperComponent } from '@shared/components/card-wrapper/card-wrapper.component';
@@ -21,7 +21,6 @@ import { Category } from '@shared/interfaces/category';
   standalone: true,
   imports: [
     ReactiveFormsModule,
-    NgIf,
     AsyncPipe,
     CheckboxComponent,
     SelectComponent,
@@ -30,8 +29,8 @@ import { Category } from '@shared/interfaces/category';
     InputComponent,
     DefaultButtonComponent,
     CardWrapperComponent,
-    CustomTableComponent,
-  ],
+    CustomTableComponent
+],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CategoriesComponent {

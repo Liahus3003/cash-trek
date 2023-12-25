@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 
 interface ActionInfo {
   type: string;
@@ -9,7 +9,7 @@ interface ActionInfo {
 @Component({
   selector: 'app-confirmation-modal',
   standalone: true,
-  imports: [CommonModule],
+  imports: [],
   templateUrl: './confirmation-modal.component.html',
   styleUrls: ['./confirmation-modal.component.less']
 })

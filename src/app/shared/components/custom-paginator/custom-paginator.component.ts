@@ -1,10 +1,10 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 
 @Component({
   selector: 'app-custom-paginator',
   standalone: true,
-  imports: [CommonModule],
+  imports: [],
   templateUrl: './custom-paginator.component.html',
   styleUrls: ['./custom-paginator.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush

@@ -1,11 +1,11 @@
-import { CommonModule } from '@angular/common';
+
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { NAVIGATION } from '../../constants';
 
 @Component({
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [RouterModule],
   selector: 'app-navigation-tab',
   templateUrl: './navigation-tab.component.html',
   styleUrls: ['./navigation-tab.component.less'],

@@ -1,12 +1,12 @@
 /* eslint-disable @typescript-eslint/no-inferrable-types */
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { ClickOutsideDirective } from '@shared/directives/click-outside.directive';
 
 @Component({
   selector: 'app-custom-popover',
   standalone: true,
-  imports: [CommonModule, ClickOutsideDirective],
+  imports: [ClickOutsideDirective],
   templateUrl: './custom-popover.component.html',
   styleUrls: ['./custom-popover.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush

@@ -1,173 +1,177 @@
 <div class="m-2 m-sm-4">
-    <h1 class="content-header">
-        Cash Book
-    </h1>
-    <div class="row row-cols-1 g-4">
-        <app-card-wrapper>
-            <div>
-                <h2 #transactionSource class="sub-header">
-                   {{ (expenseModeObs | async)?._id ? 'Edit' : 'Add' }} Transaction
-                </h2>
-                <ng-container *ngIf="(expenseModeObs | async) as expenseInfo">
-                    <form (ngSubmit)="submitExpenseForm(expenseInfo)" [formGroup]="expenseInfoForm">
-                        <div class="row mx-0 g-3">
-                            <div class="col-12 col-sm-6 col-lg-4">
-                                <app-input label="Name" iconSrc="tag">
-                                    <input class="input-content" type="text" placeholder="" name="name" id="" formControlName="name" />
-                                </app-input>
-                            </div>
-                            <div class="col-12 col-sm-6 col-lg-4">
-                                <app-input label="Amount" iconSrc="dollar">
-                                    <input class="input-content" type="number" name="amount" id="" formControlName="amount" />
-                                </app-input>
-                            </div>
-                            <div class="col-12 col-sm-6 col-lg-4">
-                                <app-input label="Date" iconSrc="calendar">
-                                    <input class="input-content" type="date" name="date" id="" formControlName="date" />
-                                </app-input>
-                            </div>
-                            <div class="col-12 col-sm-6 col-lg-4">
-                                <app-select label="Category" iconSrc="branch-up-arrow">
-                                    <select class="select-content" name="category" id="" formControlName="category">
-                                        <ng-container *ngIf="(lookupObs | async) as categories">
-                                            <ng-container *ngFor="let category of categories">
-                                                <option [value]="category.name">{{category.name}}</option>
-                                            </ng-container>
-                                        </ng-container>
-                                    </select>
-                                </app-select>
-                            </div>
-                            <div class="col-12 col-sm-6 col-lg-4">
-                                <app-select label="Transaction Type" iconSrc="branch-up-arrow">
-                                    <select class="select-content" name="transactionType" id="" formControlName="transactionType">
-                                        <option selected value="Expense">Expense</option>
-                                        <option value="Credit">Credit</option>
-                                    </select>
-                                </app-select>
-                            </div>
-                            <div class="col-12 col-sm-6 col-lg-4">
-                                <app-select label="Payment Mode" iconSrc="pay-by-card">
-                                    <select class="select-content" name="paymentMode" id="" formControlName="paymentMode">
-                                        <option selected value="debit-card">Debit Card</option>
-                                        <option value="credit-card">Credit Card</option>
-                                        <option value="cash">Cash</option>
-                                        <option value="paytm">Paytm</option>
-                                    </select>
-                                </app-select>
-                            </div>
-                            <div class="col-12 col-sm-6 col-lg-4">
-                                <app-checkbox label="Subscription" iconSrc="refresh">
-                                    <label class="check-group-label" for="checkbox">
-                                        <input class="input-checkbox" value="yes" type="checkbox" name="isSubscription" id=""
-                                            formControlName="isSubscription" />
-                                        Auto Refill
-                                    </label>
-                                </app-checkbox>
-                            </div>
-                            <div class="col-12 col-sm-6 col-lg-4">
-                                <app-textarea label="Notes" iconSrc="notes">
-                                    <textarea class="input-content" name="notes" id="" cols="20" rows="3"
-                                        formControlName="notes"></textarea>
-                                </app-textarea>
-                            </div>
-                            <div class="col-12 col-sm-6 col-lg-4" *ngIf="isRebill">
-                                <app-select label="Rebill" iconSrc="timelapse">
-                                    <select class="select-content" name="rebill" id="" formControlName="rebill">
-                                        <option selected value="1">One Month</option>
-                                        <option value="3">Three Months</option>
-                                        <option value="6">Six Months</option>
-                                        <option value="12">1 Year</option>
-                                        <option value="24">2 Years</option>
-                                    </select>
-                                </app-select>
-                            </div>
-                            <div class="col-12 col-sm-6 col-lg-4" *ngIf="isRebill">
-                                <app-input label="Site" iconSrc="website">
-                                    <input class="input-content" type="text" placeholder="" name="site" id="" formControlName="site" />
-                                </app-input>
-                            </div>
-                        </div>
-                        <div class="buttons-group">
-                            <app-default-button type="submit" buttonType="success" label="{{ (expenseModeObs | async)?._id ? 'Edit' : 'Add' }}"></app-default-button>
-                            <app-default-button type="reset" buttonType="cancel" label="Reset"
-                                (buttonClicked)="resetExpenseMode();resetExpenseForm()"></app-default-button>
-                        </div>
-                    </form>
-                </ng-container>
+  <h1 class="content-header">
+    Cash Book
+  </h1>
+  <div class="row row-cols-1 g-4">
+    <app-card-wrapper>
+      <div>
+        <h2 #transactionSource class="sub-header">
+          {{ (expenseModeObs | async)?._id ? 'Edit' : 'Add' }} Transaction
+        </h2>
+        @if ((expenseModeObs | async); as expenseInfo) {
+          <form (ngSubmit)="submitExpenseForm(expenseInfo)" [formGroup]="expenseInfoForm">
+            <div class="row mx-0 g-3">
+              <div class="col-12 col-sm-6 col-lg-4">
+                <app-input label="Name" iconSrc="tag">
+                  <input class="input-content" type="text" placeholder="" name="name" id="" formControlName="name" />
+                </app-input>
+              </div>
+              <div class="col-12 col-sm-6 col-lg-4">
+                <app-input label="Amount" iconSrc="dollar">
+                  <input class="input-content" type="number" name="amount" id="" formControlName="amount" />
+                </app-input>
+              </div>
+              <div class="col-12 col-sm-6 col-lg-4">
+                <app-input label="Date" iconSrc="calendar">
+                  <input class="input-content" type="date" name="date" id="" formControlName="date" />
+                </app-input>
+              </div>
+              <div class="col-12 col-sm-6 col-lg-4">
+                <app-select label="Category" iconSrc="branch-up-arrow">
+                  <select class="select-content" name="category" id="" formControlName="category">
+                    @if ((lookupObs | async); as categories) {
+                      @for (category of categories; track category) {
+                        <option [value]="category.name">{{category.name}}</option>
+                      }
+                    }
+                  </select>
+                </app-select>
+              </div>
+              <div class="col-12 col-sm-6 col-lg-4">
+                <app-select label="Transaction Type" iconSrc="branch-up-arrow">
+                  <select class="select-content" name="transactionType" id="" formControlName="transactionType">
+                    <option selected value="Expense">Expense</option>
+                    <option value="Credit">Credit</option>
+                  </select>
+                </app-select>
+              </div>
+              <div class="col-12 col-sm-6 col-lg-4">
+                <app-select label="Payment Mode" iconSrc="pay-by-card">
+                  <select class="select-content" name="paymentMode" id="" formControlName="paymentMode">
+                    <option selected value="debit-card">Debit Card</option>
+                    <option value="credit-card">Credit Card</option>
+                    <option value="cash">Cash</option>
+                    <option value="paytm">Paytm</option>
+                  </select>
+                </app-select>
+              </div>
+              <div class="col-12 col-sm-6 col-lg-4">
+                <app-checkbox label="Subscription" iconSrc="refresh">
+                  <label class="check-group-label" for="checkbox">
+                    <input class="input-checkbox" value="yes" type="checkbox" name="isSubscription" id=""
+                      formControlName="isSubscription" />
+                    Auto Refill
+                  </label>
+                </app-checkbox>
+              </div>
+              <div class="col-12 col-sm-6 col-lg-4">
+                <app-textarea label="Notes" iconSrc="notes">
+                  <textarea class="input-content" name="notes" id="" cols="20" rows="3"
+                  formControlName="notes"></textarea>
+                </app-textarea>
+              </div>
+              @if (isRebill) {
+                <div class="col-12 col-sm-6 col-lg-4">
+                  <app-select label="Rebill" iconSrc="timelapse">
+                    <select class="select-content" name="rebill" id="" formControlName="rebill">
+                      <option selected value="1">One Month</option>
+                      <option value="3">Three Months</option>
+                      <option value="6">Six Months</option>
+                      <option value="12">1 Year</option>
+                      <option value="24">2 Years</option>
+                    </select>
+                  </app-select>
+                </div>
+              }
+              @if (isRebill) {
+                <div class="col-12 col-sm-6 col-lg-4">
+                  <app-input label="Site" iconSrc="website">
+                    <input class="input-content" type="text" placeholder="" name="site" id="" formControlName="site" />
+                  </app-input>
+                </div>
+              }
             </div>
-        </app-card-wrapper>
-        <app-card-wrapper>
-            <div class="row m-2 m-sm-4">
-                <h2 class="sub-header mx-0 px-0">
-                    Transaction Summary
-                </h2>
-                <ng-container *ngIf="(expenseObs | async) as transactionData">
-                    <app-custom-table [tableData]="transactionData" [isClientSide]="true" [itemsPerPage]="5" [sortConfig]="['name', 'category', 'status']" (actionEmitter)="expenseAction($event)"></app-custom-table>
-                </ng-container>
+            <div class="buttons-group">
+              <app-default-button type="submit" buttonType="success" label="{{ (expenseModeObs | async)?._id ? 'Edit' : 'Add' }}"></app-default-button>
+              <app-default-button type="reset" buttonType="cancel" label="Reset"
+              (buttonClicked)="resetExpenseMode();resetExpenseForm()"></app-default-button>
             </div>
-        </app-card-wrapper>
-        <app-card-wrapper>
-            <div>
-                <h2 #wishlistSource class="sub-header">
-                    {{ (wishlistModeObs | async)?._id ? 'Edit' : 'Add' }} Wishlist
-                </h2>
-                <ng-container *ngIf="(wishlistModeObs | async) as wishlistInfo">
-                    <form (ngSubmit)="submitWishlistForm(wishlistInfo)" [formGroup]="wishlistForm">
-                        <div class="row mx-0">
-                            <div class="col-12 col-sm-6 col-lg-4">
-                                <app-input label="Name" iconSrc="tag">
-                                    <input class="input-content" type="text" placeholder="" name="name" id="" formControlName="name" />
-                                </app-input>
-                            </div>
-                            <div class="col-12 col-sm-6 col-lg-4">
-                                <app-input label="Budget" iconSrc="dollar">
-                                    <input class="input-content" type="number" name="budget" id="" formControlName="budget" />
-                                </app-input>
-                            </div>
-                            <div class="col-12 col-sm-6 col-lg-4">
-                                <app-checkbox label="Priority" iconSrc="star">
-                                    <label class="check-group-label" for="checkbox">
-                                        <input class="input-checkbox" type="checkbox" name="priority" id="priority"
-                                            formControlName="priority" />
-                                        Urgent
-                                    </label>
-                                </app-checkbox>
-                            </div>
-                            <div class="col-12 col-sm-6 col-lg-4">
-                                <app-textarea label="Notes" iconSrc="notes">
-                                    <textarea class="input-content" name="notes" id="notes" cols="20" rows="3"
-                                        formControlName="notes"></textarea>
-                                </app-textarea>
-                            </div>
-                        </div>
-                        <div class="buttons-group">
-                            <app-default-button type="submit" buttonType="success" label="Add"></app-default-button>
-                            <app-default-button type="reset" buttonType="cancel" label="Reset"
-                                (buttonClicked)="resetWishlistMode();resetWishlistForm()"></app-default-button>
-                        </div>
-                    </form>
-                </ng-container>
+          </form>
+        }
+      </div>
+    </app-card-wrapper>
+    <app-card-wrapper>
+      <div class="row m-2 m-sm-4">
+        <h2 class="sub-header mx-0 px-0">
+          Transaction Summary
+        </h2>
+        @if ((expenseObs | async); as transactionData) {
+          <app-custom-table [tableData]="transactionData" [isClientSide]="true" [itemsPerPage]="5" [sortConfig]="['name', 'category', 'status']" (actionEmitter)="expenseAction($event)"></app-custom-table>
+        }
+      </div>
+    </app-card-wrapper>
+    <app-card-wrapper>
+      <div>
+        <h2 #wishlistSource class="sub-header">
+          {{ (wishlistModeObs | async)?._id ? 'Edit' : 'Add' }} Wishlist
+        </h2>
+        @if ((wishlistModeObs | async); as wishlistInfo) {
+          <form (ngSubmit)="submitWishlistForm(wishlistInfo)" [formGroup]="wishlistForm">
+            <div class="row mx-0">
+              <div class="col-12 col-sm-6 col-lg-4">
+                <app-input label="Name" iconSrc="tag">
+                  <input class="input-content" type="text" placeholder="" name="name" id="" formControlName="name" />
+                </app-input>
+              </div>
+              <div class="col-12 col-sm-6 col-lg-4">
+                <app-input label="Budget" iconSrc="dollar">
+                  <input class="input-content" type="number" name="budget" id="" formControlName="budget" />
+                </app-input>
+              </div>
+              <div class="col-12 col-sm-6 col-lg-4">
+                <app-checkbox label="Priority" iconSrc="star">
+                  <label class="check-group-label" for="checkbox">
+                    <input class="input-checkbox" type="checkbox" name="priority" id="priority"
+                      formControlName="priority" />
+                    Urgent
+                  </label>
+                </app-checkbox>
+              </div>
+              <div class="col-12 col-sm-6 col-lg-4">
+                <app-textarea label="Notes" iconSrc="notes">
+                  <textarea class="input-content" name="notes" id="notes" cols="20" rows="3"
+                  formControlName="notes"></textarea>
+                </app-textarea>
+              </div>
             </div>
-        </app-card-wrapper>
-        <app-card-wrapper>
-            <div class="row m-2 m-sm-4">
-                <h2 class="sub-header mx-0 px-0">
-                    Wishlist
-                </h2>
-                <ng-container *ngIf="(wishlistObs | async) as wishlishData">
-                    <app-custom-table [tableData]="wishlishData" [isClientSide]="true" [itemsPerPage]="5" [sortConfig]="['name', 'budget', 'priority']" (actionEmitter)="wishlistAction($event)"></app-custom-table>
-                </ng-container>
+            <div class="buttons-group">
+              <app-default-button type="submit" buttonType="success" label="Add"></app-default-button>
+              <app-default-button type="reset" buttonType="cancel" label="Reset"
+              (buttonClicked)="resetWishlistMode();resetWishlistForm()"></app-default-button>
             </div>
-        </app-card-wrapper>
-    </div>
+          </form>
+        }
+      </div>
+    </app-card-wrapper>
+    <app-card-wrapper>
+      <div class="row m-2 m-sm-4">
+        <h2 class="sub-header mx-0 px-0">
+          Wishlist
+        </h2>
+        @if ((wishlistObs | async); as wishlishData) {
+          <app-custom-table [tableData]="wishlishData" [isClientSide]="true" [itemsPerPage]="5" [sortConfig]="['name', 'budget', 'priority']" (actionEmitter)="wishlistAction($event)"></app-custom-table>
+        }
+      </div>
+    </app-card-wrapper>
+  </div>
 </div>
 <!-- <app-radio label="Radio" iconSrc="headphones">
-        <label class="check-group-label" for="radio">
-            <input class="input-radio" type="radio" name="radio" id="" required />
-            Radio 1
-        </label>
-        <label class="check-group-label" for="radio">
-            <input class="input-radio" type="radio" name="radio" id="" required />
-            Radio 2
-        </label>
-    </app-radio> -->
+<label class="check-group-label" for="radio">
+  <input class="input-radio" type="radio" name="radio" id="" required />
+  Radio 1
+</label>
+<label class="check-group-label" for="radio">
+  <input class="input-radio" type="radio" name="radio" id="" required />
+  Radio 2
+</label>
+</app-radio> -->

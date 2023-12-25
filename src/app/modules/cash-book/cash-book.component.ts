@@ -1,4 +1,4 @@
-import { AsyncPipe, NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
+import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -38,11 +38,9 @@ import { Expense } from '@shared/interfaces/expense';
     DefaultButtonComponent,
     CardWrapperComponent,
     CustomTableComponent,
-    NgIf,
-    NgFor,
     AsyncPipe,
-    NgTemplateOutlet,
-  ],
+    NgTemplateOutlet
+],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CashBookComponent {

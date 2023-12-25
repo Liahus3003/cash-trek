@@ -1,13 +1,15 @@
 <div class="input-wrapper d-flex m-2 m-sm-3 position-relative">
-  <span *ngIf="iconSrc" class="icon-wrapper">
-    <img
-      class="input-icon"
-      aria-hidden="true"
+  @if (iconSrc) {
+    <span class="icon-wrapper">
+      <img
+        class="input-icon"
+        aria-hidden="true"
       src="https://raw.githubusercontent.com/Liahus3003/gallery/main/icons/{{
         iconSrc
       }}.svg"
-      alt="" />
-  </span>
+        alt="" />
+    </span>
+  }
   <div class="input-container position-relative">
     <ng-content></ng-content>
     <label class="select-label" for="">{{ label }}</label>

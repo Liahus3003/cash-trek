@@ -1,27 +1,29 @@
 <div class="input-wrapper default position-relative m-2 m-sm-3" [ngClass]="{'mx-0 mx-sm-0': removeXMargin}">
-  <span *ngIf="iconSrc" class="icon-wrapper">
-    <img
-      class="input-icon"
-      aria-hidden="true"
+  @if (iconSrc) {
+    <span class="icon-wrapper">
+      <img
+        class="input-icon"
+        aria-hidden="true"
       src="https://raw.githubusercontent.com/Liahus3003/gallery/main/{{iconPath}}{{
         iconSrc
       }}.svg"
-      alt="" />
-  </span>
+        alt="" />
+    </span>
+  }
   <div class="input-container position-relative">
     <ng-content></ng-content>
     <label class="input-label" for="">{{ label }}</label>
   </div>
 </div>
 <!-- <div class="input-wrapper m-5 position-relative">
-    <input class="input-content" type="number" name="" id="" required>
-    <label class="input-label" for="">Number</label>
+<input class="input-content" type="number" name="" id="" required>
+<label class="input-label" for="">Number</label>
 </div>
 <div class="input-wrapper m-5 position-relative">
-    <input class="input-content" type="email" name="" id="" required>
-    <label class="input-label" for="">Email</label>
+  <input class="input-content" type="email" name="" id="" required>
+  <label class="input-label" for="">Email</label>
 </div>
 <div class="input-wrapper m-5 position-relative">
-    <input class="input-content" type="password" name="" id="" required>
-    <label class="input-label" for="">Password</label>
+  <input class="input-content" type="password" name="" id="" required>
+  <label class="input-label" for="">Password</label>
 </div> -->

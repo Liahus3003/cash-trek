@@ -1,88 +1,98 @@
-<div class="flex-end mb-3 mb-sm-0" *ngIf="(deviceInfo$ | async) === 'mobile' && sortConfig.length">
+@if ((deviceInfo$ | async) === 'mobile' && sortConfig.length) {
+  <div class="flex-end mb-3 mb-sm-0">
     <app-select label="Sort Column">
-        <select class="select-content" name="" id="" formControlName="paymentMode">
-            <option value="{{column}}" *ngFor="let column of sortConfig">{{column | titlecase}}</option>
-        </select>
+      <select class="select-content" name="" id="" formControlName="paymentMode">
+        @for (column of sortConfig; track column) {
+          <option value="{{column}}">{{column | titlecase}}</option>
+        }
+      </select>
     </app-select>
     <span class="mobile-sort--icon cursor-pointer">
-        <img (click)="sort('name')" class="sort-icon"
-            src="https://raw.githubusercontent.com/Liahus3003/gallery/main/icons/{{sortIcon('name')}}.svg" alt="">
-    </span>
-</div>
-<ng-container *ngIf="displayedData?.length; else emptyContent">
+      <img (click)="sort('name')" class="sort-icon"
+        src="https://raw.githubusercontent.com/Liahus3003/gallery/main/icons/{{sortIcon('name')}}.svg" alt="">
+      </span>
+    </div>
+  }
+  @if (displayedData?.length) {
     <table class="table">
-        <thead class="table-head">
-            <tr class="table-head--row">
-                <ng-container *ngFor="let header of getTableHeaders">
-                    <ng-container *ngIf="header !== '_id'">
-                        <th class="row-content" (click)="sort(header)"
-                        [class.cursor-pointer]="isSortable(header)">{{ header | titlecase }}
-                        <span *ngIf="isSortable(header)">
-                            <img class="sort-icon"
-                                src="https://raw.githubusercontent.com/Liahus3003/gallery/main/icons/{{sortIcon(header)}}.svg"
-                                alt="">
-                        </span>
-                    </th>
-                    </ng-container>
-                </ng-container>
-            </tr>
-        </thead>
-        <tbody class="table-body">
-            <tr *ngFor="let row of displayedData" class="table-body-row">
-                <ng-container *ngFor="let header of getTableHeaders">
-                    <ng-container *ngIf="header !== '_id'">
-                        <td [attr.data-label]="header"
-                        class="row-content {{header}}"
-                        [ngClass]="{'title': header === 'name', 'info': (['amount', 'budget', 'type'].includes(header)), 'desc': (['notes', 'description'].includes(header))}">
-                        <ng-container [ngSwitch]="header">
-                            <ng-container *ngSwitchCase="'actions'">
-                                <span class="actions" *ngFor="let action of row[header]"
-                                    (click)="triggerAction(row, action)">
+      <thead class="table-head">
+        <tr class="table-head--row">
+          @for (header of getTableHeaders; track header) {
+            @if (header !== '_id') {
+              <th class="row-content" (click)="sort(header)"
+                [class.cursor-pointer]="isSortable(header)">{{ header | titlecase }}
+                @if (isSortable(header)) {
+                  <span>
+                    <img class="sort-icon"
+                      src="https://raw.githubusercontent.com/Liahus3003/gallery/main/icons/{{sortIcon(header)}}.svg"
+                      alt="">
+                  </span>
+                }
+              </th>
+            }
+          }
+        </tr>
+      </thead>
+      <tbody class="table-body">
+        @for (row of displayedData; track row) {
+          <tr class="table-body-row">
+            @for (header of getTableHeaders; track header) {
+              @if (header !== '_id') {
+                <td [attr.data-label]="header"
+                  class="row-content {{header}}"
+                  [ngClass]="{'title': header === 'name', 'info': (['amount', 'budget', 'type'].includes(header)), 'desc': (['notes', 'description'].includes(header))}">
+                  @switch (header) {
+                    @case ('actions') {
+                      @for (action of row[header]; track action) {
+                        <span class="actions"
+                          (click)="triggerAction(row, action)">
                                     <img class="input-icon" aria-hidden="true" src="https://raw.githubusercontent.com/Liahus3003/gallery/main/icons/{{
                                                             iconName(action)}}.svg" alt="{{action}}" />
-                                </span>
-                            </ng-container>
-                            <ng-container *ngSwitchCase="'rebill'">
-                                <span class="value" [ngClass]="{'green': row[header], 'red': !row[header]}">{{ row[header] ? 'Yes' : 'No' }}</span>
-                            </ng-container>
-                            <ng-container *ngSwitchCase="'priority'">
-                                <span class="value" [ngClass]="{'green': row[header], 'red': !row[header]}">{{ row[header] ? 'Yes' : 'No' }}</span>
-                            </ng-container>
-                            <ng-container *ngSwitchCase="'status'">
-                                <span class="value" [ngClass]="{'green': row[header], 'red': !row[header]}">{{ row[header] ? 'Active' : 'In Active' }}</span>
-                            </ng-container>
-                            <ng-container *ngSwitchCase="'date' || 'createdDate'">
-                                <span>{{ row[header] | date:'dd-MMM-yyyy' }}</span>
-                            </ng-container>
-                            <ng-container *ngSwitchDefault>
-                                <ng-container *ngIf="isObject(row[header]); else text">
-                                    <ng-container *ngFor="let item of row[header] | keyvalue">
-                                        <div class="inner-value">
-                                            <div class="key">{{item.key}}</div>
-                                            <div class="values mb-2">
-                                                <ng-container *ngIf="item.key === 'date'; else defValue">
-                                                    {{ transformDate(item.value) }}
-                                                </ng-container>
-                                                <ng-template #defValue>{{item.value}}</ng-template>
-                                            </div>
-                                        </div>
-                                    </ng-container>
-                                </ng-container>
-                                <ng-template #text>{{ row[header] }}
-                                </ng-template>
-                            </ng-container>
-                        </ng-container>
-                    </td>
-                    </ng-container>
-                </ng-container>
-            </tr>
-        </tbody>
+                        </span>
+                      }
+                    }
+                    @case ('rebill') {
+                      <span class="value" [ngClass]="{'green': row[header], 'red': !row[header]}">{{ row[header] ? 'Yes' : 'No' }}</span>
+                    }
+                    @case ('priority') {
+                      <span class="value" [ngClass]="{'green': row[header], 'red': !row[header]}">{{ row[header] ? 'Yes' : 'No' }}</span>
+                    }
+                    @case ('status') {
+                      <span class="value" [ngClass]="{'green': row[header], 'red': !row[header]}">{{ row[header] ? 'Active' : 'In Active' }}</span>
+                    }
+                    @case ('date' || 'createdDate') {
+                      <span>{{ row[header] | date:'dd-MMM-yyyy' }}</span>
+                    }
+                    @default {
+                      @if (isObject(row[header])) {
+                        @for (item of row[header] | keyvalue; track item) {
+                          <div class="inner-value">
+                            <div class="key">{{item.key}}</div>
+                            <div class="values mb-2">
+                              @if (item.key === 'date') {
+                                {{ transformDate(item.value) }}
+                              } @else {
+                                {{item.value}}
+                              }
+                            </div>
+                          </div>
+                        }
+                      } @else {
+                        {{ row[header] }}
+                      }
+                    }
+                  }
+                </td>
+              }
+            }
+          </tr>
+        }
+      </tbody>
     </table>
     <app-custom-paginator [pageSize]="itemsPerPage" [pageIndex]="currentPage" [totalItems]="totalSize"
-        (pageChange)="onPageChange($event)"></app-custom-paginator>
-</ng-container>
-<ng-template #emptyContent>
+    (pageChange)="onPageChange($event)"></app-custom-paginator>
+  } @else {
     <div class="flex-center my-3">
-        No entries found
+      No entries found
     </div>
-</ng-template>
+  }

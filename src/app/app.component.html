@@ -2,12 +2,12 @@
   <app-header></app-header>
   <div class="site-feature">
     <!-- <div slimScroll width="100%" size="5px" height="inherit" [alwaysVisible]="false" [wheelStep]="20"> -->
-      <router-outlet></router-outlet>
-    <!-- </div> -->
-  </div>
-  <ng-container *ngIf="isLoggedIn | async">
-    <app-navigation-tab></app-navigation-tab>
-  </ng-container>
+    <router-outlet></router-outlet>
+  <!-- </div> -->
+</div>
+@if (isLoggedIn | async) {
+  <app-navigation-tab></app-navigation-tab>
+}
 </div>
 <!-- Last 6 months average spend -->
 <!-- Compare month and years -->
