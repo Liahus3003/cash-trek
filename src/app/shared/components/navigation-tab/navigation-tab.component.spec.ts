@@ -8,8 +8,8 @@ describe('NavigationTabComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ NavigationTabComponent ]
-    })
+    imports: [NavigationTabComponent]
+})
     .compileComponents();
 
     fixture = TestBed.createComponent(NavigationTabComponent);

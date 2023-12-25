@@ -8,8 +8,8 @@ describe('DefaultButtonComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ DefaultButtonComponent ]
-    })
+    imports: [DefaultButtonComponent]
+})
     .compileComponents();
 
     fixture = TestBed.createComponent(DefaultButtonComponent);
