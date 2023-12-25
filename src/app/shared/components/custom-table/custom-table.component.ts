@@ -104,10 +104,9 @@ export class CustomTableComponent implements OnInit, OnChanges {
   }
 
   sort(column: string) {
-    this.sortDirection = (this.sortDirection === 'asc' ? 'desc' : 'asc');
-    this.sortedColumn = column;
-
     if (this.isSortable(column)) {
+      this.sortDirection = (this.sortDirection === 'asc' ? 'desc' : 'asc');
+      this.sortedColumn = column;
       this.tableData?.sort((a, b) => {
         let sortValue = 0;
   
@@ -135,7 +134,7 @@ export class CustomTableComponent implements OnInit, OnChanges {
   }
   
   isSortable(column: string): boolean {
-    return this.sortConfig.includes(column);
+    return this.sortConfig.includes(column) && this.isClientSide;
   }  
 
   sortIcon(column: string): string {
